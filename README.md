@@ -3,5 +3,5 @@ Before Starting:
 ```
 cd client
 npm install
-nmp install --save materialize-css@next
+npm install --save materialize-css@next
 ```
