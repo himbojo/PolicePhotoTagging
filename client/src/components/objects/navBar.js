@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from 'react-router-dom';
+
 class NavBar extends Component {
   render() {
     return (
@@ -10,13 +12,13 @@ class NavBar extends Component {
           </a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li>
-              <a href="sass.html">Sass</a>
+              <Link to="/upload">Upload</Link>
             </li>
             <li>
-              <a href="badges.html">Components</a>
+              <Link to="badges.html">Components</Link>
             </li>
             <li>
-              <a href="collapsible.html">JavaScript</a>
+              <Link to="collapsible.html">JavaScript</Link>
             </li>
           </ul>
         </div>

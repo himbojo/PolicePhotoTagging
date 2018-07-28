@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
-import NavBar from './page1/navBar';
+import NavBar from './objects/navBar';
 import Login from './Login/login';
+import Upload from './Upload/upload';
 
 class App extends Component {
   render() {
@@ -12,7 +13,7 @@ class App extends Component {
             <div>
               <Route exact path="/" component={NavBar}/>
               <Route exact path="/login" component={Login}/>
-
+              <Route exact path="/upload" component={Upload}/>
             </div>
         </BrowserRouter>
 
