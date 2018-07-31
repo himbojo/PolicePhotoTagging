@@ -1,28 +1,32 @@
 import React, { Component } from "react";
 
 import { Link } from 'react-router-dom';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from "react-router-bootstrap";
+
 
 class NavBar extends Component {
   render() {
     return (
-      <nav>
-        <div className="nav-wrapper">
-          <a href="#" className="brand-logo">
-            Logo
-          </a>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li>
-              <Link to="/upload">Upload</Link>
-            </li>
-            <li>
-              <Link to="badges.html">Components</Link>
-            </li>
-            <li>
-              <Link to="collapsible.html">JavaScript</Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <Navbar inverse collapseOnSelect>
+  <Navbar.Header>
+    <Navbar.Brand>
+      <Link to="/upload">Police Photo Tagging</Link>
+    </Navbar.Brand>
+    <Navbar.Toggle />
+  </Navbar.Header>
+  <Navbar.Collapse>
+    <Nav pullRight>
+      <NavItem eventKey={1} href="/upload" to="/upload">
+        Upload
+      </NavItem>
+      <NavItem eventKey={2} href="/search" to="/search">
+        Search
+      </NavItem>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
+
     );
   }
 }
