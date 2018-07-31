@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",
+    "react-dropdown-timepicker": "^1.0.4",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
   },
@@ -15,5 +17,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.21",
+    "react-times": "^3.1.7"
   }
 }
