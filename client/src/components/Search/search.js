@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Button, FormControl, FormGroup, ControlLabel, InputGroup, Label } from "react-bootstrap";
+import NavBar from "../objects/navBar"
 
 class Search extends Component {
   render() {
     return (
     <div>
+    <NavBar/>
       <div className="input-group">
       <span className="input-group-addon" id="basic-addon1">@</span>
           <input type="text" className="form-control" placeholder="Username" aria-describedby="basic-addon1"/>
