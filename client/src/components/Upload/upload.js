@@ -10,6 +10,9 @@ import ImageUpload from '../objects/imageUpload';
 
 import TimePicker from 'react-dropdown-timepicker';
 
+import InputForm from './inputForm';
+import InputForm1 from './inputForm1';
+
 
 class Upload extends Component{
 
@@ -17,7 +20,8 @@ class Upload extends Component{
     return(
       <div>
        <NavBar/>
-      
+       <InputForm/>
+
       </div>
     );
   }
