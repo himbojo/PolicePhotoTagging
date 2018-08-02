@@ -1,7 +1,7 @@
 //https://gist.github.com/hartzis/0b77920380736f98e4f9
 
 import React, { Component } from 'react';
-import { Button, FormControl, Grid, Row, Col, InputGroup, ControlLabel, Image } from 'react-bootstrap';
+import { Button, FormControl, Grid, Row, Col, ControlLabel, Image } from 'react-bootstrap';
 import "./imageUpload.css";
 class ImageUpload extends Component {
   constructor(props) {
