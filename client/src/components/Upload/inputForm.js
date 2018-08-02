@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {render} from 'react-dom';
-import { Button, FormControl, FormGroup, ControlLabel, Grid, Row, Col } from "react-bootstrap";
+import { FormControl, FormGroup, ControlLabel, Grid, Row, Col } from "react-bootstrap";
 import ImageUpload from "../objects/imageUpload";
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import TimeOnlyPicker from "../objects/timeOnlyPicker";
@@ -8,60 +7,98 @@ import Tagging from "../objects/tagging"
 
 
 class InputForm extends Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
+    this.handleChange = this.handleChange.bind(this);
+
     this.state = {
-      QID: '',
-      FileNumber: '',
-      Location: '',
-      Tags: '',
-      Description: '',
-      Offence: ''
+      qid: '',
+      filenumber: '',
+      location: '',
+      tags: '',
+      description: '',
+      offence: ''
     };
   }
 
-  onChange = (e) => {
-    var state = this.state;
-    state[e.target.name] = e.target.value;
-    this.setState(state);
+  FieldGroup({ id, label, ...props }) {
+  return (
+    <FormGroup controlId={id}>
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl {...props} />
+    </FormGroup>
+  );
+}
+
+  getValidationState() {
+    console.log(this.state.qid.length);
+    const length = this.state.qid.length;
+    if (length > 10) return 'success';
+    else if (length > 5) return 'warning';
+    else if (length > 0) return 'error';
+    return null;
   }
 
-  onSubmit = (e) => {
-    e.preventDefault();
-
-    //handle form processing here....
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
-    var {QID, FileNumber, Location, Tags, Description, Offence} = this.state;
 
     return (
       <div>
         <Grid>
-          <Row className="show-grid">
+          <Row>
             <Col xs={9}>
-              <ImageUpload/>
-
+              <ImageUpload />
             </Col>
-            <Col xsPull={3} xsOffset={9}>
+            <Col xs={3}>
               <form>
-                <FormGroup pullRight controlId="formBasicText">
+                <FormGroup
+                  controlId="formBasicText">
                   <ControlLabel>QID</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter QID" />
+                  <FormControl
+                    type="text"
+                    name="qid"
+                    placeholder="Please enter QID"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    validation={this.getValidationState()}
+                     />
                   <ControlLabel>File Number</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter FileNumber" />
+                  <FormControl
+                    type="text"
+                    name="filenumber"
+                    placeholder="Please enter FileNumber"
+                    value={this.state.value}
+                    onChange={this.handleChange} />
                   <ControlLabel>Date</ControlLabel>
                   <DateOnlyPicker/>
-                    <ControlLabel>Time</ControlLabel>
-                    <TimeOnlyPicker/>
+                  <ControlLabel>Time</ControlLabel>
+                  <TimeOnlyPicker/>
                   <ControlLabel>Location</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter Location" />
-                    <ControlLabel>Tags</ControlLabel>
-                    <Tagging/>
-                    <ControlLabel>Description</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter Description" />
+                  <FormControl
+                    type="text"
+                    name="location"
+                    placeholder="Please enter Location"
+                    value={this.state.value}
+                    onChange={this.handleChange}/>
+                  <ControlLabel>Tags</ControlLabel>
+                  <Tagging />
+                  <ControlLabel>Description</ControlLabel>
+                  <FormControl
+                    type="text"
+                    name="description"
+                    placeholder="Please enter Description"
+                    value={this.state.value}
+                    onChange={this.handleChange} />
                   <ControlLabel>Offence</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter Offence" />
+                  <FormControl
+                    type="text"
+                    name="offence"
+                    placeholder="Please enter Offence"
+                    value={this.state.value}
+                    onChange={this.handleChange}/>
                 </FormGroup>
               </form>
             </Col>
