@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import { Button, FormControl, FormGroup, ControlLabel, Grid, Row, Col } from "react-bootstrap";
 import ImageUpload from "../objects/imageUpload";
+import DateOnlyPicker from "../objects/dateOnlyPicker";
+import TimeOnlyPicker from "../objects/timeOnlyPicker";
 
 
 class InputForm extends Component {
@@ -36,25 +38,29 @@ class InputForm extends Component {
       <div>
         <Grid>
           <Row className="show-grid">
-            <Col xs={7}>
+            <Col xs={9}>
               <ImageUpload/>
 
             </Col>
-            <Col xsPull={5} xsOffset={7}>
+            <Col xsPull={3} xsOffset={9}>
               <form>
                 <FormGroup pullRight controlId="formBasicText">
                   <ControlLabel>QID</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter QID e.g. 12345678" />
+                  <FormControl type="text" placeholder="Please enter QID" />
                   <ControlLabel>File Number</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter FileNumber e.g. 12345678" />
+                  <FormControl type="text" placeholder="Please enter FileNumber" />
+                  <ControlLabel>Date</ControlLabel>
+                  <DateOnlyPicker/>
+                    <ControlLabel>Time</ControlLabel>
+                    <TimeOnlyPicker/>
                   <ControlLabel>Location</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter Location e.g. Hillcrest, Hamilton" />
+                  <FormControl type="text" placeholder="Please enter Location" />
                   <ControlLabel>Tags</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter Tags e.g. blue shoes, red top" />
+                  <FormControl type="text" placeholder="Please enter Tags" />
                   <ControlLabel>Description</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter Description e.g. Young male" />
+                  <FormControl type="text" placeholder="Please enter Description" />
                   <ControlLabel>Offence</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter Offence e.g. Burglary" />
+                  <FormControl type="text" placeholder="Please enter Offence" />
                 </FormGroup>
               </form>
             </Col>
