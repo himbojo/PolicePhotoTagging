@@ -4,6 +4,7 @@ import { Button, FormControl, FormGroup, ControlLabel, Grid, Row, Col } from "re
 import ImageUpload from "../objects/imageUpload";
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import TimeOnlyPicker from "../objects/timeOnlyPicker";
+import Tagging from "../objects/tagging"
 
 
 class InputForm extends Component {
@@ -55,9 +56,9 @@ class InputForm extends Component {
                     <TimeOnlyPicker/>
                   <ControlLabel>Location</ControlLabel>
                   <FormControl type="text" placeholder="Please enter Location" />
-                  <ControlLabel>Tags</ControlLabel>
-                  <FormControl type="text" placeholder="Please enter Tags" />
-                  <ControlLabel>Description</ControlLabel>
+                    <ControlLabel>Tags</ControlLabel>
+                    <Tagging/>
+                    <ControlLabel>Description</ControlLabel>
                   <FormControl type="text" placeholder="Please enter Description" />
                   <ControlLabel>Offence</ControlLabel>
                   <FormControl type="text" placeholder="Please enter Offence" />
