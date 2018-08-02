@@ -1,7 +1,8 @@
 //https://gist.github.com/hartzis/0b77920380736f98e4f9
 
 import React, { Component } from 'react';
-
+import { Button, FormControl, Grid, Row, Col, InputGroup, ControlLabel, Image } from 'react-bootstrap';
+import "./imageUpload.css";
 class ImageUpload extends Component {
   constructor(props) {
     super(props);
@@ -38,16 +39,23 @@ class ImageUpload extends Component {
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img max-height="100vh" width="40%" src={imagePreviewUrl} />);
+      $imagePreview = (<Image className="image" src={imagePreviewUrl} responsive />);
     }
 
     return (
       <div>
-        <form onSubmit={this._handleSubmit}>
-          <input type="file" onChange={this._handleImageChange} />
-          <button type="submit" onClick={this._handleSubmit}>Upload Image</button>
-        </form>
-        {$imagePreview}
+        <Grid>
+          <Row>
+            <Col xs={6}>
+            <form onSubmit={this._handleSubmit}>
+              <ControlLabel>Please Select a file</ControlLabel>
+              <FormControl className="chooseFile" type="file" label="File" help="Browse for image" onChange={this._handleImageChange} />
+            </form>
+            {$imagePreview}
+            <Button bsStyle="primary" type="submit" onClick={this._handleSubmit}>Upload Image</Button>
+            </Col>
+          </Row>
+        </Grid>
       </div>
     )
   }
