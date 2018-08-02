@@ -21,22 +21,18 @@ class InputForm extends Component {
     };
   }
 
-  FieldGroup({ id, label, ...props }) {
-  return (
-    <FormGroup controlId={id}>
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl {...props} />
-    </FormGroup>
-  );
-}
+  isNumber(_value) {
+    var value = _value;
+    if (isNaN(parseInt(value))) return 'success';
+    else if (value !== '') return 'error';
+    else return 'error';
+  }
 
-  getValidationState() {
-    console.log(this.state.qid.length);
-    const length = this.state.qid.length;
-    if (length > 10) return 'success';
-    else if (length > 5) return 'warning';
-    else if (length > 0) return 'error';
-    return null;
+  isNull(_value){
+    console.log(_value);
+    var value = _value;
+    if (value !== '') return 'error';
+    else return 'success';
   }
 
   handleChange(e) {
@@ -44,7 +40,6 @@ class InputForm extends Component {
   }
 
   render() {
-
     return (
       <div>
         <Grid>
@@ -54,8 +49,7 @@ class InputForm extends Component {
             </Col>
             <Col xs={3}>
               <form>
-                <FormGroup
-                  controlId="formBasicText">
+                <FormGroup validationState={this.isNumber(this.state.qid)}>
                   <ControlLabel>QID</ControlLabel>
                   <FormControl
                     type="text"
@@ -63,8 +57,9 @@ class InputForm extends Component {
                     placeholder="Please enter QID"
                     value={this.state.value}
                     onChange={this.handleChange}
-                    validation={this.getValidationState()}
-                     />
+                    />
+                </FormGroup>
+                <FormGroup validationState={this.isNumber(this.state.filenumber)}>
                   <ControlLabel>File Number</ControlLabel>
                   <FormControl
                     type="text"
@@ -72,10 +67,16 @@ class InputForm extends Component {
                     placeholder="Please enter FileNumber"
                     value={this.state.value}
                     onChange={this.handleChange} />
+                </FormGroup>
+                <FormGroup>
                   <ControlLabel>Date</ControlLabel>
                   <DateOnlyPicker/>
+                </FormGroup>
+                <FormGroup>
                   <ControlLabel>Time</ControlLabel>
                   <TimeOnlyPicker/>
+                </FormGroup>
+                <FormGroup validationState={this.isNull(this.state.location)}>
                   <ControlLabel>Location</ControlLabel>
                   <FormControl
                     type="text"
@@ -83,8 +84,12 @@ class InputForm extends Component {
                     placeholder="Please enter Location"
                     value={this.state.value}
                     onChange={this.handleChange}/>
+                </FormGroup>
+                <FormGroup>
                   <ControlLabel>Tags</ControlLabel>
                   <Tagging />
+                </FormGroup>
+                <FormGroup validationState={this.isNull(this.state.description)}>
                   <ControlLabel>Description</ControlLabel>
                   <FormControl
                     type="text"
@@ -92,6 +97,8 @@ class InputForm extends Component {
                     placeholder="Please enter Description"
                     value={this.state.value}
                     onChange={this.handleChange} />
+                </FormGroup>
+                <FormGroup validationState={this.isNull(this.state.offence)}>
                   <ControlLabel>Offence</ControlLabel>
                   <FormControl
                     type="text"
