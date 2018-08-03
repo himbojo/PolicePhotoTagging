@@ -24,13 +24,15 @@ class Tagging extends Component {
         value: [...value, newOption],  // select new option
         tags: [...tags, newOption] // add new option to our dataset
       })
+
+      console.log(this.state.value);
+      console.log(this.state.tags);
     }
 
     render() {
       let { value, tags } = this.state;
 
       return (
-      <div>
         <Multiselect
           data={tags}
           value={value}
@@ -38,9 +40,8 @@ class Tagging extends Component {
           onCreate={name => this.handleCreate(name)}
           onChange={value => this.setState({ value })}
           textField="name"
-          placeholder="Enter to submit"
+          placeholder="Enter tags"
         />
-    </div>
       )
     }
 }
