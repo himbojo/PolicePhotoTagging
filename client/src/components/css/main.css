@@ -1,0 +1,35 @@
+.mainPage {
+  padding: 2%;
+}
+
+.containerBox{
+  padding: 2% 3% 0% 3% ;
+}
+
+.backgroundImage {
+  border-radius: 0.3em;
+  background-image: linear-gradient(rgba(50,125,205,0.5), rgba(50,125,205,0.5)), url("../assets/new-zealand-police-background.jpg");
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+
+}
+
+body{
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.navbar{
+  margin: 0 0 1% 0;
+  padding: 0 0 0 2%;
+  background-color: rgba(50,110,170, 0.85);
+}
+
+.navbar-nav{
+  float: right;
+}
+
+.navbar > .container {
+  width: 100%;
+}
