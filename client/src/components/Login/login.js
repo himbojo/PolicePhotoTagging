@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
-import Background from '../../pictures/loginBG.jpg';
+import Background from '../assets/loginBG.jpg';
 import LoginForm from './loginForm';
+import '../css/loginCss.css';
+
 
 import '../css/main.css';
 
