@@ -16,6 +16,10 @@
 .containerBox{
   padding: 2% 3% 0% 3% ;
 }
+.image{
+  max-height: 70vh;
+  max-width: 70vw;
+}
 
 .backgroundImage {
   border-radius: 0.3em;
@@ -29,4 +33,18 @@
 
 body{
   background-color: rgba(0, 0, 0, 0.85);
+}
+
+.navbar{
+  margin: 0 0 1% 0;
+  padding: 0 0 0 2%;
+  background-color: rgba(50,110,170, 0.85);
+}
+
+.navbar-nav{
+  float: right;
+}
+
+.navbar > .container {
+  width: 100%;
 }

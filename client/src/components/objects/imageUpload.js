@@ -15,6 +15,7 @@ class ImageUpload extends Component {
   }
 
   _handleSubmit(e) {
+    console.log("hello");
     e.preventDefault();
     // TODO: do something with -> this.state.file
   }
@@ -52,7 +53,7 @@ class ImageUpload extends Component {
               <FormControl className="chooseFile" type="file" label="File" help="Browse for image" onChange={this._handleImageChange} />
             </form>
             {$imagePreview}
-            <Button bsStyle="primary" type="submit" onClick={this._handleSubmit}>Upload Image</Button>
+            {/*<Button bsStyle="primary" type="submit" onClick={this._handleSubmit}>Upload Image</Button>*/}
             </Col>
           </Row>
         </Grid>

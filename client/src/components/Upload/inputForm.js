@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import { FormControl, FormGroup, ControlLabel, Grid, Row, Col } from "react-bootstrap";
+import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button } from "react-bootstrap";
 import ImageUpload from "../objects/imageUpload";
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import TimeOnlyPicker from "../objects/timeOnlyPicker";
 import Tagging from "../objects/tagging";
-import "./inputForm.css"
+import "./inputForm.css";
 
 
 
@@ -26,13 +26,13 @@ class InputForm extends Component {
   isNumber(_value) {
     var value = _value;
     if (!isNaN(parseInt(value))) return 'success';
-    else if (value == '') return null;
+    else if (value === '') return null;
     else return 'error';
   }
 
   isNull(_value){
     var value = _value;
-    if (value == '') return null;
+    if (value === '') return null;
     else return 'success';
   }
 
@@ -108,6 +108,7 @@ class InputForm extends Component {
                     value={this.state.value}
                     onChange={this.handleChange}/>
                 </FormGroup>
+                <Button bsStyle="primary" type="submit" onClick={ImageUpload}>Upload Image</Button>
               </form>
             </Col>
           </Row>
