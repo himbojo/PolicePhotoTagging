@@ -11,10 +11,11 @@ class loginForm extends Component {
             <FormControl type="text" placeholder="Please enter Username" />
             <ControlLabel>Password</ControlLabel>
             <FormControl type="text" placeholder="Please enter Password" />
+            </FormGroup>
             <Button bsSize="large" type="submit">
               Login
             </Button>
-          </FormGroup>
+
         </form>
       </div>
     );
