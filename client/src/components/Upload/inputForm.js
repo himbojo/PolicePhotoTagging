@@ -3,7 +3,9 @@ import { FormControl, FormGroup, ControlLabel, Grid, Row, Col } from "react-boot
 import ImageUpload from "../objects/imageUpload";
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import TimeOnlyPicker from "../objects/timeOnlyPicker";
-import Tagging from "../objects/tagging"
+import Tagging from "../objects/tagging";
+import "./inputForm.css"
+
 
 
 class InputForm extends Component {
@@ -23,15 +25,14 @@ class InputForm extends Component {
 
   isNumber(_value) {
     var value = _value;
-    if (isNaN(parseInt(value))) return 'success';
-    else if (value !== '') return 'error';
+    if (!isNaN(parseInt(value))) return 'success';
+    else if (value == '') return null;
     else return 'error';
   }
 
   isNull(_value){
-    console.log(_value);
     var value = _value;
-    if (value !== '') return 'error';
+    if (value == '') return null;
     else return 'success';
   }
 
@@ -44,10 +45,10 @@ class InputForm extends Component {
       <div>
         <Grid>
           <Row>
-            <Col xs={9}>
+            <Col xs={8} className="colStyle2">
               <ImageUpload />
             </Col>
-            <Col xs={3}>
+            <Col xsOffset={1} xs={3} className="colStyle1">
               <form>
                 <FormGroup validationState={this.isNumber(this.state.qid)}>
                   <ControlLabel>QID</ControlLabel>
