@@ -6,7 +6,6 @@ import NavBar from '../objects/navBar';
 
 import InputForm from './inputForm';
 
-import Background from '../assets/new-zealand-police-background.jpg';
 
 
 class Upload extends Component{
