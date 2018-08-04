@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import './upload.css';
+import '../css/main.css';
 
 import NavBar from '../objects/navBar';
 
