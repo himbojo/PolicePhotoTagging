@@ -1,10 +1,20 @@
 import React, {Component} from 'react';
-import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button } from "react-bootstrap";
+import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button, HelpBlock } from "react-bootstrap";
 import ImageUpload from "../objects/imageUpload";
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import TimeOnlyPicker from "../objects/timeOnlyPicker";
 import Tagging from "../objects/tagging";
-import "./inputForm.css";
+import "../css/inputForm.css";
+
+function FieldGroup({ id, vState, label, help, ...props }) {
+  return (
+    <FormGroup controlId={id} validationState={vState} >
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl {...props} />
+      {help && <HelpBlock>{help}</HelpBlock>}
+    </FormGroup>
+  );
+}
 
 
 
@@ -41,34 +51,34 @@ class InputForm extends Component {
   }
 
   render() {
+    var iu = new ImageUpload();
     return (
       <div>
         <Grid>
           <Row>
             <Col xs={8} className="colStyle2">
-              <ImageUpload />
+              <ImageUpload file={iu.state.file} onChange={iu._handleImageChange} />
             </Col>
             <Col xsOffset={1} xs={3} className="colStyle1">
               <form>
-                <FormGroup validationState={this.isNumber(this.state.qid)}>
-                  <ControlLabel>QID</ControlLabel>
-                  <FormControl
-                    type="text"
-                    name="qid"
-                    placeholder="Please enter QID"
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    />
-                </FormGroup>
-                <FormGroup validationState={this.isNumber(this.state.filenumber)}>
-                  <ControlLabel>File Number</ControlLabel>
-                  <FormControl
-                    type="text"
-                    name="filenumber"
-                    placeholder="Please enter FileNumber"
-                    value={this.state.value}
-                    onChange={this.handleChange} />
-                </FormGroup>
+                <FieldGroup
+                  id="formControlsQID"
+                  type="text"
+                  label="QID"
+                  name="qid"
+                  placeholder="Please enter QID"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  vState={this.isNumber(this.state.qid)}/>
+                <FieldGroup
+                  id="formControlsFileNumber"
+                  type="text"
+                  label="File Number"
+                  name="filenumber"
+                  placeholder="Please enter File Number"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  vState={this.isNumber(this.state.filenumber)}/>
                 <FormGroup>
                   <ControlLabel>Date</ControlLabel>
                   <DateOnlyPicker/>
@@ -77,38 +87,38 @@ class InputForm extends Component {
                   <ControlLabel>Time</ControlLabel>
                   <TimeOnlyPicker/>
                 </FormGroup>
-                <FormGroup validationState={this.isNull(this.state.location)}>
-                  <ControlLabel>Location</ControlLabel>
-                  <FormControl
-                    type="text"
-                    name="location"
-                    placeholder="Please enter Location"
-                    value={this.state.value}
-                    onChange={this.handleChange}/>
-                </FormGroup>
+                <FieldGroup
+                  id="formControlsLocation"
+                  type="text"
+                  label="Location"
+                  name="location"
+                  placeholder="Please enter Location"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  vState={this.isNull(this.state.location)}/>
                 <FormGroup>
                   <ControlLabel>Tags</ControlLabel>
                   <Tagging />
                 </FormGroup>
-                <FormGroup validationState={this.isNull(this.state.description)}>
-                  <ControlLabel>Description</ControlLabel>
-                  <FormControl
+                <FieldGroup
+                  id="formControlsDescription"
+                  type="text"
+                  label="Description"
+                  name="description"
+                  placeholder="Please enter Description"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  vState={this.isNull(this.state.description)}/>
+                  <FieldGroup
+                    id="formControlsOffence"
                     type="text"
-                    name="description"
-                    placeholder="Please enter Description"
-                    value={this.state.value}
-                    onChange={this.handleChange} />
-                </FormGroup>
-                <FormGroup validationState={this.isNull(this.state.offence)}>
-                  <ControlLabel>Offence</ControlLabel>
-                  <FormControl
-                    type="text"
+                    label="Offence"
                     name="offence"
                     placeholder="Please enter Offence"
                     value={this.state.value}
-                    onChange={this.handleChange}/>
-                </FormGroup>
-                <Button bsStyle="primary" type="submit" onClick={ImageUpload}>Upload Image</Button>
+                    onChange={this.handleChange}
+                    vState={this.isNull(this.state.offence)}/>
+                  <Button bsStyle="primary" type="submit" onClick={iu._handleSubmit}>Upload Image</Button>
               </form>
             </Col>
           </Row>
