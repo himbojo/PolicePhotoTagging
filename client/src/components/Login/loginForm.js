@@ -1,5 +1,15 @@
 import React, { Component } from "react";
-import { Button, FormControl, FormGroup, ControlLabel, PageHeader } from "react-bootstrap";
+import { Button, FormControl, FormGroup, ControlLabel, PageHeader, HelpBlock } from "react-bootstrap";
+
+function FieldGroup({ id, label, help, ...props }) {
+  return (
+    <FormGroup controlId={id} >
+      <ControlLabel bsClass="loginFont" >{label}</ControlLabel>
+      <FormControl {...props} />
+      {help && <HelpBlock>{help}</HelpBlock>}
+    </FormGroup>
+  );
+}
 
 class loginForm extends Component {
   render() {
@@ -7,22 +17,26 @@ class loginForm extends Component {
 
 
       <div className="loginBody">
-        <PageHeader>
-          Template login Heading
-        </PageHeader>
-
-        <form>
-          <FormGroup controlId="formBasicText">
-            <ControlLabel>Username</ControlLabel>
-            <FormControl type="text" placeholder="Please enter Username" />
-            <ControlLabel>Password</ControlLabel>
-            <FormControl type="text" placeholder="Please enter Password" />
-            </FormGroup>
-            <Button bsSize="large" type="submit">
+      <h1 className="loginHeader"> Photo Tagging Login</h1>
+        <FormGroup controlId="formBasicText" bsSize="large">
+          <FieldGroup
+            id="formControlsUsername"
+            type="text"
+            label="Text"
+            placeholder="Enter Username"
+          />
+          <FieldGroup
+            id="formControlsPassword"
+            type="text"
+            label="Password"
+            placeholder="Enter Password"
+          />
+          <div className="loginButton">
+            <Button  bsSize="large" type="submit" block bsStyle="primary" >
               Login
             </Button>
-
-        </form>
+            </div>
+</FormGroup>
       </div>
     );
   }
