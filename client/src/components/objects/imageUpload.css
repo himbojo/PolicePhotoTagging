@@ -1,6 +1,7 @@
 .image{
   padding-top: 5%;
   padding-bottom: 6%;
+  resize: both;
 }
 
 .chooseFile{
