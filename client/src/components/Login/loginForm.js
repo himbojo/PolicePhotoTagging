@@ -22,7 +22,7 @@ class loginForm extends Component {
           <FieldGroup
             id="formControlsUsername"
             type="text"
-            label="Text"
+            label="Username"
             placeholder="Enter Username"
           />
           <FieldGroup
