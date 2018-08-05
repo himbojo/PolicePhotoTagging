@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Background from '../assets/new-zealand-police-background.jpg';
 import LoginForm from './loginForm';
-import '../css/loginCss.css';
+import '../css/login.css';
 
 class Login extends Component{
   render(){
