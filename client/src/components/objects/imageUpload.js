@@ -15,7 +15,6 @@ class ImageUpload extends Component {
   }
 
   _handleSubmit(e) {
-    console.log("hello");
     e.preventDefault();
     // TODO: do something with -> this.state.file
   }
