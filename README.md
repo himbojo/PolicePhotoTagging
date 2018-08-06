@@ -1,8 +1,12 @@
 # PolicePhotoTagging
 Before Starting:
 ```
-cd client
-npm install
-npm install --save materialize-css@next
+git checkout your-name
+git reset --hard master
+git push -f
+git pull
+
+npm run bulk
+npm run dev
 ```
 
