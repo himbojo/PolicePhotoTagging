@@ -56,10 +56,10 @@ class InputForm extends Component {
       <div>
         <Grid>
           <Row>
-            <Col xs={8} className="colStyle2">
+            <Row xs={8} className="colStyle2">
               <ImageUpload file={iu.state.file} onChange={iu._handleImageChange} />
-            </Col>
-            <Col xsOffset={1} xs={3} className="colStyle1">
+            </Row>
+            <Row xsOffset={1} xs={3} className="colStyle1">
               <form>
                 <FieldGroup
                   id="formControlsQID"
@@ -120,7 +120,7 @@ class InputForm extends Component {
                     vState={this.isNull(this.state.offence)}/>
                   <Button bsStyle="primary" type="submit" onClick={iu._handleSubmit}>Upload Image</Button>
               </form>
-            </Col>
+            </Row>
           </Row>
         </Grid>
       </div>
