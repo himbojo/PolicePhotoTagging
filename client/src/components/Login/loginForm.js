@@ -17,7 +17,7 @@ class loginForm extends Component {
 
 
       <div className="loginBody">
-      <h1 className="loginHeader"> Photo Tagging Login</h1>
+
         <FormGroup controlId="formBasicText" bsSize="large">
           <FieldGroup
             id="formControlsUsername"
