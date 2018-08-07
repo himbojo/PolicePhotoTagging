@@ -1,15 +1,11 @@
 .colStyle1{
   border-radius: 0.3em;
-  padding: 2%;
+  margin: 2%;
   background-color: rgba(255, 255, 255, 0.75);
 }
 .colStyle2{
   border-radius: 0.3em;
-  padding: 2%;
+  margin: 2%;
   background-color: rgba(255, 255, 255, 0.75);
-  object-fit: cover;
-}
-
-.row{
-  margin-right: 4%;
+  object-fit: auto;
 }
