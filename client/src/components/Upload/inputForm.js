@@ -6,6 +6,7 @@ import TimeOnlyPicker from "../objects/timeOnlyPicker";
 import Tagging from "../objects/tagging";
 import "../css/inputForm.css";
 
+
 function FieldGroup({ id, vState, label, help, ...props }) {
   return (
     <FormGroup controlId={id} validationState={vState} >
@@ -29,9 +30,23 @@ class InputForm extends Component {
       location: '',
       tags: '',
       description: '',
-      offence: ''
+      offence: '',
+
+      width: window.innerWidth,
     };
   }
+
+    componentWillMount() {
+      window.addEventListener('resize', this.handleWindowSizeChange);
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('resize', this.handleWindowSizeChange);
+    }
+
+    handleWindowSizeChange = () => {
+      this.setState({ width: window.innerWidth });
+    };
 
   isNumber(_value) {
     var value = _value;
@@ -51,7 +66,10 @@ class InputForm extends Component {
   }
 
   render() {
+    const { width } = this.state;
+    const isMobile = width <= 768;
     var iu = new ImageUpload();
+    if (isMobile) {
     return (
       <div>
         <Grid>
@@ -126,6 +144,83 @@ class InputForm extends Component {
       </div>
     );
   }
+  else{
+    return (
+      <div>
+        <Grid>
+          <Row>
+            <Col xs={8} className="colStyle2">
+              <ImageUpload file={iu.state.file} onChange={iu._handleImageChange} />
+            </Col>
+            <Col xsOffset={1} xs={3} className="colStyle1">
+              <form>
+                <FieldGroup
+                  id="formControlsQID"
+                  type="text"
+                  label="QID"
+                  name="qid"
+                  placeholder="Please enter QID"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  vState={this.isNumber(this.state.qid)}/>
+                <FieldGroup
+                  id="formControlsFileNumber"
+                  type="text"
+                  label="File Number"
+                  name="filenumber"
+                  placeholder="Please enter File Number"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  vState={this.isNumber(this.state.filenumber)}/>
+                <FormGroup>
+                  <ControlLabel>Date</ControlLabel>
+                  <DateOnlyPicker/>
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>Time</ControlLabel>
+                  <TimeOnlyPicker/>
+                </FormGroup>
+                <FieldGroup
+                  id="formControlsLocation"
+                  type="text"
+                  label="Location"
+                  name="location"
+                  placeholder="Please enter Location"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  vState={this.isNull(this.state.location)}/>
+                <FormGroup>
+                  <ControlLabel>Tags</ControlLabel>
+                  <Tagging />
+                </FormGroup>
+                <FieldGroup
+                  id="formControlsDescription"
+                  type="text"
+                  label="Description"
+                  name="description"
+                  placeholder="Please enter Description"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  vState={this.isNull(this.state.description)}/>
+                  <FieldGroup
+                    id="formControlsOffence"
+                    type="text"
+                    label="Offence"
+                    name="offence"
+                    placeholder="Please enter Offence"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    vState={this.isNull(this.state.offence)}/>
+                  <Button bsStyle="primary" type="submit" onClick={iu._handleSubmit}>Upload Image</Button>
+              </form>
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    );
+
+  }
+}
 };
 
 export default InputForm;
