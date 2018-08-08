@@ -5,7 +5,7 @@ import NavBar from "./objects/navBar";
 import Login from "./Login/login";
 import Upload from "./Upload/upload";
 import Search from "./Search/search";
-import Result from "./Search/results";
+import Results from "./Search/results";
 class App extends Component {
   render() {
     return (
@@ -16,7 +16,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/upload" component={Upload} />
             <Route exact path="/search" component={Search} />
-            <Route exact path="/result" component={Result} />
+            <Route exact path="/results" component={Results} />
           </div>
         </BrowserRouter>
       </div>

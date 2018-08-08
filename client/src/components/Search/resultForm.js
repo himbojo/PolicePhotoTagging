@@ -8,7 +8,7 @@ import {
   Col,
   Button
 } from 'react-bootstrap';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route} from 'react-router-dom';
 import ImageUpload from '../objects/imageUpload';
 import DateOnlyPicker from '../objects/dateOnlyPicker';
 import TimeOnlyPicker from '../objects/timeOnlyPicker';
