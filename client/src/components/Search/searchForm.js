@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   FormControl,
   FormGroup,
@@ -7,14 +7,14 @@ import {
   Row,
   Col,
   Button
-} from "react-bootstrap";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import ImageUpload from "../objects/imageUpload";
-import DateOnlyPicker from "../objects/dateOnlyPicker";
-import TimeOnlyPicker from "../objects/timeOnlyPicker";
-import Tagging from "../objects/tagging";
-import "./inputForm.css";
-import "./search.css";
+} from 'react-bootstrap';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+import ImageUpload from '../objects/imageUpload';
+import DateOnlyPicker from '../objects/dateOnlyPicker';
+import TimeOnlyPicker from '../objects/timeOnlyPicker';
+import Tagging from '../objects/tagging';
+import './inputForm.css';
+import './search.css';
 
 class SearchForm extends Component {
   constructor(props, context) {
@@ -22,27 +22,27 @@ class SearchForm extends Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      qid: "",
-      filenumber: "",
-      location: "",
-      tags: "",
-      description: "",
-      offence: "",
+      qid: '',
+      filenumber: '',
+      location: '',
+      tags: '',
+      description: '',
+      offence: '',
       showing: false
     };
   }
 
   isNumber(_value) {
     var value = _value;
-    if (!isNaN(parseInt(value))) return "success";
-    else if (value === "") return null;
-    else return "error";
+    if (!isNaN(parseInt(value))) return 'success';
+    else if (value === '') return null;
+    else return 'error';
   }
 
   isNull(_value) {
     var value = _value;
-    if (value === "") return null;
-    else return "success";
+    if (value === '') return null;
+    else return 'success';
   }
 
   handleChange(e) {
@@ -109,17 +109,21 @@ class SearchForm extends Component {
                 </div>
               ) : null}
 
-              <Link to="/result">
-                <Button bsStyle="primary">Search</Button>
-              </Link>
-              <Button
-                className="refineButton"
-                bsStyle="primary"
-                bsSize="small"
-                onClick={() => this.setState({ showing: !showing })}
-              >
-                Refine Search
-              </Button>
+              <div className="buttonGroup">
+                <Button
+                  className="refineButton"
+                  bsStyle="primary"
+                  bsSize="small"
+                  onClick={() => this.setState({ showing: !showing })}
+                >
+                  {!showing ? 'Refine Search' : 'Hide'}
+                </Button>
+                <Link href="/results" to="/results">
+                <Button className="searchButton" bsStyle="primary">
+                  Search
+                </Button>
+                </Link>
+              </div>
             </form>
           </Row>
         </Grid>

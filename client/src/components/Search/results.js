@@ -7,7 +7,7 @@ import NavBar from "../objects/navBar";
 
 import ResultForm from "./resultForm";
 
-class Result extends Component {
+class Results extends Component {
   render() {
     return (
       <div className="containerBox">
@@ -22,4 +22,4 @@ class Result extends Component {
   }
 }
 
-export default Result;
+export default Results;
