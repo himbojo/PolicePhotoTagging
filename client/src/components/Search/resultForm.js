@@ -6,9 +6,11 @@ import {
   Grid,
   Row,
   Col,
-  Button
+  Button,
+  Modal,
+  Image
 } from "react-bootstrap";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import ImageUpload from "../objects/imageUpload";
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import TimeOnlyPicker from "../objects/timeOnlyPicker";
@@ -17,81 +19,75 @@ import "./inputForm.css";
 import "./search.css";
 import Gallery from "react-photo-gallery";
 import Lightbox from "react-images";
-
 const PHOTO_SET = [
   {
-    src: require("../assets/loginBG.jpg"),
-    width: 1,
-    height: 1
+    src: require("./loginBG.jpg"),
+    width: 4,
+    height: 3
   },
   {
     src: require("./loginBG.jpg"),
-    width: 1,
-    height: 1
+    width: 4,
+    height: 3
   },
   {
     src: require("./loginBG.jpg"),
-    width: 1,
-    height: 1
-  },
-  {
-    src: require("../assets/loginBG.jpg"),
-    width: 1,
-    height: 1
-  },
-  {
-    src: require("./loginBG.jpg"),
-    width: 1,
-    height: 1
-  },
-  {
-    src: require("./loginBG.jpg"),
-    width: 1,
-    height: 1
+    width: 4,
+    height: 3
   }
 ];
 
 class ResultForm extends Component {
-  constructor() {
-    super();
-    this.state = { currentImage: 0 };
-    this.closeLightbox = this.closeLightbox.bind(this);
-    this.openLightbox = this.openLightbox.bind(this);
-    this.gotoNext = this.gotoNext.bind(this);
-    this.gotoPrevious = this.gotoPrevious.bind(this);
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.state = {
+      show: false
+    };
   }
-  openLightbox(event, obj) {
-    this.setState({
-      currentImage: obj.index,
-      lightboxIsOpen: true
-    });
+
+  handleClose() {
+    this.setState({ show: false });
   }
-  closeLightbox() {
-    this.setState({
-      currentImage: 0,
-      lightboxIsOpen: false
-    });
+
+  handleShow() {
+    this.setState({ show: true });
   }
-  gotoPrevious() {
-    this.setState({
-      currentImage: this.state.currentImage - 1
-    });
-  }
-  gotoNext() {
-    this.setState({
-      currentImage: this.state.currentImage + 1
-    });
-  }
+
   render() {
-    return <Gallery photos={PHOTO_SET} onClick={this.openLightbox} />;
-    <Lightbox
-      images={PHOTO_SET}
-      onClose={this.closeLightbox}
-      onClickPrev={this.gotoPrevious}
-      onClickNext={this.gotoNext}
-      currentImage={this.state.currentImage}
-      isOpen={this.state.lightboxIsOpen}
-    />;
+    return (
+      <div>
+        <Gallery photos={PHOTO_SET} onClick={this.handleShow} />
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Picture #1</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Image src={require("./loginBG.jpg")} thumbnail />
+            <FormGroup>
+              <ControlLabel>Assocaited Tags</ControlLabel>
+              <Tagging />
+              <ControlLabel>QID</ControlLabel>
+              <FormControl type="text" name="qid" />
+              <ControlLabel>Date</ControlLabel>
+              <DateOnlyPicker />
+              <ControlLabel>Time</ControlLabel>
+              <TimeOnlyPicker />
+              <ControlLabel>File Number</ControlLabel>
+              <FormControl type="text" name="filenumber" />
+              <ControlLabel>Offence</ControlLabel>
+              <FormControl type="text" name="offence" />
+            </FormGroup>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleClose}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
   }
 }
 
