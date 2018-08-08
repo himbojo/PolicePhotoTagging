@@ -118,9 +118,11 @@ class SearchForm extends Component {
                 >
                   {!showing ? 'Refine Search' : 'Hide'}
                 </Button>
+                <Link to="/results">
                 <Button className="searchButton" bsStyle="primary">
                   Search
                 </Button>
+                </Link>
               </div>
             </form>
           </Row>
