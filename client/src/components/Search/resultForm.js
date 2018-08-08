@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   FormControl,
   FormGroup,
@@ -7,45 +7,48 @@ import {
   Row,
   Col,
   Button
-} from "react-bootstrap";
-import { BrowserRouter, Route } from "react-router-dom";
-import ImageUpload from "../objects/imageUpload";
-import DateOnlyPicker from "../objects/dateOnlyPicker";
-import TimeOnlyPicker from "../objects/timeOnlyPicker";
-import Tagging from "../objects/tagging";
-import "./inputForm.css";
-import "./search.css";
-import Gallery from "react-photo-gallery";
-import Lightbox from "react-images";
+} from 'react-bootstrap';
+import { BrowserRouter, Route } from 'react-router-dom';
+import ImageUpload from '../objects/imageUpload';
+import DateOnlyPicker from '../objects/dateOnlyPicker';
+import TimeOnlyPicker from '../objects/timeOnlyPicker';
+import Tagging from '../objects/tagging';
+import './inputForm.css';
+import './search.css';
+import Gallery from 'react-photo-gallery';
+import Lightbox from 'react-images';
 
 const PHOTO_SET = [
   {
-    src: require("../assets/loginBG.jpg"),
+    src: require('../assets/loginBG.jpg'),
+    width: 1,
+    height: 1,
+    size: ['(min-width: 480px) 50vw,(min-width: 480px) 50vw, 100vw, 100vw']
+  },
+  {
+    src: require('./loginBG.jpg'),
+    width: 1,
+    height: 1,
+    size: ['(min-width: 480px) 50vw,(min-width: 480px) 50vw, 100vw, 100vw']
+  },
+  {
+    src: require('./loginBG.jpg'),
+    width: 1,
+    height: 1,
+    size: ['(min-width: 480px) 50vw,(min-width: 480px) 50vw, 100vw, 100vw']
+  },
+  {
+    src: require('../assets/loginBG.jpg'),
     width: 1,
     height: 1
   },
   {
-    src: require("./loginBG.jpg"),
+    src: require('./loginBG.jpg'),
     width: 1,
     height: 1
   },
   {
-    src: require("./loginBG.jpg"),
-    width: 1,
-    height: 1
-  },
-  {
-    src: require("../assets/loginBG.jpg"),
-    width: 1,
-    height: 1
-  },
-  {
-    src: require("./loginBG.jpg"),
-    width: 1,
-    height: 1
-  },
-  {
-    src: require("./loginBG.jpg"),
+    src: require('./loginBG.jpg'),
     width: 1,
     height: 1
   }
