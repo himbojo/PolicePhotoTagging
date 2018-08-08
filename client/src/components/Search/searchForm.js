@@ -109,18 +109,19 @@ class SearchForm extends Component {
                 </div>
               ) : null}
 
-              <Button
-                bsStyle="primary"
-                bsSize="small"
-                onClick={() => this.setState({ showing: !showing })}
-              >
-                {!showing ? 'Refine Search' : 'Hide'}
-              </Button>
-              <Link to="/result">
+              <div className="buttonGroup">
+                <Button
+                  className="refineButton"
+                  bsStyle="primary"
+                  bsSize="small"
+                  onClick={() => this.setState({ showing: !showing })}
+                >
+                  {!showing ? 'Refine Search' : 'Hide'}
+                </Button>
                 <Button className="searchButton" bsStyle="primary">
                   Search
                 </Button>
-              </Link>
+              </div>
             </form>
           </Row>
         </Grid>
