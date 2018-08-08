@@ -8,7 +8,7 @@ import {
   Col,
   Button
 } from "react-bootstrap";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import ImageUpload from "../objects/imageUpload";
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import TimeOnlyPicker from "../objects/timeOnlyPicker";
@@ -48,7 +48,9 @@ class SearchForm extends Component {
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
+  redirectToTarget = () => {
+    this.context.router.history.push(`/result`);
+  };
   render() {
     const { showing } = this.state;
     return (
@@ -60,9 +62,7 @@ class SearchForm extends Component {
                 <ControlLabel>Search Tags</ControlLabel>
                 <Tagging />
               </FormGroup>
-
               <div />
-
               {showing ? (
                 <div>
                   <FormGroup validationState={this.isNumber(this.state.qid)}>
@@ -70,7 +70,7 @@ class SearchForm extends Component {
                     <FormControl
                       type="text"
                       name="qid"
-                      placeholder="Please enter QID"
+                      placeholder="Search by QID"
                       value={this.state.value}
                       onChange={this.handleChange}
                     />
@@ -82,7 +82,7 @@ class SearchForm extends Component {
                     <FormControl
                       type="text"
                       name="filenumber"
-                      placeholder="Please enter FileNumber"
+                      placeholder="Search by FileNumber"
                       value={this.state.value}
                       onChange={this.handleChange}
                     />
@@ -101,14 +101,17 @@ class SearchForm extends Component {
                     <FormControl
                       type="text"
                       name="offence"
-                      placeholder="Please enter Offence"
+                      placeholder="Search by Offence"
                       value={this.state.value}
                       onChange={this.handleChange}
                     />
                   </FormGroup>
                 </div>
               ) : null}
-              <Button bsStyle="primary">Search</Button>
+
+              <Link to="/result">
+                <Button bsStyle="primary">Search</Button>
+              </Link>
               <Button
                 className="refineButton"
                 bsStyle="primary"
