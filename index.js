@@ -4,10 +4,12 @@ const mysql = require('mysql');
 const fs = require('fs');
 const app = express();
 
+const keys = require('./keys');
+
 var connection = mysql.createConnection({
-	host: 'phototaggingdatabase.cxtufkjuvqzf.ap-southeast-2.rds.amazonaws.com',
-	user: 'JBAkroyd',
-	password: 'Jorcob021',
+	host: keys.DB_HOST_NAME,
+	user: keys.DB_ADMIN_USER,
+	password: keys.DB_ADMIN_PASS,
 	ssl: {
 		ca: fs.readFileSync(__dirname + '/rds-combined-ca-bundle.pem')
 	}
