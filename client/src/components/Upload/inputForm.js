@@ -77,12 +77,12 @@ class InputForm extends Component {
             <Row xs={8} className="colStyle2">
               <ImageUpload file={iu.state.file} onChange={iu._handleImageChange} />
             </Row>
-            <Row xsOffset={1} xs={3} className="colStyle1">
+            <Row mOffset={.5} xsOffset={1} xs={3} className="colStyle1">
               <form>
                 <FieldGroup
                   id="formControlsQID"
                   type="text"
-                  label="QID"
+                  label="Uploader QID"
                   name="qid"
                   placeholder="Please enter QID"
                   value={this.state.value}
@@ -91,9 +91,9 @@ class InputForm extends Component {
                 <FieldGroup
                   id="formControlsFileNumber"
                   type="text"
-                  label="File Number"
+                  label="Event Number"
                   name="filenumber"
-                  placeholder="Please enter File Number"
+                  placeholder="Please enter Event Number"
                   value={this.state.value}
                   onChange={this.handleChange}
                   vState={this.isNumber(this.state.filenumber)}/>
@@ -118,15 +118,7 @@ class InputForm extends Component {
                   <ControlLabel>Tags</ControlLabel>
                   <Tagging />
                 </FormGroup>
-                <FieldGroup
-                  id="formControlsDescription"
-                  type="text"
-                  label="Description"
-                  name="description"
-                  placeholder="Please enter Description"
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                  vState={this.isNull(this.state.description)}/>
+
                   <FieldGroup
                     id="formControlsOffence"
                     type="text"
@@ -152,12 +144,12 @@ class InputForm extends Component {
             <Col xs={8} className="colStyle2">
               <ImageUpload file={iu.state.file} onChange={iu._handleImageChange} />
             </Col>
-            <Col xsOffset={1} xs={3} className="colStyle1">
+            <Col  xsOffset={1} xs={3} className="colStyle1">
               <form>
                 <FieldGroup
                   id="formControlsQID"
                   type="text"
-                  label="QID"
+                  label="Uploader QID"
                   name="qid"
                   placeholder="Please enter QID"
                   value={this.state.value}
@@ -166,9 +158,9 @@ class InputForm extends Component {
                 <FieldGroup
                   id="formControlsFileNumber"
                   type="text"
-                  label="File Number"
+                  label="Event Number"
                   name="filenumber"
-                  placeholder="Please enter File Number"
+                  placeholder="Please enter Event Number"
                   value={this.state.value}
                   onChange={this.handleChange}
                   vState={this.isNumber(this.state.filenumber)}/>
@@ -193,15 +185,6 @@ class InputForm extends Component {
                   <ControlLabel>Tags</ControlLabel>
                   <Tagging />
                 </FormGroup>
-                <FieldGroup
-                  id="formControlsDescription"
-                  type="text"
-                  label="Description"
-                  name="description"
-                  placeholder="Please enter Description"
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                  vState={this.isNull(this.state.description)}/>
                   <FieldGroup
                     id="formControlsOffence"
                     type="text"
@@ -218,7 +201,6 @@ class InputForm extends Component {
         </Grid>
       </div>
     );
-
   }
 }
 };
