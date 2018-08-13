@@ -1,2 +1,2 @@
 //example
-//export const FETCH_CITYS = 'fetch_citys';
+export const LOGIN_USER = 'login_user';
