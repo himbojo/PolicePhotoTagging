@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { LOGIN_USER } from './types';
 
 /*
 ##example
@@ -16,3 +17,8 @@ export const fetchCitys = values => async dispatch => {
 };
 
 */
+export const loginUser = (values) => async dispatch => {
+	const res = await axios.post('/users/login', values);
+
+	dispatch({ type: LOGIN_USER, payload: res.data });
+};
