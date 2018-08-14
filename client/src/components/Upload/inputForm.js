@@ -89,7 +89,7 @@ class InputForm extends Component {
                   onChange={this.handleChange}
                   vState={this.isNumber(this.state.qid)}/>
                 <FieldGroup
-                  id="formControlsFileNumber"
+                  id="formCon<ControlLabel>Clothing</ControlLabel>trolsFileNumber"
                   type="text"
                   label="Event Number"
                   name="filenumber"
@@ -114,6 +114,31 @@ class InputForm extends Component {
                   value={this.state.value}
                   onChange={this.handleChange}
                   vState={this.isNull(this.state.location)}/>
+                  
+                  <FormGroup controlId="formControlsSelect">
+                  <ControlLabel>Select Clothing</ControlLabel>
+                  <FormControl componentClass="select" placeholder="select">
+                    <option value="Hat">Hat</option>
+                    <option value="Top">Top</option>
+                    <option value="Pants">Pants</option>
+                    <option value="Footwear">Footwear</option>
+                  </FormControl>
+                  </FormGroup>
+                  <FormGroup controlId="formControlsSelect">
+                  <ControlLabel>Select Colour</ControlLabel>
+                  <FormControl componentClass="select" placeholder="select">
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Grey">Grey</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Yellow">Yellow</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Green">Green</option>
+                    <option value="Red">Red</option>
+                  </FormControl>
+                  </FormGroup>
+                  <Button bsStyle="primary" type="submit">Add Tag</Button>
+
                 <FormGroup>
                   <ControlLabel>Tags</ControlLabel>
                   <Tagging />
@@ -181,6 +206,30 @@ class InputForm extends Component {
                   value={this.state.value}
                   onChange={this.handleChange}
                   vState={this.isNull(this.state.location)}/>
+
+                  <FormGroup controlId="formControlsSelect">
+                  <ControlLabel>Select Clothing</ControlLabel>
+                  <FormControl componentClass="select" placeholder="select">
+                    <option value="Hat">Hat</option>
+                    <option value="Top">Top</option>
+                    <option value="Pants">Pants</option>
+                    <option value="Footwear">Footwear</option>
+                  </FormControl>
+                  </FormGroup>
+                  <FormGroup controlId="formControlsSelect">
+                  <ControlLabel>Select Colour</ControlLabel>
+                  <FormControl componentClass="select" placeholder="select">
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Grey">Grey</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Yellow">Yellow</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Green">Green</option>
+                    <option value="Red">Red</option>
+                  </FormControl>
+                  </FormGroup>
+                  <Button bsStyle="primary" type="submit">Add Tag</Button>
                 <FormGroup>
                   <ControlLabel>Tags</ControlLabel>
                   <Tagging />
