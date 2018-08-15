@@ -3,6 +3,8 @@ const axios = require("axios");
 const mysql = require("mysql");
 const fs = require("fs");
 const app = express();
+const _ = require("lodash");
+const {User} = require("./routes/models/user");
 
 const keys = require("./keys");
 
@@ -13,7 +15,27 @@ mongoose.connect("mongodb://user1:user123@ds119652.mlab.com:19652/login", {
   userNewUrlParser: true
 });
 
-require("./routes/login.js")(app);
+//require("./routes/login.js")(app);
+
+app.post("/users/reg", (req, res) => { // REG USER
+  console.log("users/reg");
+  var body = _.pick(req.body, ["email", "password"]);
+  var user = new User(body);
+
+  user
+    .save()
+    .then(() => {
+      return user.generateAuthToken();
+    })
+    .then(token => {
+      res.header("x-auth", token).send(user);
+    })
+    .catch(e => {
+      res.status(400).send();
+    });
+
+  });
+
 var connection = mysql.createConnection({
   host: keys.DB_HOST_NAME,
   user: keys.DB_ADMIN_USER,

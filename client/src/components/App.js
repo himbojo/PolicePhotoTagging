@@ -6,6 +6,8 @@ import Login from "./Login/login";
 import Upload from "./Upload/upload";
 import Search from "./Search/search";
 import Results from "./Search/results";
+import Reg from "./Login/reg";
+
 class App extends Component {
   render() {
     return (
@@ -17,6 +19,7 @@ class App extends Component {
             <Route exact path="/upload" component={Upload} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/results" component={Results} />
+            <Route exact path="/reg" component={Reg} />
           </div>
         </BrowserRouter>
       </div>
