@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button, HelpBlock } from "react-bootstrap";
+import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button, HelpBlock, Well } from "react-bootstrap";
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import TimeOnlyPicker from "../objects/timeOnlyPicker";
 import Tagging from "../objects/tagging";
 import { DropdownList } from 'react-widgets';
+import "../css/inputForm.css";
 
 function FieldGroup({ id, vState, label, help, ...props }) {
   return (
@@ -30,8 +31,8 @@ class FormContents extends Component{
       offence: '',
       items: ['Headwear', 'Top', 'Pants', 'Footwear'],
       colours: ['Black', 'White', 'Grey', 'Orange', 'Yellow', 'Blue', 'Green', 'Red', 'Purple', 'Pink'],
-      genSelect: 'Headwear',
-      colSelect: 'Black',
+      genSelect: '',
+      colSelect: '',
       gTags: [],
       gSelect: '',
       cTags: [],
@@ -115,13 +116,14 @@ class FormContents extends Component{
             value={this.state.value}
             onChange={this.handleChange}
             vState={this.isNull(this.state.location)}/>
-
+          <Well>
           <FormGroup controlId="formControlsDrop1">
             <ControlLabel>Select Clothing</ControlLabel>
             <DropdownList
               data={this.state.items}
               value={this.state.genSelect}
               onChange={genSelect => this.setState({ genSelect })}
+              placeholder="Select Clothing"
 
               />
           </FormGroup>
@@ -132,9 +134,11 @@ class FormContents extends Component{
               value={this.state.colSelect}
               onChange={colSelect => this.setState({ colSelect })}
               defaultValue={"Black"}
+              placeholder="Select Colour"
               />
           </FormGroup>
           <Button bsStyle="primary" onClick={() => {this.handleChangeDrop(this.state.genSelect, this.state.colSelect)}}>Add Tag</Button>
+          </Well>
           <FormGroup>
             <ControlLabel>Generic Tags</ControlLabel>
             <DropdownList

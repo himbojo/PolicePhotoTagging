@@ -63,7 +63,6 @@ class SearchForm extends Component {
                 <Tagging />
               </FormGroup>
               <div />
-              {showing ? (
                 <div>
                   <FormGroup validationState={this.isNumber(this.state.qid)}>
                     <ControlLabel>QID</ControlLabel>
@@ -107,17 +106,8 @@ class SearchForm extends Component {
                     />
                   </FormGroup>
                 </div>
-              ) : null}
 
               <div className="buttonGroup">
-                <Button
-                  className="refineButton"
-                  bsStyle="primary"
-                  bsSize="small"
-                  onClick={() => this.setState({ showing: !showing })}
-                >
-                  {!showing ? 'Refine Search' : 'Hide'}
-                </Button>
                 <Link href="/results" to="/results">
                 <Button className="searchButton" bsStyle="primary">
                   Search
