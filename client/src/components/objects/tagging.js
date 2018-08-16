@@ -13,6 +13,7 @@ class Tagging extends Component {
     }
 
     handleCreate(name) {
+      console.log("hi");
       let { tags, value } = this.state;
 
       let newOption = {
