@@ -2,29 +2,30 @@ const express = require("express");
 const axios = require("axios");
 const mysql = require("mysql");
 const fs = require("fs");
+const bodyParser = require("body-parser");
 const app = express();
 const _ = require("lodash");
-const {User} = require("./routes/models/user");
+const { User } = require("./routes/models/user");
 
 const keys = require("./keys");
-
-
+app.use(bodyParser.json());
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://user1:user123@ds119652.mlab.com:19652/login", {
-  userNewUrlParser: true
-});
+mongoose.connect(
+  "mongodb://user1:user123@ds119652.mlab.com:19652/login",
+  { userNewUrlParser: true }
+);
 
 //require("./routes/login.js")(app);
 
-app.post("/users/reg", (req, res) => { // REG USER
-  console.log("users/reg");
+app.post("/users/reg", (req, res) => {
   var body = _.pick(req.body, ["email", "password"]);
   var user = new User(body);
-
+  console.log(body);
   user
     .save()
     .then(() => {
+      console.log("generate");
       return user.generateAuthToken();
     })
     .then(token => {
@@ -33,8 +34,7 @@ app.post("/users/reg", (req, res) => { // REG USER
     .catch(e => {
       res.status(400).send();
     });
-
-  });
+});
 
 var connection = mysql.createConnection({
   host: keys.DB_HOST_NAME,
