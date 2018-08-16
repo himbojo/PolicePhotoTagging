@@ -87,12 +87,12 @@ class SearchForm extends Component {
                     />
                   </FormGroup>
                   <FormGroup>
-                    <ControlLabel>Date</ControlLabel>
+                    <ControlLabel>Date One</ControlLabel>
                     <DateOnlyPicker />
                   </FormGroup>
                   <FormGroup>
-                    <ControlLabel>Time</ControlLabel>
-                    <TimeOnlyPicker />
+                    <ControlLabel>Date Two</ControlLabel>
+                    <DateOnlyPicker />
                   </FormGroup>
 
                   <FormGroup validationState={this.isNull(this.state.offence)}>
