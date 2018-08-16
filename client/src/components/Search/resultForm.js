@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
-import {
-  FormControl,
-  FormGroup,
-  ControlLabel,
-  Grid,
-  Row,
-  Col,
-  Button,
-  Modal,
-  Image
-} from 'react-bootstrap';
+import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button, Modal, Image } from 'react-bootstrap';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import ImageUpload from '../objects/imageUpload';
 import DateOnlyPicker from '../objects/dateOnlyPicker';
@@ -88,6 +78,13 @@ class ResultForm extends Component {
           }
           return (
             <div>
+              <div className="buttonGroup">
+                <Link href="/search" to="/search">
+                <Button className="searchButton" bsStyle="primary">
+                  Back
+                </Button>
+                </Link>
+              </div>
               <Gallery
                 photos={PHOTO_SET}
                 columns={columns}
