@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Multiselect } from 'react-widgets';
 import 'react-widgets/dist/css/react-widgets.css';
+import '../css/inputForm.css';
 
 class Tagging extends Component {
   constructor(...args) {
