@@ -5,6 +5,8 @@ import TimeOnlyPicker from "../objects/timeOnlyPicker";
 import Tagging from "../objects/tagging";
 import { DropdownList } from 'react-widgets';
 import "../css/inputForm.css";
+import * as actions from "../../actions";
+import { connect } from "react-redux";
 
 function FieldGroup({ id, vState, label, help, ...props }) {
   return (
@@ -17,51 +19,30 @@ function FieldGroup({ id, vState, label, help, ...props }) {
 }
 
 class FormContents extends Component{
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.handleChangeDrop = this.handleChangeDrop.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       iu: '',
       qid: '',
       filenumber: '',
       location: '',
       tags: '',
-      description: '',
-      offence: '',
-      items: ['Headwear', 'Top', 'Pants', 'Footwear'],
-      colours: ['Black', 'White', 'Grey', 'Orange', 'Yellow', 'Blue', 'Green', 'Red', 'Purple', 'Pink'],
-      genSelect: '',
-      colSelect: '',
-      gTags: [],
-      gSelect: '',
-      cTags: [],
-      cSelect: '',
-      genericArray:[],
-      genericSelect: ''
+      offence: ''
     };
+  }
+
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.insPhoto(this.state);
+
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
-  handleChangeDrop(item, colour){
-    console.log(item);
-    let { gTags, gSelect, cTags, cSelect, genericArray, genericSelect } = this.state;
-    var n = gTags.includes(item);
-    if(!n){
-      var ic = colour.concat(' ', item);
-      this.setState({
-        gSelect: item,
-        gTags: [...gTags, item],
-        cSelect: colour,
-        cTags: [...cTags, colour],
-        genericArray:[...genericArray, ic],
-        genericSelect: ic
-      })}
-
-    }
 
     isNumber(_value) {
       var value = _value;
@@ -77,8 +58,6 @@ class FormContents extends Component{
     }
 
     render(){
-      var gt = new Tagging();
-      var iu = this.state.iu;
       return(
         <form>
           <FieldGroup
@@ -116,39 +95,8 @@ class FormContents extends Component{
             value={this.state.value}
             onChange={this.handleChange}
             vState={this.isNull(this.state.location)}/>
-          <Well>
-          <FormGroup controlId="formControlsDrop1">
-            <ControlLabel>Select Clothing</ControlLabel>
-            <DropdownList
-              data={this.state.items}
-              value={this.state.genSelect}
-              onChange={genSelect => this.setState({ genSelect })}
-              placeholder="Select Clothing"
-
-              />
-          </FormGroup>
-          <FormGroup controlId="formControlsDrop2">
-            <ControlLabel>Select Colour</ControlLabel>
-            <DropdownList
-              data={this.state.colours}
-              value={this.state.colSelect}
-              onChange={colSelect => this.setState({ colSelect })}
-              defaultValue={"Black"}
-              placeholder="Select Colour"
-              />
-          </FormGroup>
-          <Button bsStyle="primary" onClick={() => {this.handleChangeDrop(this.state.genSelect, this.state.colSelect)}}>Add Tag</Button>
-          </Well>
           <FormGroup>
-            <ControlLabel>Generic Tags</ControlLabel>
-            <DropdownList
-              data={this.state.genericArray}
-              value={this.state.genericSelect}
-              onChange={genericSelect => this.setState({ genericSelect })}
-              />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Detail Tags</ControlLabel>
+            <ControlLabel>Tags</ControlLabel>
             <Tagging />
           </FormGroup>
           <FieldGroup
@@ -160,11 +108,14 @@ class FormContents extends Component{
             value={this.state.value}
             onChange={this.handleChange}
             vState={this.isNull(this.state.offence)}/>
-          <Button bsStyle="primary" type="submit" onClick={iu._handleSubmit}>Upload Image</Button>
+          <Button bsStyle="primary" type="submit" onClick={this.handleSubmit}>Upload Image</Button>
         </form>
 
       );
     }
   };
 
-  export default FormContents;
+  export default connect(
+    null,
+    actions
+  )(FormContents);

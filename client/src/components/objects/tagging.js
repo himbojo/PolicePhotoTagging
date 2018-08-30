@@ -10,11 +10,11 @@ class Tagging extends Component {
       this.state = {
         value: [],
         tags: [],
+        state: ''
       }
     }
 
     handleCreate(name) {
-      console.log("hi");
       let { tags, value } = this.state;
 
       let newOption = {
@@ -24,18 +24,17 @@ class Tagging extends Component {
 
       this.setState({
         value: [...value, newOption],  // select new option
-        tags: [...tags, newOption] // add new option to our dataset
+        tags: [...tags, newOption], // add new option to our dataset
+        state: this.state
       })
-
-      console.log(this.state.value);
-      console.log(this.state.tags);
     }
 
     render() {
-      let { value, tags } = this.state;
+      let { value, tags, state } = this.state;
 
       return (
         <Multiselect
+          state={state}
           data={tags}
           value={value}
           allowCreate="onFilter"

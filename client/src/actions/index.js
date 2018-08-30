@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_USER, REG_USER } from "./types";
+import { LOGIN_USER, REG_USER, INS_PHOTO } from "./types";
 
 /*
 ##example
@@ -28,4 +28,10 @@ export const regUser = values => async dispatch => {
   const res = await axios.post("/users/reg", values);
   console.log("test12");
   dispatch({ type: REG_USER, payload: res.data });
+};
+
+export const insPhoto = values => async dispatch => {
+  const res = await axios.post("/photos", values);
+
+  dispatch({ type: INS_PHOTO, payload: res.data });
 };
