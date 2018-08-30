@@ -11,12 +11,6 @@ class ImageUpload extends Component {
       imagePreviewUrl: ''
     };
     this._handleImageChange = this._handleImageChange.bind(this);
-    this._handleSubmit = this._handleSubmit.bind(this);
-  }
-
-  _handleSubmit(e) {
-    e.preventDefault();
-    // TODO: do something with -> this.state.file
   }
 
   _handleImageChange(e) {
@@ -47,7 +41,7 @@ class ImageUpload extends Component {
         <Grid>
           <Row>
             <Col xs={6}>
-            <form onSubmit={this._handleSubmit}>
+            <form>
               <ControlLabel>Please Select a file</ControlLabel>
               <FormControl className="chooseFile" type="file" label="File" help="Browse for image" onChange={this._handleImageChange} />
             </form>
