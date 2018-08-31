@@ -31,7 +31,8 @@ export const regUser = values => async dispatch => {
 };
 
 export const insPhoto = values => async dispatch => {
-  const res = await axios.post("/photos", values);
-
+    console.log(values);
+  const res = await axios.post("/image/add", values);
+  console.log("insPhoto2");
   dispatch({ type: INS_PHOTO, payload: res.data });
 };

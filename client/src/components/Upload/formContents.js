@@ -24,20 +24,22 @@ class FormContents extends Component{
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
-      iu: '',
       qid: '',
-      filenumber: '',
+      eventNumber: '',
+      date: '',
+      time: '',
       location: '',
-      tags: '',
-      offence: ''
+      tags: [],
+      offence: '',
+      iu: ''
     };
   }
 
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log(this.props);
     this.props.insPhoto(this.state);
-
   }
 
   handleChange(e) {
@@ -70,14 +72,14 @@ class FormContents extends Component{
             onChange={this.handleChange}
             vState={this.isNumber(this.state.qid)}/>
           <FieldGroup
-            id="formControlsFileNumber"
+            id="formControlseventNumber"
             type="text"
             label="Event Number"
-            name="filenumber"
+            name="eventNumber"
             placeholder="Please enter Event Number"
             value={this.state.value}
             onChange={this.handleChange}
-            vState={this.isNumber(this.state.filenumber)}/>
+            vState={this.isNumber(this.state.eventNumber)}/>
           <FormGroup>
             <ControlLabel>Date</ControlLabel>
             <DateOnlyPicker/>
