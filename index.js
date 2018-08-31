@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const _ = require("lodash");
 const { User } = require("./routes/models/user");
+const { Image } = require("./routes/models/image");
 
 const keys = require("./keys");
 app.use(bodyParser.json());
@@ -29,6 +30,18 @@ app.post("/users/reg", (req, res) => {
     .then(token => {
       res.header("x-auth", token).send(user);
     })
+    .catch(e => {
+      res.status(400).send();
+    });
+});
+
+app.post("/image/add", (req, res) => {
+  var body = _.pick(req.body, ["qid", "eventNumber", "date", "time", "location", "tags", "offense", "iu"]);
+  var image = new Image(body);
+    console.log("posting");
+  console.log(body);
+  image
+    .save()
     .catch(e => {
       res.status(400).send();
     });
