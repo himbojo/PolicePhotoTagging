@@ -7,6 +7,16 @@ import { DropdownList } from 'react-widgets';
 import "../css/inputForm.css";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
+import "../../../node_modules/react-tag-input/example/reactTags.css";
+
+import { WithContext as ReactTags } from 'react-tag-input';
+
+const KeyCodes = {
+  comma: 188,
+  enter: 13,
+};
+
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 function FieldGroup({ id, vState, label, help, ...props }) {
   return (
@@ -23,6 +33,9 @@ class FormContents extends Component{
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+        this.handleAddition = this.handleAddition.bind(this);
+        this.handleDrag = this.handleDrag.bind(this);
     this.state = {
       qid: '',
       eventNumber: '',
@@ -58,6 +71,29 @@ class FormContents extends Component{
       if (value === '') return null;
       else return 'success';
     }
+
+    handleDelete(i) {
+    const { tags } = this.state;
+    this.setState({
+     tags: tags.filter((tag, index) => index !== i),
+    });
+}
+
+handleAddition(tag) {
+    this.setState(state => ({ tags: [...state.tags, tag] }));
+}
+
+handleDrag(tag, currPos, newPos) {
+    const tags = [...this.state.tags];
+    const newTags = tags.slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    // re-render
+    this.setState({ tags: newTags });
+}
+
 
     render(){
       return(
@@ -99,7 +135,15 @@ class FormContents extends Component{
             vState={this.isNull(this.state.location)}/>
           <FormGroup>
             <ControlLabel>Tags</ControlLabel>
-            <Tagging />
+            <div>
+              <ReactTags tags={this.state.tags}
+                     suggestions={this.state.suggestions}
+                     handleDelete={this.handleDelete}
+                     handleAddition={this.handleAddition}
+                     handleDrag={this.handleDrag}
+                     delimiters={delimiters} />
+            </div>
+
           </FormGroup>
           <FieldGroup
             id="formControlsOffence"

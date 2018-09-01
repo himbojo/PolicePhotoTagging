@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  "mongodb://user1:pass@13.210.197.54:27017/PhotoTagging",
+  "mongodb://user1:user123@ds119652.mlab.com:19652/login",
   { userNewUrlParser: true }
 );
 
