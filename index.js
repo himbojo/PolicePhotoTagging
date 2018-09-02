@@ -15,6 +15,11 @@ mongoose.connect(
   { userNewUrlParser: true }
 );
 
+//mongoose.connect(
+  //"mongodb://user1:pass@13.210.197.54:27017/PhotoTagging",
+  //{ userNewUrlParser: true }
+//);
+
 //require("./routes/login.js")(app);
 
 app.post("/users/reg", (req, res) => {
