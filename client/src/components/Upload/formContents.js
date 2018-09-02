@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button, HelpBlock, Well } from "react-bootstrap";
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import TimeOnlyPicker from "../objects/timeOnlyPicker";
+import DateTimePick from "../objects/dateTimePicker";
 import Tagging from "../objects/tagging";
 import { DropdownList } from 'react-widgets';
 import "../css/inputForm.css";
@@ -36,11 +37,11 @@ class FormContents extends Component{
     this.handleDelete = this.handleDelete.bind(this);
         this.handleAddition = this.handleAddition.bind(this);
         this.handleDrag = this.handleDrag.bind(this);
+        this.handleTime = this.handleTime.bind(this);
     this.state = {
       qid: '',
       eventNumber: '',
-      date: '',
-      time: '',
+      dateTime: '',
       location: '',
       tags: [],
       offence: '',
@@ -48,7 +49,12 @@ class FormContents extends Component{
     };
   }
 
+handleTime(e){
+//  var date = new Date(e.value);
+  //console.log(date.getMinutes());
+  this.setState({ dateTime: e.value});
 
+}
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.props);
@@ -116,13 +122,13 @@ handleDrag(tag, currPos, newPos) {
             value={this.state.value}
             onChange={this.handleChange}
             vState={this.isNumber(this.state.eventNumber)}/>
+
           <FormGroup>
-            <ControlLabel>Date</ControlLabel>
-            <DateOnlyPicker/>
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Time</ControlLabel>
-            <TimeOnlyPicker/>
+            <ControlLabel>Date & Time</ControlLabel>
+            <DateTimePick
+              handleTime={this.handleTime}
+            />
+
           </FormGroup>
           <FieldGroup
             id="formControlsLocation"
@@ -141,7 +147,8 @@ handleDrag(tag, currPos, newPos) {
                      handleDelete={this.handleDelete}
                      handleAddition={this.handleAddition}
                      handleDrag={this.handleDrag}
-                     delimiters={delimiters} />
+                     delimiters={delimiters}
+                    />
             </div>
 
           </FormGroup>
