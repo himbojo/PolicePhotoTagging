@@ -2,11 +2,22 @@ import React, {Component} from 'react';
 import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button, HelpBlock, Well } from "react-bootstrap";
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import TimeOnlyPicker from "../objects/timeOnlyPicker";
+import DateTimePick from "../objects/dateTimePicker";
 import Tagging from "../objects/tagging";
 import { DropdownList } from 'react-widgets';
 import "../css/inputForm.css";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
+import "../../../node_modules/react-tag-input/example/reactTags.css";
+
+import { WithContext as ReactTags } from 'react-tag-input';
+
+const KeyCodes = {
+  comma: 188,
+  enter: 13,
+};
+
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 function FieldGroup({ id, vState, label, help, ...props }) {
   return (
@@ -23,11 +34,14 @@ class FormContents extends Component{
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+        this.handleAddition = this.handleAddition.bind(this);
+        this.handleDrag = this.handleDrag.bind(this);
+        this.handleTime = this.handleTime.bind(this);
     this.state = {
       qid: '',
       eventNumber: '',
-      date: '',
-      time: '',
+      dateTime: '',
       location: '',
       tags: [],
       offence: '',
@@ -35,7 +49,12 @@ class FormContents extends Component{
     };
   }
 
+handleTime(e){
+//  var date = new Date(e.value);
+  //console.log(date.getMinutes());
+  this.setState({ dateTime: e.value});
 
+}
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.props);
@@ -59,6 +78,29 @@ class FormContents extends Component{
       else return 'success';
     }
 
+    handleDelete(i) {
+    const { tags } = this.state;
+    this.setState({
+     tags: tags.filter((tag, index) => index !== i),
+    });
+}
+
+handleAddition(tag) {
+    this.setState(state => ({ tags: [...state.tags, tag] }));
+}
+
+handleDrag(tag, currPos, newPos) {
+    const tags = [...this.state.tags];
+    const newTags = tags.slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    // re-render
+    this.setState({ tags: newTags });
+}
+
+
     render(){
       return(
         <form>
@@ -80,13 +122,13 @@ class FormContents extends Component{
             value={this.state.value}
             onChange={this.handleChange}
             vState={this.isNumber(this.state.eventNumber)}/>
+
           <FormGroup>
-            <ControlLabel>Date</ControlLabel>
-            <DateOnlyPicker/>
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Time</ControlLabel>
-            <TimeOnlyPicker/>
+            <ControlLabel>Date & Time</ControlLabel>
+            <DateTimePick
+              handleTime={this.handleTime}
+            />
+
           </FormGroup>
           <FieldGroup
             id="formControlsLocation"
@@ -99,7 +141,16 @@ class FormContents extends Component{
             vState={this.isNull(this.state.location)}/>
           <FormGroup>
             <ControlLabel>Tags</ControlLabel>
-            <Tagging />
+            <div>
+              <ReactTags tags={this.state.tags}
+                     suggestions={this.state.suggestions}
+                     handleDelete={this.handleDelete}
+                     handleAddition={this.handleAddition}
+                     handleDrag={this.handleDrag}
+                     delimiters={delimiters}
+                    />
+            </div>
+
           </FormGroup>
           <FieldGroup
             id="formControlsOffence"
