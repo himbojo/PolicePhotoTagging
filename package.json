@@ -28,6 +28,7 @@
     "react-measure": "^2.1.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
+    "s3fs": "^2.5.0",
     "validator": "^10.5.0"
   }
 }
