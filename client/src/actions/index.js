@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_USER, REG_USER, INS_PHOTO } from "./types";
+import { LOGIN_USER, REG_USER, INS_PHOTO, BUCKET_PHOTO } from "./types";
 
 /*
 ##example
@@ -33,6 +33,13 @@ export const regUser = values => async dispatch => {
 export const insPhoto = values => async dispatch => {
     console.log(values);
   const res = await axios.post("/image/add", values);
-  console.log("insPhoto2");
+  console.log("insPhoto");
   dispatch({ type: INS_PHOTO, payload: res.data });
+};
+
+export const bucketPhoto = values => async dispatch => {
+    console.log(values);
+  const res = await axios.post("/bucket/add", values);
+  console.log("bucketPhoto");
+  dispatch({ type: BUCKET_PHOTO, payload: res.data });
 };
