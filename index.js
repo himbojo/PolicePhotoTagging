@@ -9,6 +9,16 @@ const { Image } = require("./routes/models/image");
 const keys = require("./keys");
 app.use(bodyParser.json());
 const mongoose = require("mongoose");
+const fs = require('fs');
+const S3FS = require('s3fs');
+const s3fsImpl = new S3FS('policephototaggingstorage', {
+  accessKeyId: 'AKIAIPC5WDUR6SXASWTQ',
+  secretAccessKey: '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'
+});
+const multiparty = require('connect-multiparty');
+      multipartyMiddleware = multiparty();
+
+app.use(multipartyMiddleware);
 
 mongoose.connect(
   "mongodb://user1:user123@ds119652.mlab.com:19652/login",
@@ -41,7 +51,7 @@ app.post("/users/reg", (req, res) => {
 });
 
 app.post("/image/add", (req, res) => {
-  var body = _.pick(req.body, ["qid", "eventNumber", "date", "time", "location", "tags", "offense", "iu"]);
+  var body = _.pick(req.body, ["qid", "eventNumber", "dateTime", "location", "tags", "offense", "iu"]);
   var image = new Image(body);
     console.log("posting");
   console.log(body);
@@ -51,6 +61,21 @@ app.post("/image/add", (req, res) => {
       res.status(400).send();
     });
 });
+
+app.post("/bucket/add", (req, res) => {
+  var file = _.pick(req.body, "file");
+    console.log("posting bucket");
+  console.log(file);
+  var stream = fs.createReadStream(file.path);
+  return s3fsImpl.writeFile(file.originalFilename, stream).then(function(){
+    fs.unlink(file.path, function(err){
+      if(err){
+        console.error(err);
+      }
+    })
+  });
+});
+
 
 if (process.env.NODE_ENV == "production") {
   //Express will server up production assets

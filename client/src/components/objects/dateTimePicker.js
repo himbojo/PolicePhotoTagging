@@ -13,8 +13,7 @@ class DateTimePick extends Component {
     return (
       <div>
         <DateTimePicker
-
-
+        format={'DD/MM/YYYY H:mm'}
           defaultValue={new Date()}
         onChange={value => this.props.handleTime({value})} />
       </div>

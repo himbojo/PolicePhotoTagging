@@ -13,11 +13,7 @@ var ImageSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  date: {
-    type: String,
-    trim: true
-  },
-  time: {
+  dateTime: {
     type: String,
     trim: true
   },
@@ -43,7 +39,7 @@ ImageSchema.methods.toJSON = function() {
   var image = this;
   var imageObject = image.toObject();
 
-  return _.pick(imageObject, ["_id", "qid", "eventNumber", "date", "time", "location", "tags", "offense", "iu"]);
+  return _.pick(imageObject, ["_id", "qid", "eventNumber", "dateTime", "location", "tags", "offense", "iu"]);
 };
 
 ImageSchema.pre("save", function(next) {
