@@ -3,34 +3,14 @@
 import React, { Component } from 'react';
 import { Button, FormControl, Grid, Row, Col, ControlLabel, Image } from 'react-bootstrap';
 import "./imageUpload.css";
+var path = require('path');
 class ImageUpload extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      file: '',
-      imagePreviewUrl: ''
-    };
-    this._handleImageChange = this._handleImageChange.bind(this);
-  }
-
-  _handleImageChange(e) {
-    e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
-    }
-
-    reader.readAsDataURL(file)
   }
 
   render() {
-    let {imagePreviewUrl} = this.state;
+    let imagePreviewUrl = this.props.imagePreviewUrl;
     let $imagePreview = null;
     if (imagePreviewUrl) {
       $imagePreview = (<Image className="image" src={imagePreviewUrl} responsive />);
@@ -43,7 +23,7 @@ class ImageUpload extends Component {
             <Col xs={6}>
             <form>
               <ControlLabel>Please Select a file</ControlLabel>
-              <FormControl className="chooseFile" type="file" label="File" help="Browse for image" onChange={this._handleImageChange} />
+              <FormControl className="chooseFile" type="file" label="File" help="Browse for image" onChange={this.props.onChangeFile} />
             </form>
             {$imagePreview}
             {/*<Button bsStyle="primary" type="submit" onClick={this._handleSubmit}>Upload Image</Button>*/}

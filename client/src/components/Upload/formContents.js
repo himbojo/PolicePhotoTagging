@@ -22,9 +22,9 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter];
 function FieldGroup({ id, vState, label, help, ...props }) {
   return (
     <FormGroup controlId={id} validationState={vState} >
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl {...props} />
-      {help && <HelpBlock>{help}</HelpBlock>}
+    <ControlLabel>{label}</ControlLabel>
+    <FormControl {...props} />
+    {help && <HelpBlock>{help}</HelpBlock>}
     </FormGroup>
   );
 }
@@ -35,9 +35,9 @@ class FormContents extends Component{
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-        this.handleAddition = this.handleAddition.bind(this);
-        this.handleDrag = this.handleDrag.bind(this);
-        this.handleTime = this.handleTime.bind(this);
+    this.handleAddition = this.handleAddition.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
+    this.handleTime = this.handleTime.bind(this);
     this.state = {
       qid: '',
       eventNumber: '',
@@ -49,15 +49,15 @@ class FormContents extends Component{
     };
   }
 
-handleTime(e){
-//  var date = new Date(e.value);
-  //console.log(date.getMinutes());
-  this.setState({ dateTime: e.value});
+  handleTime(e){
+    //  var date = new Date(e.value);
+    //console.log(date.getMinutes());
+    this.setState({ dateTime: e.value});
+    console.log(this.props);
 
-}
+  }
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.props);
     this.props.insPhoto(this.state);
   }
 
@@ -65,31 +65,31 @@ handleTime(e){
     this.setState({ [e.target.name]: e.target.value });
   }
 
-    isNumber(_value) {
-      var value = _value;
-      if (!isNaN(parseInt(value))) return 'success';
-      else if (value === '') return null;
-      else return 'error';
-    }
+  isNumber(_value) {
+    var value = _value;
+    if (!isNaN(parseInt(value))) return 'success';
+    else if (value === '') return null;
+    else return 'error';
+  }
 
-    isNull(_value){
-      var value = _value;
-      if (value === '') return null;
-      else return 'success';
-    }
+  isNull(_value){
+    var value = _value;
+    if (value === '') return null;
+    else return 'success';
+  }
 
-    handleDelete(i) {
+  handleDelete(i) {
     const { tags } = this.state;
     this.setState({
-     tags: tags.filter((tag, index) => index !== i),
+      tags: tags.filter((tag, index) => index !== i),
     });
-}
+  }
 
-handleAddition(tag) {
+  handleAddition(tag) {
     this.setState(state => ({ tags: [...state.tags, tag] }));
-}
+  }
 
-handleDrag(tag, currPos, newPos) {
+  handleDrag(tag, currPos, newPos) {
     const tags = [...this.state.tags];
     const newTags = tags.slice();
 
@@ -98,77 +98,77 @@ handleDrag(tag, currPos, newPos) {
 
     // re-render
     this.setState({ tags: newTags });
-}
+  }
 
 
-    render(){
-      return(
-        <form>
-          <FieldGroup
-            id="formControlsQID"
-            type="text"
-            label="Uploader QID"
-            name="qid"
-            placeholder="Please enter QID"
-            value={this.state.value}
-            onChange={this.handleChange}
-            vState={this.isNumber(this.state.qid)}/>
-          <FieldGroup
-            id="formControlseventNumber"
-            type="text"
-            label="Event Number"
-            name="eventNumber"
-            placeholder="Please enter Event Number"
-            value={this.state.value}
-            onChange={this.handleChange}
-            vState={this.isNumber(this.state.eventNumber)}/>
+  render(){
+    return(
+      <form>
+      <FieldGroup
+      id="formControlsQID"
+      type="text"
+      label="Uploader QID"
+      name="qid"
+      placeholder="Please enter QID"
+      value={this.state.value}
+      onChange={this.handleChange}
+      vState={this.isNumber(this.state.qid)}/>
+      <FieldGroup
+      id="formControlseventNumber"
+      type="text"
+      label="Event Number"
+      name="eventNumber"
+      placeholder="Please enter Event Number"
+      value={this.state.value}
+      onChange={this.handleChange}
+      vState={this.isNumber(this.state.eventNumber)}/>
 
-          <FormGroup>
-            <ControlLabel>Date & Time</ControlLabel>
-            <DateTimePick
-              handleTime={this.handleTime}
-            />
+      <FormGroup>
+      <ControlLabel>Date & Time</ControlLabel>
+      <DateTimePick
+      handleTime={this.handleTime}
+      />
 
-          </FormGroup>
-          <FieldGroup
-            id="formControlsLocation"
-            type="text"
-            label="Location"
-            name="location"
-            placeholder="Please enter Location"
-            value={this.state.value}
-            onChange={this.handleChange}
-            vState={this.isNull(this.state.location)}/>
-          <FormGroup>
-            <ControlLabel>Tags</ControlLabel>
-            <div>
-              <ReactTags tags={this.state.tags}
-                     suggestions={this.state.suggestions}
-                     handleDelete={this.handleDelete}
-                     handleAddition={this.handleAddition}
-                     handleDrag={this.handleDrag}
-                     delimiters={delimiters}
-                    />
-            </div>
+      </FormGroup>
+      <FieldGroup
+      id="formControlsLocation"
+      type="text"
+      label="Location"
+      name="location"
+      placeholder="Please enter Location"
+      value={this.state.value}
+      onChange={this.handleChange}
+      vState={this.isNull(this.state.location)}/>
+      <FormGroup>
+      <ControlLabel>Tags</ControlLabel>
+      <div>
+      <ReactTags tags={this.state.tags}
+      suggestions={this.state.suggestions}
+      handleDelete={this.handleDelete}
+      handleAddition={this.handleAddition}
+      handleDrag={this.handleDrag}
+      delimiters={delimiters}
+      />
+      </div>
 
-          </FormGroup>
-          <FieldGroup
-            id="formControlsOffence"
-            type="text"
-            label="Offence"
-            name="offence"
-            placeholder="Please enter Offence"
-            value={this.state.value}
-            onChange={this.handleChange}
-            vState={this.isNull(this.state.offence)}/>
-          <Button bsStyle="primary" type="submit" onClick={this.handleSubmit}>Upload Image</Button>
-        </form>
+      </FormGroup>
+      <FieldGroup
+      id="formControlsOffence"
+      type="text"
+      label="Offence"
+      name="offence"
+      placeholder="Please enter Offence"
+      value={this.state.value}
+      onChange={this.handleChange}
+      vState={this.isNull(this.state.offence)}/>
+      <Button bsStyle="primary" type="submit" onClick={this.handleSubmit}>Upload Image</Button>
+      </form>
 
-      );
-    }
-  };
+    );
+  }
+};
 
-  export default connect(
-    null,
-    actions
-  )(FormContents);
+export default connect(
+  null,
+  actions
+)(FormContents);

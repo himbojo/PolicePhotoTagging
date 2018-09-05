@@ -21,9 +21,11 @@ class InputForm extends Component {
     super(props, context);
 
     this.state = {
-
-      width: window.innerWidth,
+      file: '',
+      imagePreviewUrl: '',
+      width: window.innerWidth
     };
+    this._handleImageChange = this._handleImageChange.bind(this);
   }
 
   componentWillMount() {
@@ -38,20 +40,27 @@ class InputForm extends Component {
     this.setState({ width: window.innerWidth });
   };
 
+  _handleImageChange(e) {
+    e.preventDefault();
+    let file = e.target.files[0];
+      this.setState({
+        file: file,
+        imagePreviewUrl: URL.createObjectURL(file)});
+  }
+
   render() {
     const { width } = this.state;
     const isMobile = width <= 768;
-    var iu = new ImageUpload();
     if (isMobile) {
       return (
         <div>
           <Grid>
             <Row>
               <Row xs={8} className="colStyle2">
-                <ImageUpload file={iu.state.file} onChange={iu._handleImageChange} />
+                <ImageUpload file={this.state.file} imagePreviewUrl={this.state.imagePreviewUrl} onChange={this._handleImageChange} />
               </Row>
               <Row mOffset={.5} xsOffset={1} xs={3} className="colStyle1">
-                <FormContents iu={iu.state}/>
+                <FormContents iu={this.state.file}/>
               </Row>
             </Row>
           </Grid>
@@ -64,10 +73,10 @@ class InputForm extends Component {
           <Grid>
             <Row>
               <Col xs={8} className="colStyle2">
-                <ImageUpload file={iu.state.file} onChange={iu._handleImageChange} />
+                <ImageUpload file={this.state.file} imagePreviewUrl={this.state.imagePreviewUrl} onChangeFile={this._handleImageChange} />
               </Col>
               <Col  xsOffset={1} xs={3} className="colStyle1">
-                <FormContents iu={iu.state}/>
+                <FormContents iu={this.state.file}/>
               </Col>
             </Row>
           </Grid>
