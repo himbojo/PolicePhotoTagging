@@ -38,8 +38,9 @@ export const insPhoto = values => async dispatch => {
 };
 
 export const bucketPhoto = values => async dispatch => {
-    console.log(values);
-  const res = await axios.post("/bucket/add", values);
+    console.log("bucket");
+    console.log(values.file);
+  const res = await axios.post("/bucket/add", values.file);
   console.log("bucketPhoto");
   dispatch({ type: BUCKET_PHOTO, payload: res.data });
 };

@@ -8,6 +8,7 @@ const { Image } = require("./routes/models/image");
 
 const keys = require("./keys");
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 const mongoose = require("mongoose");
 const fs = require('fs');
 const S3FS = require('s3fs');
@@ -48,6 +49,7 @@ app.post("/users/reg", (req, res) => {
     .catch(e => {
       res.status(400).send();
     });
+    res.redi
 });
 
 app.post("/image/add", (req, res) => {
@@ -63,17 +65,19 @@ app.post("/image/add", (req, res) => {
 });
 
 app.post("/bucket/add", (req, res) => {
-  var file = _.pick(req.body, "file");
-    console.log("posting bucket");
-  console.log(file);
-  var stream = fs.createReadStream(file.path);
-  return s3fsImpl.writeFile(file.originalFilename, stream).then(function(){
+  console.log("start");
+  console.log(req.body);
+
+
+  console.log("done");
+//  var stream = fs.createReadStream(req.body.file);
+  /*return s3fsImpl.writeFile(file.originalFilename, stream).then(function(){
     fs.unlink(file.path, function(err){
       if(err){
         console.error(err);
       }
     })
-  });
+  }); */
 });
 
 
