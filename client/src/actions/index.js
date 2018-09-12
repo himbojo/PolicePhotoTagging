@@ -37,6 +37,7 @@ export const loginUser = values => async dispatch => {
   const res = await axios.post("/users/login", values);
 
   dispatch({ type: LOGIN_USER, payload: res.data });
+};
 
 export const bucketPhoto = values => async dispatch => {
     console.log("bucket");
