@@ -20,6 +20,8 @@ class SearchForm extends Component {
   constructor(props, context) {
     super(props, context);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
 
     this.state = {
       qid: '',
@@ -48,16 +50,31 @@ class SearchForm extends Component {
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
   redirectToTarget = () => {
     this.context.router.history.push(`/result`);
   };
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log("Searching...");
+    console.log(this.state.qid);
+    // e.preventDefault();
+    // var file1 = this.props.iu;
+    // var date = new Date().toISOString('en-nz').replace(/T/, '_').replace(/\..+/, '');
+    //
+    // var name = date + '_' + file1.name;
+    // var file2 = new File([file1], name);
+    // this.setState({iu: file2.name, file: file2}, () => this.sendData());
+  }
+
   render() {
     const { showing } = this.state;
     return (
       <div>
         <Grid>
           <Row xsOffset={1} xs={3} className="colStyle1">
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <ControlLabel>Search Tags</ControlLabel>
                 <Tagging />
@@ -109,8 +126,8 @@ class SearchForm extends Component {
 
               <div className="buttonGroup">
                 <Link href="/results" to="/results">
-                <Button className="searchButton" bsStyle="primary">
-                  Search
+                <Button className="searchButton" bsStyle="primary" type="submit" >
+                   Search
                 </Button>
                 </Link>
               </div>
