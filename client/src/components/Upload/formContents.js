@@ -57,7 +57,9 @@ class FormContents extends Component{
   handleSubmit(e) {
     e.preventDefault();
     var file1 = this.props.iu;
-    var name = new Date().toISOString('en-nz')+ '_' + file1.name;
+    var date = new Date().toISOString('en-nz').replace(/T/, '_').replace(/\..+/, '');
+
+    var name = date + '_' + file1.name;
     var file2 = new File([file1], name);
     this.setState({iu: file2.name, file: file2}, () => this.sendData());
     //console.log(this.state.iu);
