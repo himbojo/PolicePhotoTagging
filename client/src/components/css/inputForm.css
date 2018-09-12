@@ -6,7 +6,6 @@
 .colStyle2{
   border-radius: 0.3em;
   margin: 2%;
-  width: 60%;
   background-color: rgba(255, 255, 255, 0.75);
   object-fit: cover;
 }

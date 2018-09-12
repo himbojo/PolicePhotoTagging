@@ -6,7 +6,7 @@ import { DropdownList } from 'react-widgets';
 import "../css/inputForm.css";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
-import "../../../node_modules/react-tag-input/example/reactTags.css";
+import "../css/reactTags.css";
 
 import { WithContext as ReactTags } from 'react-tag-input';
 
