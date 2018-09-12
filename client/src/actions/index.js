@@ -41,8 +41,11 @@ export const loginUser = values => async dispatch => {
 
 export const bucketPhoto = values => async dispatch => {
     console.log("bucket");
-    console.log(values.file);
-  const res = await axios.post("/bucket/add", values.file);
+    var form = new FormData();
+    var file = values.file;
+        form.append(file.name, file);
+
+  const res = await axios.post("/bucket/add", form);
   console.log("bucketPhoto");
   dispatch({ type: BUCKET_PHOTO, payload: res.data });
 
