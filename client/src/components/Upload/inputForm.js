@@ -42,10 +42,13 @@ class InputForm extends Component {
 
   _handleImageChange(e) {
     e.preventDefault();
+    console.log(e);
     let file = e.target.files[0];
       this.setState({
         file: file,
-        imagePreviewUrl: URL.createObjectURL(file)});
+        imagePreviewUrl: URL.createObjectURL(file)},     console.log(this.state));
+
+
   }
 
   render() {

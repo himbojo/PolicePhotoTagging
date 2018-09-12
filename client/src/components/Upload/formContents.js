@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button, HelpBlock, Well } from "react-bootstrap";
-import DateOnlyPicker from "../objects/dateOnlyPicker";
-import TimeOnlyPicker from "../objects/timeOnlyPicker";
 import DateTimePick from "../objects/dateTimePicker";
 import Tagging from "../objects/tagging";
 import { DropdownList } from 'react-widgets';
 import "../css/inputForm.css";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
-import "../../../node_modules/react-tag-input/example/reactTags.css";
+import "../css/reactTags.css";
 
 import { WithContext as ReactTags } from 'react-tag-input';
 
@@ -45,20 +43,30 @@ class FormContents extends Component{
       location: '',
       tags: [],
       offence: '',
-      iu: ''
+      iu: '',
+      file: ''
     };
   }
 
   handleTime(e){
     //  var date = new Date(e.value);
     //console.log(date.getMinutes());
+    console.log(e.value);
     this.setState({ dateTime: e.value});
-    console.log(this.props);
-
   }
   handleSubmit(e) {
     e.preventDefault();
+    var file1 = this.props.iu;
+    var name = new Date().toISOString('en-nz')+ '_' + file1.name;
+    var file2 = new File([file1], name);
+    this.setState({iu: file2.name, file: file2}, () => this.sendData());
+    //console.log(this.state.iu);
+  }
+
+  sendData(){
     this.props.insPhoto(this.state);
+    console.log("sent photo");
+    this.props.bucketPhoto(this.state);
   }
 
   handleChange(e) {
