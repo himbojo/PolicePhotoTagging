@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "proxy": {
+    "/users/login": {
+      "target": "http://localhost:5000"
+    },
     "/users/reg": {
       "target": "http://localhost:5000"
     },

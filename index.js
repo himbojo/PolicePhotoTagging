@@ -16,12 +16,26 @@ mongoose.connect(
 );
 
 //mongoose.connect(
-  //"mongodb://user1:pass@13.210.197.54:27017/PhotoTagging",
-  //{ userNewUrlParser: true }
+//"mongodb://user1:pass@13.210.197.54:27017/PhotoTagging",
+//{ userNewUrlParser: true }
 //);
 
 //require("./routes/login.js")(app);
+app.post("/users/login", (req, res) => {
+  console.log("HERERERE");
+  var body = _.pick(req.body, ["email", "password"]);
 
+  User.findByCredentials(body.email, body.password)
+    .then(user => {
+      console.log("now here");
+      return user.generateAuthToken().then(token => {
+        res.header("x-auth", token).send(user);
+      });
+    })
+    .catch(e => {
+      res.status(400).send();
+    });
+});
 app.post("/users/reg", (req, res) => {
   var body = _.pick(req.body, ["email", "password"]);
   var user = new User(body);
@@ -41,15 +55,22 @@ app.post("/users/reg", (req, res) => {
 });
 
 app.post("/image/add", (req, res) => {
-  var body = _.pick(req.body, ["qid", "eventNumber", "date", "time", "location", "tags", "offense", "iu"]);
+  var body = _.pick(req.body, [
+    "qid",
+    "eventNumber",
+    "date",
+    "time",
+    "location",
+    "tags",
+    "offense",
+    "iu"
+  ]);
   var image = new Image(body);
-    console.log("posting");
+  console.log("posting");
   console.log(body);
-  image
-    .save()
-    .catch(e => {
-      res.status(400).send();
-    });
+  image.save().catch(e => {
+    res.status(400).send();
+  });
 });
 
 if (process.env.NODE_ENV == "production") {
