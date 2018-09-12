@@ -44,6 +44,7 @@ export const bucketPhoto = values => async dispatch => {
     var form = new FormData();
     var file = values.file;
         form.append(file.name, file);
+        form.append('name', file.name);
 
   const res = await axios.post("/bucket/add", form);
   console.log("bucketPhoto");
