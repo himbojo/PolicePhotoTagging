@@ -65,7 +65,8 @@ class FormContents extends Component{
 
   sendData(){
     this.props.insPhoto(this.state);
-    console.log("sent photo");
+    //console.log("sent photo");
+    //console.log(this.state.file);
     this.props.bucketPhoto(this.state);
   }
 

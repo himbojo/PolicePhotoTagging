@@ -79,12 +79,10 @@ app.post("/image/add", (req, res) => {
 
 app.post("/bucket/add", (req, res) => {
   console.log("start");
-  console.log(req.body);
-
-
+  var file = req.files;
+  console.log(file);
   console.log("done");
-//  var stream = fs.createReadStream(req.body.file);
-  /*return s3fsImpl.writeFile(file.originalFilename, stream).then(function(){
+/*  return s3fsImpl.writeFile(file.originalFilename, stream).then(function(){
     fs.unlink(file.path, function(err){
       if(err){
         console.error(err);
