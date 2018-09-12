@@ -17,25 +17,26 @@ export const fetchCitys = values => async dispatch => {
 };
 
 */
-export const loginUser = values => async dispatch => {
-  const res = await axios.post("/users/login", values);
-
-  dispatch({ type: LOGIN_USER, payload: res.data });
-};
 
 export const regUser = values => async dispatch => {
-  console.log(values);
-  const res = await axios.post("/users/reg", values);
   console.log("test12");
+  const res = await axios.post("/users/reg", values);
+
   dispatch({ type: REG_USER, payload: res.data });
 };
 
 export const insPhoto = values => async dispatch => {
-    console.log(values);
+  console.log(values);
   const res = await axios.post("/image/add", values);
   console.log("insPhoto");
   dispatch({ type: INS_PHOTO, payload: res.data });
 };
+
+export const loginUser = values => async dispatch => {
+  console.log("values");
+  const res = await axios.post("/users/login", values);
+
+  dispatch({ type: LOGIN_USER, payload: res.data });
 
 export const bucketPhoto = values => async dispatch => {
     console.log("bucket");
@@ -43,4 +44,5 @@ export const bucketPhoto = values => async dispatch => {
   const res = await axios.post("/bucket/add", values.file);
   console.log("bucketPhoto");
   dispatch({ type: BUCKET_PHOTO, payload: res.data });
+
 };
