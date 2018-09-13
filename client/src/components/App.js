@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-
+import Protected from "../utils/protectedAuth";
 import NavBar from "./objects/navBar";
 import Login from "./Login/login";
 import Upload from "./Upload/upload";
@@ -13,13 +13,12 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter>
-        
           <div>
-            <Route exact path="/" component={NavBar} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/upload" component={Upload} />
-            <Route exact path="/search" component={Search} />
-            <Route exact path="/results" component={Results} />
+            <Route exact path="/" component={Protected(NavBar)} />
+            <Route exact path="/login" component={Protected(Login)} />
+            <Route exact path="/upload" component={Protected(Upload)} />
+            <Route exact path="/search" component={Protected(Search)} />
+            <Route exact path="/results" component={Protected(Results)} />
             <Route exact path="/reg" component={Reg} />
           </div>
         </BrowserRouter>

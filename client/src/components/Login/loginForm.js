@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import * as actions from "../../actions";
+import { BrowserRouter, Route, Redirect, withRouter } from "react-router-dom";
+
 import { connect } from "react-redux";
 import {
   Button,
@@ -28,12 +30,20 @@ class loginForm extends Component {
   }
   state = {
     email: "",
-    password: ""
+    password: "",
+    logged: false
   };
   handleSubmit(e) {
     e.preventDefault();
     console.log("this.state");
-    this.props.loginUser(this.state);
+    this.setState({ logged: true });
+    this.props.loginUser(this.state).then(res => {
+      this.props.history.push("/upload");
+    });
+
+    // if (localStorage.getItem("token")) {
+    //   this.props.history.push("/upload");
+    // }
   }
 
   change = e => {
@@ -47,6 +57,14 @@ class loginForm extends Component {
     this.props.onSubmit(this.state);
   };
   render() {
+    // if (this.state.logged === true){
+    //   return (
+    //       <BrowserRouter>
+    //         <Redirect push to= "/" />
+    //       </BrowserRouter>
+    //     );
+    //
+    // }
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="loginBody">
@@ -83,4 +101,4 @@ class loginForm extends Component {
 export default connect(
   null,
   actions
-)(loginForm);
+)(withRouter(loginForm));
