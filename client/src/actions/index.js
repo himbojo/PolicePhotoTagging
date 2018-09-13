@@ -1,7 +1,7 @@
 import axios from "axios";
+import { LOGIN_USER, REG_USER, INS_PHOTO, BUCKET_PHOTO, IMG_SEARCH } from "./types";
 import setAuth from "./setAuth";
 import { Router, Route, Redirect } from "react-router-dom";
-import { LOGIN_USER, REG_USER, INS_PHOTO, BUCKET_PHOTO } from "./types";
 
 export function setUser(user) {
   return {
@@ -66,4 +66,9 @@ export const bucketPhoto = values => async dispatch => {
   const res = await axios.post("/bucket/add", form);
   console.log("bucketPhoto");
   dispatch({ type: BUCKET_PHOTO, payload: res.data });
+};
+export const searchImage = values => async dispatch => {
+  console.log("You done it now");
+  const res = await axios.get("/image/search");
+  dispatch({ type: IMG_SEARCH, payload: res.data });
 };

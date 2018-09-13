@@ -95,6 +95,24 @@ app.post("/bucket/add", (req, res) => {
   });
 });
 
+app.get("/image/search", (req, res) =>{
+  console.log("You got here");
+  var tags = getTags();
+  console.log(tags);
+  // res.render('images', {})
+});
+function getTags(){
+  mongoose.test.find({"qid": "789456123"}, function(err, objs){
+    var gettingtags;
+    if (objs.length ==1)
+    {
+      gettingtags = objs[0].qid;
+      console.log(gettingtags);
+      return gettingtags;
+    }
+  });
+}
+
 
 if (process.env.NODE_ENV == "production") {
   //Express will server up production assets
