@@ -15,6 +15,8 @@ import TimeOnlyPicker from '../objects/timeOnlyPicker';
 import Tagging from '../objects/tagging';
 import './inputForm.css';
 import './search.css';
+import * as actions from "../../actions";
+import { connect } from "react-redux";
 
 class SearchForm extends Component {
   constructor(props, context) {
@@ -57,15 +59,7 @@ class SearchForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("Searching...");
-    console.log(this.state.qid);
-    // e.preventDefault();
-    // var file1 = this.props.iu;
-    // var date = new Date().toISOString('en-nz').replace(/T/, '_').replace(/\..+/, '');
-    //
-    // var name = date + '_' + file1.name;
-    // var file2 = new File([file1], name);
-    // this.setState({iu: file2.name, file: file2}, () => this.sendData());
+    this.props.searchImage(this.state);
   }
 
   render() {
@@ -74,7 +68,7 @@ class SearchForm extends Component {
       <div>
         <Grid>
           <Row xsOffset={1} xs={3} className="colStyle1">
-            <form onSubmit={this.handleSubmit}>
+            <form>
               <FormGroup>
                 <ControlLabel>Search Tags</ControlLabel>
                 <Tagging />
@@ -126,7 +120,7 @@ class SearchForm extends Component {
 
               <div className="buttonGroup">
                 <Link href="/results" to="/results">
-                <Button className="searchButton" bsStyle="primary" type="submit" >
+                <Button className="searchButton" bsStyle="primary" type="submit" onClick={this.handleSubmit} >
                    Search
                 </Button>
                 </Link>
@@ -139,4 +133,7 @@ class SearchForm extends Component {
   }
 }
 
-export default SearchForm;
+export default connect(
+  null,
+  actions
+)(SearchForm);

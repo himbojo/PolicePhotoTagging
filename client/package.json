@@ -14,7 +14,11 @@
     },
     "/image/add": {
       "target": "http://localhost:5000"
+    },
+    "/image/search": {
+      "target": "http://localhost:5000"
     }
+
   },
   "dependencies": {
     "axios": "^0.18.0",
