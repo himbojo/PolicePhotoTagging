@@ -40,7 +40,7 @@ app.post("/users/login", (req, res) => {
     .then(user => {
       console.log("now here");
       return user.generateAuthToken().then(token => {
-        res.header("x-auth", token).send(user);
+        res.header("xauth", token).send(user);
       });
     })
     .catch(e => {
@@ -58,7 +58,7 @@ app.post("/users/reg", (req, res) => {
       return user.generateAuthToken();
     })
     .then(token => {
-      res.header("x-auth", token).send(user);
+      res.header("xauth", token).send(user);
     })
     .catch(e => {
       res.status(400).send();
@@ -94,6 +94,24 @@ app.post("/bucket/add", (req, res) => {
     })
   });
 });
+
+app.get("/image/search", (req, res) =>{
+  console.log("You got here");
+  var tags = getTags();
+  console.log(tags);
+  // res.render('images', {})
+});
+function getTags(){
+  mongoose.test.find({"qid": "789456123"}, function(err, objs){
+    var gettingtags;
+    if (objs.length ==1)
+    {
+      gettingtags = objs[0].qid;
+      console.log(gettingtags);
+      return gettingtags;
+    }
+  });
+}
 
 
 if (process.env.NODE_ENV == "production") {
