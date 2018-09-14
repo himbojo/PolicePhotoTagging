@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button, HelpBlock, Well } from "react-bootstrap";
+import { FormControl, FormGroup, ControlLabel, Button, HelpBlock } from "react-bootstrap";
 import DateTimePick from "../objects/dateTimePicker";
-import Tagging from "../objects/tagging";
-import { DropdownList } from 'react-widgets';
 import "../css/inputForm.css";
 import * as actions from "../../actions";
 import { connect } from "react-redux";

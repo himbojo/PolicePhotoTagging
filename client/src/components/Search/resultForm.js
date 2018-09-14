@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button, Modal, Image } from 'react-bootstrap';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-import ImageUpload from '../objects/imageUpload';
+import { FormControl, FormGroup, ControlLabel, Button, Modal, Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import DateOnlyPicker from '../objects/dateOnlyPicker';
 import TimeOnlyPicker from '../objects/timeOnlyPicker';
 import Tagging from '../objects/tagging';
@@ -9,7 +8,7 @@ import './inputForm.css';
 import './search.css';
 import Measure from 'react-measure';
 import Gallery from 'react-photo-gallery';
-import Lightbox from 'react-images';
+
 const PHOTO_SET = [
   {
     src: require('./loginBG.jpg'),

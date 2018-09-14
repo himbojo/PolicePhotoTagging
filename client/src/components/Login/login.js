@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import Background from '../assets/new-zealand-police-background.jpg';
 import LoginForm from './loginForm';
 import '../css/login.css';
 

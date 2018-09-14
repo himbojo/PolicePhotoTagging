@@ -1,7 +1,6 @@
 import axios from "axios";
-import { LOGIN_USER, REG_USER, INS_PHOTO, BUCKET_PHOTO, IMG_SEARCH } from "./types";
+import { LOGIN_USER, REG_USER, INS_PHOTO, BUCKET_PHOTO, IMG_SEARCH, INS_TAG } from "./types";
 import setAuth from "./setAuth";
-import { Router, Route, Redirect } from "react-router-dom";
 
 export function setUser(user) {
   return {
@@ -15,22 +14,7 @@ export function logout() {
     dispatch(setUser({}));
   };
 }
-/*
-##example
-import { FETCH_CITYS } from './types';
 
-export const fetchCitys = values => async dispatch => {
-	const k = await axios.post('/api/city', values);
-	//console.log(k.data.id);
-	const res = await axios.post('/api/cuisines', k);
-//	console.log(res.data);
-	//var randomItem = temp[Math.floor(Math.random()*temp.length)]; // gets me a random item
-	//console.log(randomItem);
-
-	dispatch({ type: FETCH_CITYS, payload: res.data });
-};
-
-*/
 
 export const regUser = values => async dispatch => {
   console.log("test12");
@@ -71,4 +55,11 @@ export const searchImage = values => async dispatch => {
   console.log("You done it now");
   const res = await axios.get("/image/search");
   dispatch({ type: IMG_SEARCH, payload: res.data });
+};
+
+export const insTag = values => async dispatch => {
+  console.log(values);
+  const res = await axios.post("/tag/add", values);
+  console.log("insTag");
+  dispatch({ type: INS_TAG, payload: res.data });
 };

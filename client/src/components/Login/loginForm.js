@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as actions from "../../actions";
-import { BrowserRouter, Route, Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import {
@@ -8,7 +8,6 @@ import {
   FormControl,
   FormGroup,
   ControlLabel,
-  PageHeader,
   HelpBlock
 } from "react-bootstrap";
 
