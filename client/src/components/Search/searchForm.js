@@ -5,13 +5,10 @@ import {
   ControlLabel,
   Grid,
   Row,
-  Col,
   Button
 } from 'react-bootstrap';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-import ImageUpload from '../objects/imageUpload';
+import { Link } from 'react-router-dom';
 import DateOnlyPicker from '../objects/dateOnlyPicker';
-import TimeOnlyPicker from '../objects/timeOnlyPicker';
 import Tagging from '../objects/tagging';
 import './inputForm.css';
 import './search.css';
@@ -63,7 +60,6 @@ class SearchForm extends Component {
   }
 
   render() {
-    const { showing } = this.state;
     return (
       <div>
         <Grid>

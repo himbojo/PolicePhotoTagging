@@ -1,13 +1,9 @@
 //https://gist.github.com/hartzis/0b77920380736f98e4f9
 
 import React, { Component } from 'react';
-import { Button, FormControl, Grid, Row, Col, ControlLabel, Image } from 'react-bootstrap';
+import { FormControl, Grid, Row, Col, ControlLabel, Image } from 'react-bootstrap';
 import "./imageUpload.css";
-var path = require('path');
 class ImageUpload extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let imagePreviewUrl = this.props.imagePreviewUrl;

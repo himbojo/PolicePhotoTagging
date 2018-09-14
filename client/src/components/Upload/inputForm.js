@@ -1,20 +1,8 @@
 import React, {Component} from 'react';
-import { FormControl, FormGroup, ControlLabel, Grid, Row, Col, Button, HelpBlock } from "react-bootstrap";
+import { Grid, Row, Col } from "react-bootstrap";
 import ImageUpload from "../objects/imageUpload";
 import "../css/inputForm.css";
 import FormContents from "./formContents";
-
-function FieldGroup({ id, vState, label, help, ...props }) {
-  return (
-    <FormGroup controlId={id} validationState={vState} >
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl {...props} />
-      {help && <HelpBlock>{help}</HelpBlock>}
-    </FormGroup>
-  );
-}
-
-
 
 class InputForm extends Component {
   constructor(props, context) {

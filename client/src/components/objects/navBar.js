@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { Router, Route, Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { logout } from "../../actions/index";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 
