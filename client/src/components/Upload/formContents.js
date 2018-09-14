@@ -5,7 +5,7 @@ import "../css/inputForm.css";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import "../css/reactTags.css";
-
+import thesaurus from "thesaurus";
 import { WithContext as ReactTags } from 'react-tag-input';
 
 const KeyCodes = {
@@ -65,6 +65,13 @@ class FormContents extends Component{
   }
 
   sendData(){
+        //var imported_thesaurus = thesaurus.load("../assets/th_en_US_new.dat");
+        var tags = this.state.tags;
+        console.log(tags);
+        for (var i = 0; i < tags.length; i++) {
+          console.log(thesaurus.find(tags[i].text));
+        }
+
     this.props.insPhoto(this.state);
     //console.log("sent photo");
     //console.log(this.state.file);
