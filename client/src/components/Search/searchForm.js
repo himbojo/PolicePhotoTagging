@@ -14,13 +14,13 @@ import './inputForm.css';
 import './search.css';
 import * as actions from "../../actions";
 import { connect } from "react-redux";
+import axios from "axios";
 
 class SearchForm extends Component {
   constructor(props, context) {
     super(props, context);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
 
     this.state = {
       qid: '',
@@ -56,7 +56,12 @@ class SearchForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.searchImage(this.state);
+    //Trying to use axios here to search database
+    //to avoid passing the pages data around
+    //https://stackoverflow.com/questions/50924154/how-to-fetch-data-from-mongodb-in-mern
+    axios.get("images/search");
+    
+    //this.props.searchImage(this.state);
   }
 
   render() {
