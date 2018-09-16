@@ -95,14 +95,19 @@ app.post("/bucket/add", (req, res) => {
   });
 });
 
+
+
 app.get("/image/search", (req, res) =>{
   console.log("You got here");
   var tags = getTags();
   console.log(tags);
-  // res.render('images', {})
+  res.render('images', {})
 });
+
 function getTags(){
-  mongoose.test.find({"qid": "789456123"}, function(err, objs){
+//  var body = _.pick(req.body, ["qid", "eventNumber", "dateTime", "location", "tags", "offense", "iu"]);
+  //var image = new Image();
+  mongoose.get({"qid": "6969"}, function(err, objs){
     var gettingtags;
     if (objs.length ==1)
     {
