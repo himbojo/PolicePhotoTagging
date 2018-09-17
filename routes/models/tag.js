@@ -5,24 +5,18 @@ const _ = require("lodash");
 const bcrypt = require("bcryptjs");
 
 var ColourSchema = new mongoose.Schema({
-  Colour: {
-    name: String,
-    $addToSet: { imageName: { $each: { [] } } }
-  }
-});
-
-var ItemSchema = new mongoose.Schema({
-  Item: {
-    name: String,
-    $addToSet: { Colour: { $each: { [ColourSchema] } } }
-  }
+  name: String,
+  imageName: []
 });
 
 var TagSchema = new mongoose.Schema({
-  tag: {
-    $addToSet: { items: { $each: { [ItemSchema] } } }
-  }
+  type: String,
+  colour: [ColourSchema]
 });
+
+// var TagSchema = new mongoose.Schema({
+//   clothingType: [TypeSchema]
+// });
 
 TagSchema.methods.toJSON = function() {
   var tag = this;

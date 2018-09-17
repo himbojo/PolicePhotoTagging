@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_USER, REG_USER, INS_PHOTO, BUCKET_PHOTO, IMG_SEARCH, INS_TAG } from "./types";
+import { LOGIN_USER, REG_USER, INS_PHOTO, BUCKET_PHOTO, IMG_SEARCH, UPDATE_TAG } from "./types";
 import setAuth from "./setAuth";
 
 export function setUser(user) {
@@ -57,9 +57,9 @@ export const searchImage = values => async dispatch => {
   dispatch({ type: IMG_SEARCH, payload: res.data });
 };
 
-export const insTag = values => async dispatch => {
+export const updateTag = values => async dispatch => {
   console.log(values);
-  const res = await axios.post("/tag/add", values);
-  console.log("insTag");
-  dispatch({ type: INS_TAG, payload: res.data });
+  const res = await axios.post("/tag/update", values);
+  console.log("updateTag");
+  dispatch({ type: UPDATE_TAG, payload: res.data });
 };
