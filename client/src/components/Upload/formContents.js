@@ -60,17 +60,86 @@ class FormContents extends Component{
     var name = date + '_' + file1.name;
     name = name.split(".").join("$");
     var file2 = new File([file1], name);
-    this.setState({iu: file2.name, file: file2}, () => this.sendData());
+    var tags1 = this.sendTags();
+    this.setState({iu: file2.name, file: file2, tags: tags1}, () => this.sendData());
     //console.log(this.state.iu);
   }
 
-  sendData(){
-        //var imported_thesaurus = thesaurus.load("../assets/th_en_US_new.dat");
-        var tags = this.state.tags;
-        console.log(tags);
-        for (var i = 0; i < tags.length; i++) {
-          console.log(thesaurus.find(tags[i].text));
+compareItems(item, arrayI){
+  for (var i = 0; i < arrayI.length; i++) {
+    if(arrayI[i].indexOf(item) > -1){
+      return true;
+    }
+  }
+  return false;
+}
+
+formatTags(arrayT, string){
+  var headwear = ["head", "hat"];
+  var top = ["top", "shirt"];
+  var bottom = ["bottom", "pants"];
+  var footwear = ["foot", "shoe"];
+  var arrayWithString = [string];
+  arrayWithString = arrayWithString.concat(arrayT);
+  for (var i = 0; i < arrayWithString.length; i++) {
+      if(this.compareItems(arrayWithString[i], headwear)){
+        return "headwear";
+      }
+      else if(this.compareItems(arrayWithString[i], top)){
+        return "top";
+      }
+      else if(this.compareItems(arrayWithString[i], bottom)){
+        return "bottom";
+      }
+      else if(this.compareItems(arrayWithString[i], footwear)){
+        return "footwear";
+      }
+  }
+  return "other";
+}
+
+  sendTags(){
+    var tags = this.state.tags;
+    for (var i = 0; i < tags.length; i++) {
+      var string = tags[i].text;
+      var strings = string.split(" ");
+
+      var ts1 = thesaurus.find(strings[0]);
+      var ts2 = thesaurus.find(strings[1]);
+      var s1 = false;
+      var s2 = false;
+
+      for(var j = 0; j < ts1.length; j++){
+        if(ts1[j].indexOf("color") > -1 || ts1[j].indexOf("colour") > -1){
+          strings[1] = this.formatTags(ts2, strings[1]);
+          s1 = true;
+          break;
         }
+      }
+      for(j = 0; j < ts2.length; j++){
+        if(ts2[j].indexOf("color") > -1 || ts2[j].indexOf("colour") > -1){
+          strings[0] = this.formatTags(ts1, strings[0]);
+          s2 = true
+          break;
+        }
+      }
+
+      if(s1 === true){
+        tags[i].text = strings[1].concat(" ").concat(strings[0]);
+      }
+      else if(s2 === true){
+        tags[i].text =  strings[0].concat(" ").concat(strings[1]);
+      }
+      console.log(tags[i]);
+    }
+    return tags;
+  }
+
+  sendData(){
+    //var imported_thesaurus = thesaurus.load("../assets/th_en_US_new.dat");
+
+
+    this.props.updateTag(this.state);
 
     this.props.insPhoto(this.state);
     //console.log("sent photo");

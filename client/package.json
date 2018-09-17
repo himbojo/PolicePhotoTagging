@@ -18,7 +18,7 @@
     "/image/search": {
       "target": "http://localhost:5000"
     },
-    "/tag/add": {
+    "/tag/update": {
       "target": "http://localhost:5000"
     }
   },
