@@ -59,9 +59,9 @@ class SearchForm extends Component {
     //Trying to use axios here to search database
     //to avoid passing the pages data around
     //https://stackoverflow.com/questions/50924154/how-to-fetch-data-from-mongodb-in-mern
-    axios.get("images/search");
-    
-    //this.props.searchImage(this.state);
+    //axios.get("/images/search");
+
+    this.props.searchImage(this.state);
   }
 
   render() {
