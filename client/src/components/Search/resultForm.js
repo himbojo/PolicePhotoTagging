@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { FormControl, FormGroup, ControlLabel, Button, Modal, Image } from 'react-bootstrap';
+import {
+  FormControl,
+  FormGroup,
+  ControlLabel,
+  Button,
+  Modal,
+  Image
+} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import DateOnlyPicker from '../objects/dateOnlyPicker';
 import TimeOnlyPicker from '../objects/timeOnlyPicker';
@@ -8,6 +15,9 @@ import './inputForm.css';
 import './search.css';
 import Measure from 'react-measure';
 import Gallery from 'react-photo-gallery';
+import GoogleMapReact from 'google-map-react';
+
+const MAP_COMPONENT = ({ text }) => <div>{text}</div>;
 
 const PHOTO_SET = [
   {
@@ -44,6 +54,14 @@ class ResultForm extends Component {
     };
   }
 
+  static defaultProps = {
+    center: {
+      lat: 59.95,
+      lng: 30.33
+    },
+    zoom: 11
+  };
+
   handleClose() {
     this.setState({ show: false });
   }
@@ -79,9 +97,9 @@ class ResultForm extends Component {
             <div>
               <div className="buttonGroup">
                 <Link href="/search" to="/search">
-                <Button className="searchButton" bsStyle="primary">
-                  Back
-                </Button>
+                  <Button className="searchButton" bsStyle="primary">
+                    Back
+                  </Button>
                 </Link>
               </div>
               <Gallery
@@ -109,6 +127,21 @@ class ResultForm extends Component {
                     <ControlLabel>Offence</ControlLabel>
                     <FormControl type="text" name="offence" />
                   </FormGroup>
+                  <div style={{ height: '50vh', width: '100%' }}>
+                    <GoogleMapReact
+                      bootstrapURLKeys={{
+                        key: 'AIzaSyBLvmlM79W0-VlpNs1wTCIKYnllg_Uns3I'
+                      }}
+                      defaultCenter={this.props.center}
+                      defaultZoom={this.props.zoom}
+                    >
+                      <MAP_COMPONENT
+                        lat={59.955413}
+                        lng={30.337844}
+                        text={'Kreyser Avrora'}
+                      />
+                    </GoogleMapReact>
+                  </div>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button onClick={this.handleClose}>Close</Button>
