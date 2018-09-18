@@ -78,6 +78,7 @@ app.post("/image/add", (req, res) => {
   });
 });
 
+
 app.post("/bucket/add", (req, res) => {
   console.log("start");
   var files = req.files;
@@ -98,26 +99,20 @@ app.post("/bucket/add", (req, res) => {
 
 
 
-app.get("/image/search", (req, res) =>{
-  console.log("You got here");
-  var tags = getTags();
-  console.log(tags);
-  res.render('images', {})
-});
 
-function getTags(){
-  //  var body = _.pick(req.body, ["qid", "eventNumber", "dateTime", "location", "tags", "offense", "iu"]);
-  //var image = new Image();
-  mongoose.get({"qid": "6969"}, function(err, objs){
-    var gettingtags;
-    if (objs.length ==1)
-    {
-      gettingtags = objs[0].qid;
-      console.log(gettingtags);
-      return gettingtags;
-    }
-  });
-}
+// function getTags(){
+//   //  var body = _.pick(req.body, ["qid", "eventNumber", "dateTime", "location", "tags", "offense", "iu"]);
+//   //var image = new Image();
+//   mongoose.get({"qid": "6969"}, function(err, objs){
+//     var gettingtags;
+//     if (objs.length ==1)
+//     {
+//       gettingtags = objs[0].qid;
+//       console.log(gettingtags);
+//       return gettingtags;
+//     }
+//   });
+// }
 
 app.post("/tag/update", (req, res) => {
 
@@ -126,13 +121,12 @@ app.post("/tag/update", (req, res) => {
   var image = req.body.iu;
   console.log(tags);
 
-  
   for (var i = 0; i < tags.length; i++) {
     var tag1 = tags[i].text.split(" ");
     var item = tag1[0];
     var colour = tag1[1];
     Tag.findOneAndUpdate(
-      { "type": item, "colour.name": colour},
+      { "type": item, "colour.name": colour },
       {
         "$addToSet": {
           "colour.$.imageName": image
@@ -163,6 +157,40 @@ app.post("/tag/update", (req, res) => {
 });
 
 
+app.get("/image/search", (req, res) =>{
+  console.log("/image/search");
+
+  var tags = req.body.tags;
+  // var tag1 = tags[i].text.split(" ");
+  // var item = tag1[0];
+  // var colour = tag1[1];
+
+  // for (var i = 0; i < tags.length; i++) {
+  Tag.find({ "type": "footwear", "colour.name": "blue" },
+        function(err,doc) {
+         //console.log(doc);
+         for (var j = 0; j <= doc.length; i++) {
+          for (var i = 0; i < doc[j].colour.length; i++) {
+            console.log(doc[j].colour[i]);
+            //console.log(doc[0].colour[4].imageName);
+          }
+        }
+          var body = _.pick(doc, ["name"]);
+
+        }
+      ).catch(e => {
+
+      });
+    // }
+  res.send(tags).catch(e => {
+
+  });
+});
+
+
+
+
+
 if (process.env.NODE_ENV == "production") {
   //Express will server up production assets
   // like main.js or main.css
@@ -173,6 +201,8 @@ if (process.env.NODE_ENV == "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
+
+
 
 /*axios.get('http://hotsapi.net/api/v1/heroes')
 .then(function (response) {
