@@ -1,6 +1,13 @@
 
 import axios from "axios";
-import { LOGIN_USER, REG_USER, INS_PHOTO, BUCKET_PHOTO, IMG_SEARCH, UPDATE_TAG } from "./types";
+import {
+  LOGIN_USER,
+  REG_USER,
+  INS_PHOTO,
+  BUCKET_PHOTO,
+  IMG_SEARCH,
+  UPDATE_TAG
+} from "./types";
 import setAuth from "./setAuth";
 
 
@@ -42,25 +49,25 @@ export const loginUser = (values, history) => async dispatch => {
   });
 };
 export const bucketPhoto = values => async dispatch => {
-  console.log('bucket');
+  console.log("bucket");
   var form = new FormData();
   var file = values.file;
   form.append(file.name, file);
-  form.append('name', file.name);
-
+  form.append("name", file.name);
   const res = await axios.post('/bucket/add', form);
   console.log('bucketPhoto');
   dispatch({ type: BUCKET_PHOTO, payload: res.data });
 };
 
 export const searchImage = values => async dispatch => {
-  console.log('You done it now');
-  const res = await axios.get('/image/search');
+  //console.log(values.tags);
+  const res = await axios.post("/image/search", values);
+  console.log("We're in the good zone");
+  console.log(res.data);
   dispatch({ type: IMG_SEARCH, payload: res.data });
 };
 
 export const updateTag = values => async dispatch => {
-  console.log(values);
   const res = await axios.post("/tag/update", values);
   console.log("updateTag");
   dispatch({ type: UPDATE_TAG, payload: res.data });
