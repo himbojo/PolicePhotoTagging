@@ -71,6 +71,7 @@ class SearchForm extends Component {
   }
 
   handleAddition(tag) {
+    tag = this.sendTags(tag);
     this.setState(state => ({ tags: [...state.tags, tag] }));
   }
 
@@ -84,13 +85,10 @@ class SearchForm extends Component {
     // re-render
     this.setState({ tags: newTags });
   }
-  
+
   handleSubmit(e) {
     e.preventDefault();
-
-    //this.props.searchImage(this.state);
-    var tags1 = this.sendTags();
-    this.setState({ tags: tags1 }, () => this.sendData());
+    this.sendData();
   }
 
   compareItems(item, arrayI){
@@ -127,10 +125,8 @@ class SearchForm extends Component {
     return "other";
   }
 
-  sendTags() {
-    var tags = this.state.tags;
-    for (var i = 0; i < tags.length; i++) {
-      var string = tags[i].text;
+  sendTags(tag){
+      var string = tag.text;
       var strings = string.split(" ");
 
       var ts1 = thesaurus.find(strings[0]);
@@ -138,29 +134,38 @@ class SearchForm extends Component {
       var s1 = false;
       var s2 = false;
 
-      for (var j = 0; j < ts1.length; j++) {
-        if (ts1[j].indexOf("color") > -1 || ts1[j].indexOf("colour") > -1) {
-          strings[1] = this.formatTags(ts2, strings[1]);
-          s1 = true;
-          break;
-        }
+      if(strings[1] == null){
+        strings[0] = this.formatTags(ts1, strings[0]);
+        s2 = true;
+        strings[1] = "other";
       }
-      for (j = 0; j < ts2.length; j++) {
-        if (ts2[j].indexOf("color") > -1 || ts2[j].indexOf("colour") > -1) {
-          strings[0] = this.formatTags(ts1, strings[0]);
-          s2 = true;
-          break;
+      else{
+        for(var j = 0; j < ts1.length; j++){
+          if(ts1[j].indexOf("color") > -1 || ts1[j].indexOf("colour") > -1){
+            strings[1] = this.formatTags(ts2, strings[1]);
+            s1 = true;
+            break;
+          }
+        }
+        for(j = 0; j < ts2.length; j++){
+          if(ts2[j].indexOf("color") > -1 || ts2[j].indexOf("colour") > -1){
+            strings[0] = this.formatTags(ts1, strings[0]);
+            s2 = true;
+            break;
+          }
         }
       }
 
-      if (s1 === true) {
-        tags[i].text = strings[1].concat(" ").concat(strings[0]);
-      } else if (s2 === true) {
-        tags[i].text = strings[0].concat(" ").concat(strings[1]);
+      if(s1 === true){
+        tag.text = strings[1].concat(" ").concat(strings[0]);
+        tag.id = strings[1].concat(" ").concat(strings[0]);
       }
-      console.log(tags[i]);
-    }
-    return tags;
+      else if(s2 === true){
+        tag.text = strings[0].concat(" ").concat(strings[1]);
+        tag.id = strings[0].concat(" ").concat(strings[1]);
+      }
+      console.log(tag);
+    return tag;
   }
 
   render() {
