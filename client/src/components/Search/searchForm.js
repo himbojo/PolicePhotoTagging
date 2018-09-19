@@ -105,10 +105,10 @@ class SearchForm extends Component {
   }
 
   formatTags(arrayT, string) {
-    var headwear = ["head", "hat"];
+    var headwear = ["head", "hat", "headwear"];
     var top = ["top", "shirt"];
     var bottom = ["bottom", "pants"];
-    var footwear = ["foot", "shoe"];
+    var footwear = ["foot", "shoe", "footwear"];
     var arrayWithString = [string];
     arrayWithString = arrayWithString.concat(arrayT);
     for (var i = 0; i < arrayWithString.length; i++) {
