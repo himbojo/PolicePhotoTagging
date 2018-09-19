@@ -11,6 +11,7 @@ module.exports = app => {
 	    var tag1 = tags[i].text.split(" ");
 	    var item = tag1[0];
 	    var colour = tag1[1];
+			console.log(item + " " + colour);
 	    Tag.findOneAndUpdate(
 	      { type: item, "colour.name": colour },
 	      {
