@@ -14,10 +14,12 @@ module.exports = app => {
       var colourObject = doc.colour;
       for (var j = 0; j < colourObject.length; j++) {
         if(colourObject[j].name === colour){
-          console.log(colourObject[j].imageName);
+          imageNameArray = colourObject[j].imageName;
           break;
         }
       }
+      console.log(imageNameArray);
+
     });
   }
   console.log(imageNameArray);
