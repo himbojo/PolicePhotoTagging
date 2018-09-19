@@ -1,23 +1,16 @@
-/*const express = require('express');
-const bodyParser = require('body-parser');
-const {ObjectID} = require('mongodb');
+const _ = require("lodash");
+const { User } = require("./models/user");
 
-var {mongoose} = require('./db/mongoose');
-
-var {User} = require('./models/user');
-var {authenticate} = require('./middleware/authenticate');
-var app = express();
 module.exports = app => {
-
-  });
-
   app.post("/users/login", (req, res) => {
+    console.log("HERERERE");
     var body = _.pick(req.body, ["email", "password"]);
 
     User.findByCredentials(body.email, body.password)
       .then(user => {
+        console.log("now here");
         return user.generateAuthToken().then(token => {
-          res.header("x-auth", token).send(user);
+          res.header("xauth", token).send(user);
         });
       })
       .catch(e => {
@@ -25,4 +18,3 @@ module.exports = app => {
       });
   });
 };
-*/
