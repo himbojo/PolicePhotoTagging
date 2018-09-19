@@ -35,31 +35,48 @@ require('./routes/main')(app);
 app.post("/image/search", (req, res) => {
   console.log("/image/search");
 
+
+
+  // for (var l = 0; l < tags.length; l++) {
+  //   console.log("In the loop");
+  //
+  //
+  // }
+
+
+  //TODO: split tags.text into colour and item then search mongo for those items
+
   var tags = req.body.tags[0];
   console.log(tags);
-  // var tag1 = tags[i].text.split(" ");
-  // var item = tag1[0];
-  // var colour = tag1[1];
+  var strings = tags.text.split(" ");
+  var item = strings[0];
+  var colour = strings[1];
+  console.log(item);
+  console.log(colour);
+  // , "colour.imageName": {$elemMatch: {$exists: true}}
   var array = [];
+  Tag.find({ "type": item, "colour": {$elemMatch: {"name": colour}}}, function(err, doc) {
+    console.log(doc);
+  });
   // for (var i = 0; i < tags.length; i++) {
-  Tag.find({ type: tags.text }, function(err, doc) {
-    for (var j = 0; j < doc.length; j++) {
-      for (var i = 0; i < doc[j].colour.length; i++) {
-        //if there are images in the array
-        if (doc[j].colour[i].imageName.length > 0) {
-          //for all images
-          for (var k = 0; k < doc[j].colour[i].imageName.length; k++) {
-            //console.log(doc[j].colour[i].imageName[k]);
-            //finds all objects that have that image in it
-            Image.find({ iu: doc[j].colour[i].imageName[k] }, (err, data) => {
-              //  console.log(data);
-              res.send(data);
-            });
-          }
-        }
-      }
-    }
-  }).catch(e => {});
+  // Tag.find({ type: tags.text }, function(err, doc) {
+  //   for (var j = 0; j < doc.length; j++) {
+  //     for (var i = 0; i < doc[j].colour.length; i++) {
+  //       //if there are images in the array
+  //       if (doc[j].colour[i].imageName.length > 0) {
+  //         //for all images
+  //         for (var k = 0; k < doc[j].colour[i].imageName.length; k++) {
+  //           //console.log(doc[j].colour[i].imageName[k]);
+  //           //finds all objects that have that image in it
+  //           Image.find({ iu: doc[j].colour[i].imageName[k] }, (err, data) => {
+  //           //  console.log(data);
+  //           res.send(data);
+  //           });
+  //         }
+  //       }
+  //     }
+  //   }
+  // }).catch(e => {});
   // }
 });
 
