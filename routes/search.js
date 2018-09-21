@@ -41,9 +41,9 @@ module.exports = app => {
 
         if(colourObject[j].name === colour){
         //  console.log("break");
-          console.log(colourObject[j].imageName);
+        //  console.log(colourObject[j].imageName);
           imageNameArray = imageNameArray.concat(colourObject[j].imageName);
-          console.log(imageNameArray + " is aray");
+        //  console.log(imageNameArray + " is aray");
           break;
         }
       }
@@ -52,7 +52,7 @@ module.exports = app => {
 
     });
   }
-  console.log(imageNameArray + "is final");
+//  console.log(imageNameArray + "is final");
   //console.log(imageName);
   res.send(imageNameArray);
 });
