@@ -16,7 +16,7 @@ module.exports = app => {
     // _.forEach(tags, function(value) {
     //     console.log(value);
     //     _.forEach(value.text, function(value1) {
-    //       console.log(value1)
+    //       console.log(value1)$
     //       // value1.text.split(" ");
     //       // var item = strings[0];
     //       // var colour = strings[1];
@@ -54,6 +54,9 @@ module.exports = app => {
   }
 //  console.log(imageNameArray + "is final");
   //console.log(imageName);
-  res.send(imageNameArray);
+//  console.log(imageNameArray);
+
+  // gets rid of duplicate values with _.uniq
+  res.send(_.uniq(imageNameArray));
 });
 };
