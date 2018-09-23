@@ -66,7 +66,7 @@ export const searchImage = values => async dispatch => {
   console.log(res1.data);
 
   const res = await axios.post("/bucket/get", res1.data);
-  console.log(res.data.Body.data);
+  console.log(res);
 
 
   dispatch({ type: IMG_SEARCH, payload: res.data });
