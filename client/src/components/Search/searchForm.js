@@ -7,7 +7,7 @@ import {
   Row,
   Button
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import Tagging from "../objects/tagging";
 import "./inputForm.css";
@@ -17,6 +17,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 import thesaurus from "thesaurus";
 import { WithContext as ReactTags } from "react-tag-input";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const KeyCodes = {
   comma: 188,
@@ -73,7 +75,10 @@ class SearchForm extends Component {
     //https://stackoverflow.com/questions/50924154/how-to-fetch-data-from-mongodb-in-mern
     //axios.get("/images/search");
 
-    this.props.searchImage(this.state);
+    this.props.searchImage(this.state).then(res => {
+      //console.log(this.props);
+      this.props.history.push("/results");
+    });
   }
 
   //Upload form HandleSubmit
@@ -232,16 +237,14 @@ class SearchForm extends Component {
               </div>
 
               <div className="buttonGroup">
-                <Link href="/results" to="/results">
-                  <Button
-                    className="searchButton"
-                    bsStyle="primary"
-                    type="submit"
-                    onClick={this.handleSubmit}
-                  >
-                    Search
-                  </Button>
-                </Link>
+                <Button
+                  className="searchButton"
+                  bsStyle="primary"
+                  type="submit"
+                  onClick={this.handleSubmit}
+                >
+                  Search
+                </Button>
               </div>
             </form>
           </Row>
@@ -250,8 +253,10 @@ class SearchForm extends Component {
     );
   }
 }
-
+function mapStateToProps({ search }) {
+  return { search };
+}
 export default connect(
-  null,
+  mapStateToProps,
   actions
-)(SearchForm);
+)(withRouter(SearchForm));

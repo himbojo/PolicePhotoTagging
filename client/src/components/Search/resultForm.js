@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   FormControl,
   FormGroup,
@@ -6,37 +6,40 @@ import {
   Button,
   Modal,
   Image
-} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import DateOnlyPicker from '../objects/dateOnlyPicker';
-import TimeOnlyPicker from '../objects/timeOnlyPicker';
-import Tagging from '../objects/tagging';
-import './inputForm.css';
-import './search.css';
-import Measure from 'react-measure';
-import Gallery from 'react-photo-gallery';
-import GoogleMapReact from 'google-map-react';
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import DateOnlyPicker from "../objects/dateOnlyPicker";
+import TimeOnlyPicker from "../objects/timeOnlyPicker";
+import Tagging from "../objects/tagging";
+import "./inputForm.css";
+import "./search.css";
+import Measure from "react-measure";
+import Gallery from "react-photo-gallery";
+import GoogleMapReact from "google-map-react";
+import * as actions from "../../actions";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const MAP_COMPONENT = ({ text }) => <div>{text}</div>;
 
 const PHOTO_SET = [
   {
-    src: require('./loginBG.jpg'),
+    src: require("./loginBG.jpg"),
     width: 4,
     height: 3
   },
   {
-    src: require('./loginBG.jpg'),
+    src: require("./loginBG.jpg"),
     width: 4,
     height: 3
   },
   {
-    src: require('./loginBG.jpg'),
+    src: require("./loginBG.jpg"),
     width: 4,
     height: 3
   },
   {
-    src: require('./loginBG.jpg'),
+    src: require("./loginBG.jpg"),
     width: 4,
     height: 3
   }
@@ -71,6 +74,7 @@ class ResultForm extends Component {
   }
 
   render() {
+    console.log(this.props.search);
     const width = this.state.width;
     return (
       <Measure
@@ -112,7 +116,7 @@ class ResultForm extends Component {
                   <Modal.Title>Picture #1</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Image src={require('./loginBG.jpg')} thumbnail />
+                  <Image src={require("./loginBG.jpg")} thumbnail />
                   <FormGroup>
                     <ControlLabel>Assocaited Tags</ControlLabel>
                     <Tagging />
@@ -123,14 +127,18 @@ class ResultForm extends Component {
                     <ControlLabel>Time</ControlLabel>
                     <TimeOnlyPicker />
                     <ControlLabel>File Number</ControlLabel>
-                    <FormControl type="text" name="filenumber" />
+                    <FormControl
+                      type="text"
+                      name="filenumber"
+                      value="32039820"
+                    />
                     <ControlLabel>Offence</ControlLabel>
                     <FormControl type="text" name="offence" />
                   </FormGroup>
-                  <div style={{ height: '50vh', width: '100%' }}>
+                  <div style={{ height: "50vh", width: "100%" }}>
                     <GoogleMapReact
                       bootstrapURLKeys={{
-                        key: 'AIzaSyBLvmlM79W0-VlpNs1wTCIKYnllg_Uns3I'
+                        key: "AIzaSyBLvmlM79W0-VlpNs1wTCIKYnllg_Uns3I"
                       }}
                       defaultCenter={this.props.center}
                       defaultZoom={this.props.zoom}
@@ -138,7 +146,7 @@ class ResultForm extends Component {
                       <MAP_COMPONENT
                         lat={59.955413}
                         lng={30.337844}
-                        text={'Kreyser Avrora'}
+                        text={"Kreyser Avrora"}
                       />
                     </GoogleMapReact>
                   </div>
@@ -155,4 +163,10 @@ class ResultForm extends Component {
   }
 }
 
-export default ResultForm;
+function mapStateToProps({ search }) {
+  return { search };
+}
+export default connect(
+  mapStateToProps,
+  actions
+)(ResultForm);
