@@ -6,6 +6,24 @@ const s3fsImpl = new S3FS("policephototaggingstorage/photos", {
 });
 
 module.exports = app => {
+app.post("/bucket/get",async (req, res) => {
+  //get array of imagenames from req.body
+  var imageNameArray = req.body;
+    var imageByteArrays = [];
+
+  for(var i =0; i < imageNameArray.length; i++){
+
+    //s3fsImpl.getpath();
+    var stream = await s3fsImpl.readFile(imageNameArray[0], 'binary');
+    // console.log(stream.data.Body.data);
+     imageByteArrays.push(stream);
+  }
+
+   res.send(imageByteArrays);
+
+
+});
+
 	app.post("/bucket/add", (req, res) => {
 	  console.log("start");
 	  var files = req.files;

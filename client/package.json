@@ -9,7 +9,7 @@
     "/users/reg": {
       "target": "http://localhost:5000"
     },
-    "/bucket/add": {
+    "/bucket/*": {
       "target": "http://localhost:5000"
     },
     "/image/add": {
