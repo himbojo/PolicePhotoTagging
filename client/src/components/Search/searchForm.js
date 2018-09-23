@@ -7,7 +7,7 @@ import {
   Row,
   Button
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import Tagging from "../objects/tagging";
 import "./inputForm.css";
@@ -17,6 +17,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 import thesaurus from "thesaurus";
 import { WithContext as ReactTags } from "react-tag-input";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const KeyCodes = {
   comma: 188,
@@ -62,6 +64,37 @@ class SearchForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  redirectToTarget = () => {
+    this.context.router.history.push(`/result`);
+  };
+
+  handleSubmit(e) {
+    e.preventDefault();
+    //Trying to use axios here to search database
+    //to avoid passing the pages data around
+    //https://stackoverflow.com/questions/50924154/how-to-fetch-data-from-mongodb-in-mern
+    //axios.get("/images/search");
+
+    this.props.searchImage(this.state).then(res => {
+      //console.log(this.props);
+      this.props.history.push("/results");
+    });
+  }
+
+  //Upload form HandleSubmit
+
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   var file1 = this.props.iu;
+  //   var date = new Date().toISOString('en-nz').replace(/T/, '_').replace(/\..+/, '');
+  //
+  //   var name = date + '_' + file1.name;
+  //   name = name.split(".").join("$");
+  //   var file2 = new File([file1], name);
+  //   var tags1 = this.sendTags();
+  //   this.setState({iu: file2.name, file: file2, tags: tags1}, () => this.sendData());
+  //   //console.log(this.state.iu);
+  // }
 
   handleDelete(i) {
     const { tags } = this.state;
@@ -230,16 +263,14 @@ class SearchForm extends Component {
               </div>
 
               <div className="buttonGroup">
-                <Link href="/results" to="/results">
-                  <Button
-                    className="searchButton"
-                    bsStyle="primary"
-                    type="submit"
-                    onClick={this.handleSubmit}
-                  >
-                    Search
-                  </Button>
-                </Link>
+                <Button
+                  className="searchButton"
+                  bsStyle="primary"
+                  type="submit"
+                  onClick={this.handleSubmit}
+                >
+                  Search
+                </Button>
               </div>
             </form>
           </Row>
@@ -248,8 +279,10 @@ class SearchForm extends Component {
     );
   }
 }
-
+function mapStateToProps({ search }) {
+  return { search };
+}
 export default connect(
-  null,
+  mapStateToProps,
   actions
-)(SearchForm);
+)(withRouter(SearchForm));
