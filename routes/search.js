@@ -6,6 +6,7 @@ module.exports = app => {
   app.post("/image/search", async (req, res) => {
     console.log("/image/search");
     var tags = req.body.tags;
+
     var imageNameArray = [];
     var imageInfoArray = [];
   //  console.log(tags[0].text + "\n" + tags[1].text + "finish")
@@ -77,7 +78,6 @@ module.exports = app => {
   //console.log(imageName);
 //  console.log(imageNameArray);
 
-  // gets rid of duplicate values with _.uniq
-  res.send(_.uniq(imageNameArray));
-});
+    res.send(_.uniq(imageNameArray));
+  });
 };
