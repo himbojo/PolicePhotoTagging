@@ -74,6 +74,18 @@ class ResultForm extends Component {
   }
 
   render() {
+    let images = this.props.search.map(image => {
+      return (
+        <img
+          key={image}
+          src={`data:image/jpeg;base64,${image}`}
+          alt=""
+          style={{ width: 400, height: 300 }}
+          onClick={this.handleShow}
+        />
+      );
+    });
+
     console.log(this.props.search);
     const width = this.state.width;
     return (
@@ -111,12 +123,24 @@ class ResultForm extends Component {
                 columns={columns}
                 onClick={this.handleShow}
               />
+              <div>{images}</div>
+              <Image
+                style={{ width: 400, height: 300 }}
+                src={`data:image/jpeg;base64,${this.props.search[1]}`}
+                onClick={this.handleShow}
+                thumbnail
+              />
               <Modal show={this.state.show} onHide={this.handleClose}>
                 <Modal.Header closeButton>
                   <Modal.Title>Picture #1</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Image src={require("./loginBG.jpg")} thumbnail />
+                  <Image
+                    style={{ width: 400, height: 300 }}
+                    src={`data:image/jpeg;base64,${this.props.search[1]}`}
+                    onClick={this.handleShow}
+                    thumbnail
+                  />
                   <FormGroup>
                     <ControlLabel>Assocaited Tags</ControlLabel>
                     <Tagging />
@@ -135,21 +159,6 @@ class ResultForm extends Component {
                     <ControlLabel>Offence</ControlLabel>
                     <FormControl type="text" name="offence" />
                   </FormGroup>
-                  <div style={{ height: "50vh", width: "100%" }}>
-                    <GoogleMapReact
-                      bootstrapURLKeys={{
-                        key: "AIzaSyBLvmlM79W0-VlpNs1wTCIKYnllg_Uns3I"
-                      }}
-                      defaultCenter={this.props.center}
-                      defaultZoom={this.props.zoom}
-                    >
-                      <MAP_COMPONENT
-                        lat={59.955413}
-                        lng={30.337844}
-                        text={"Kreyser Avrora"}
-                      />
-                    </GoogleMapReact>
-                  </div>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button onClick={this.handleClose}>Close</Button>
