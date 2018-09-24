@@ -4,7 +4,14 @@ module.exports = app => {
 	app.post("/tag/update", async (req, res) => {
 		console.log("/tag/update");
 		try {
-			var point = 'POINT(' + req.body.location + ')';
+			var pointD = req.body.location;
+			console.log(pointD);
+			if(!pointD){
+				console.log("Default: 0 0");
+				var pointD = "0 0";
+			}
+			var point = 'POINT(' + pointD + ')';
+
 			var body = [req.body.qid, req.body.eventNumber, req.body.dateTime, point, req.body.offence, req.body.iu];
 			console.log(body);
 			var tags = req.body.tags;
