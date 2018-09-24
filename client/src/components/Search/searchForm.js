@@ -121,6 +121,7 @@ class SearchForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.props.onShowMap(); 
     this.sendData();
   }
 
