@@ -157,7 +157,7 @@ class SearchForm extends Component {
         return "footwear";
       }
     }
-    return "other";
+    return string;
   }
 
   sendTags(tag) {
