@@ -120,6 +120,7 @@ class SearchForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.props.onShowMap(); 
     console.log("hello");
     this.sendData();
   }
