@@ -94,7 +94,7 @@ class FormContents extends Component{
         return "footwear";
       }
     }
-    return "other";
+    return string;
   }
 
   sendTags(tag){
@@ -143,10 +143,6 @@ class FormContents extends Component{
   sendData(){
     //var imported_thesaurus = thesaurus.load("../assets/th_en_US_new.dat");
     this.props.updateTag(this.state);
-
-    this.props.insPhoto(this.state);
-    //console.log("sent photo");
-    //console.log(this.state.file);
     this.props.bucketPhoto(this.state);
   }
 

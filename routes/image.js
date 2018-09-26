@@ -9,7 +9,7 @@ module.exports = app => {
 	    "dateTime",
 	    "location",
 	    "tags",
-	    "offense",
+	    "offence",
 	    "iu"
 	  ]);
 	  var image = new Image(body);
