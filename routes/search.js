@@ -50,7 +50,7 @@ module.exports = app => {
       // for every item query the database -> 1 query for all items
 
       var selectImage = await pool.query(
-        'SELECT * FROM Images WHERE date between ID IN (SELECT imageID FROM Link WHERE itemID = ? AND colourID = ?)', [selectItem, selectColour]);
+        'SELECT * FROM Images WHERE ID IN (SELECT imageID FROM Link WHERE itemID = ? AND colourID = ?)', [selectItem, selectColour]);
 
       for (j = 0; j < selectImage.length; j++) {
         imageInfoArray = imageInfoArray.concat(selectImage[j]);
