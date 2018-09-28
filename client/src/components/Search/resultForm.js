@@ -44,6 +44,75 @@ const PHOTO_SET = [
     height: 3
   }
 ];
+class EachPicture extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.state = {
+      show: false,
+      width: -1
+    };
+  }
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
+  }
+  render() {
+    console.log(this.props.desciptor);
+    return (
+      <div>
+        <Image
+          style={{ width: 400, height: 300 }}
+          src={`data:image/jpeg;base64,${this.props.blob}`}
+          onClick={this.handleShow}
+        />
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Picture #1</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Image
+              style={{ width: 400, height: 300 }}
+              src={`data:image/jpeg;base64,${this.props.blob}`}
+              onClick={this.handleShow}
+              thumbnail
+            />
+            <FormGroup disabled>
+              <ControlLabel>Assocaited Tags</ControlLabel>
+              <Tagging />
+              <ControlLabel>QID</ControlLabel>
+              <FormControl
+                type="text"
+                name="qid"
+                value={this.props.desciptor.qid}
+              />
+              <ControlLabel>Date</ControlLabel>
+              <DateOnlyPicker value={this.props.desciptor._datetime} />
+              <ControlLabel>Time</ControlLabel>
+              <TimeOnlyPicker />
+              <ControlLabel>File Number</ControlLabel>
+              <FormControl type="text" name="filenumber" />
+              <ControlLabel>Offence</ControlLabel>
+              <FormControl
+                type="text"
+                name="offence"
+                value={this.props.desciptor.offence}
+              />
+            </FormGroup>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleClose}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  }
+}
 
 class ResultForm extends Component {
   constructor(props, context) {
@@ -74,19 +143,17 @@ class ResultForm extends Component {
   }
 
   render() {
-    let images = this.props.search.map(image => {
+    let images = Object.keys(this.props.search).map(image => {
+      //  console.log(this.props.search[image].blob);
       return (
-        <img
-          key={image}
-          src={`data:image/jpeg;base64,${image}`}
-          alt=""
-          style={{ width: 400, height: 300 }}
-          onClick={this.handleShow}
+        <EachPicture
+          blob={this.props.search[image].blob}
+          desciptor={this.props.search[image]}
         />
       );
     });
 
-    console.log(this.props.search);
+    //console.log(this.props.search[0].blob);
     const width = this.state.width;
     return (
       <Measure
@@ -118,52 +185,8 @@ class ResultForm extends Component {
                   </Button>
                 </Link>
               </div>
-              <Gallery
-                photos={PHOTO_SET}
-                columns={columns}
-                onClick={this.handleShow}
-              />
+
               <div>{images}</div>
-              <Image
-                style={{ width: 400, height: 300 }}
-                src={`data:image/jpeg;base64,${this.props.search[1]}`}
-                onClick={this.handleShow}
-                thumbnail
-              />
-              <Modal show={this.state.show} onHide={this.handleClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Picture #1</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <Image
-                    style={{ width: 400, height: 300 }}
-                    src={`data:image/jpeg;base64,${this.props.search[1]}`}
-                    onClick={this.handleShow}
-                    thumbnail
-                  />
-                  <FormGroup>
-                    <ControlLabel>Assocaited Tags</ControlLabel>
-                    <Tagging />
-                    <ControlLabel>QID</ControlLabel>
-                    <FormControl type="text" name="qid" />
-                    <ControlLabel>Date</ControlLabel>
-                    <DateOnlyPicker />
-                    <ControlLabel>Time</ControlLabel>
-                    <TimeOnlyPicker />
-                    <ControlLabel>File Number</ControlLabel>
-                    <FormControl
-                      type="text"
-                      name="filenumber"
-                      value="32039820"
-                    />
-                    <ControlLabel>Offence</ControlLabel>
-                    <FormControl type="text" name="offence" />
-                  </FormGroup>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button onClick={this.handleClose}>Close</Button>
-                </Modal.Footer>
-              </Modal>
             </div>
           );
         }}

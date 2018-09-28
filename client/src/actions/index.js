@@ -59,11 +59,11 @@ export const bucketPhoto = values => async dispatch => {
 
 export const searchImage = values => async dispatch => {
   //console.log(values.tags);
-  const res1 = await axios.post("/image/search", values);
+  const res = await axios.post("/image/search", values);
   console.log("We're in the good zone");
-  //  console.log(res1.data);
+  //console.log(res1.data);
 
-  const res = await axios.post("/bucket/get", res1.data);
+  //const res = await axios.post("/bucket/get", res1.data);
   //  console.log(res);
 
   dispatch({ type: IMG_SEARCH, payload: res.data });
