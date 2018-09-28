@@ -66,8 +66,7 @@ class EachPicture extends Component {
     console.log(this.props.desciptor);
     return (
       <div>
-        <Image
-          style={{ width: 400, height: 300 }}
+        <img
           src={`data:image/jpeg;base64,${this.props.blob}`}
           onClick={this.handleShow}
         />
@@ -76,8 +75,7 @@ class EachPicture extends Component {
             <Modal.Title>Picture #1</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Image
-              style={{ width: 400, height: 300 }}
+            <img
               src={`data:image/jpeg;base64,${this.props.blob}`}
               onClick={this.handleShow}
               thumbnail
@@ -144,7 +142,7 @@ class ResultForm extends Component {
 
   render() {
     let images = Object.keys(this.props.search).map(image => {
-      //  console.log(this.props.search[image].blob);
+        console.log(this.props.search[image].blob);
       return (
         <EachPicture
           blob={this.props.search[image].blob}
