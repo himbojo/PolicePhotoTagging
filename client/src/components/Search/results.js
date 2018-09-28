@@ -12,11 +12,7 @@ class Results extends Component {
     return (
       <div className="containerBox">
         <NavBar />
-        <div className="backgroundImage">
-          <div className="mainPage">
-            <ResultForm />
-          </div>
-        </div>
+        <ResultForm />
       </div>
     );
   }

@@ -5,14 +5,14 @@ import {
   ControlLabel,
   Button,
   Modal,
+  Well,
   Image
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import DateOnlyPicker from "../objects/dateOnlyPicker";
 import TimeOnlyPicker from "../objects/timeOnlyPicker";
 import Tagging from "../objects/tagging";
-import "./inputForm.css";
-import "./search.css";
+import "../results/results.css"
 import Measure from "react-measure";
 import Gallery from "react-photo-gallery";
 import GoogleMapReact from "google-map-react";
@@ -22,28 +22,7 @@ import { withRouter } from "react-router-dom";
 
 const MAP_COMPONENT = ({ text }) => <div>{text}</div>;
 
-const PHOTO_SET = [
-  {
-    src: require("./loginBG.jpg"),
-    width: 4,
-    height: 3
-  },
-  {
-    src: require("./loginBG.jpg"),
-    width: 4,
-    height: 3
-  },
-  {
-    src: require("./loginBG.jpg"),
-    width: 4,
-    height: 3
-  },
-  {
-    src: require("./loginBG.jpg"),
-    width: 4,
-    height: 3
-  }
-];
+
 class EachPicture extends Component {
   constructor(props, context) {
     super(props, context);
@@ -55,6 +34,7 @@ class EachPicture extends Component {
       width: -1
     };
   }
+
   handleClose() {
     this.setState({ show: false });
   }
@@ -62,22 +42,26 @@ class EachPicture extends Component {
   handleShow() {
     this.setState({ show: true });
   }
+
   render() {
-    console.log(this.props.desciptor);
+
+    // console.log(this.props.desciptor);
     return (
       <div>
-        <Image
-          style={{ width: 400, height: 300 }}
+
+
+        <img
           src={`data:image/jpeg;base64,${this.props.blob}`}
-          onClick={this.handleShow}
-        />
+            onClick={this.handleShow}/>
+      
+
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Picture #1</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+
             <Image
-              style={{ width: 400, height: 300 }}
               src={`data:image/jpeg;base64,${this.props.blob}`}
               onClick={this.handleShow}
               thumbnail
@@ -125,6 +109,8 @@ class ResultForm extends Component {
       width: -1
     };
   }
+
+
 
   static defaultProps = {
     center: {
@@ -186,7 +172,9 @@ class ResultForm extends Component {
                 </Link>
               </div>
 
-              <div>{images}</div>
+
+              {images}
+
             </div>
           );
         }}
