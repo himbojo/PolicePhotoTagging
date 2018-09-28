@@ -35,6 +35,7 @@ module.exports = app => {
       }
       console.log("Colour ID: " + selectColour);
 
+      //SELECT i.ID,c.ID from Items i, Colours c where Item in (?) and colour in (?);
       //query to select item
       var selectItem = await pool.query("SELECT ID FROM Items WHERE item = ?", [
         item
@@ -49,6 +50,8 @@ module.exports = app => {
       console.log("Item ID: " + selectItem);
 
       //link id's
+      // var selectLink =  await pool.query(
+      //   'SELECT imageID FROM Link WHERE itemID = ? AND colourID = ?', [selectItem, selectColour]);
       var selectLink = await pool.query(
         "SELECT imageID FROM Link WHERE itemID = ? AND colourID = ?",
         [selectItem, selectColour]
@@ -57,9 +60,15 @@ module.exports = app => {
         imageIdArray = imageIdArray.concat(selectLink[j].imageID);
       }
 
-      console.log(imageIdArray);
+      // for (var j = 0; j < selectLink.length; j++) {
+      //   imageIdArray = imageIdArray.concat(selectLink[j].imageID);
+      // }
+      //
+      // console.log(imageIdArray);
+      // for every item query the database -> 1 query for all items
 
-      var selectImage = await pool.query(
+      //'SELECT * FROM Images WHERE ID IN (SELECT imageID FROM Link WHERE itemID = ? AND colourID = ?)', [selectItem, selectColour]);
+      var selectImage = await pool.query(  
         "SELECT * FROM Images WHERE ID IN (?)",
         [imageIdArray]
       );
@@ -100,6 +109,28 @@ module.exports = app => {
     //console.log(imageName);
     //  console.log(imageNameArray);
 
-    res.send(_.uniq(imageInfoArray));
+    // await Tag.findOne({ "type": item }, function(err, doc) {
+    //   var co()()()()()(lourObject = doc.colour;
+    //   //console.log(colour + " is colour we search for");
+    //   for (var j = 0; j < colourObject.length; j++) {
+    //
+    //     if(colourObject[j].name === colour){
+    //     //  console.log("break");
+    //     //  console.log(colourObject[j].imageName);
+    //       imageNameArray = imageNameArray.concat(colourObject[j].imageName);
+    //     //  console.log(imageNameArray + " is aray");
+    //       break;
+    //     }
+    //   }
+    //
+    //
+    //
+    // });
+  }
+//  console.log(imageNameArray + "is final");
+  //console.log(imageName);
+//  console.log(imageNameArray);
+
+    res.send(_.uniq(imageNameArray));
   });
 };
