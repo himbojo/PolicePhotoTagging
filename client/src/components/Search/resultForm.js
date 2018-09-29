@@ -53,7 +53,7 @@ class EachPicture extends Component {
         <img
           src={`data:image/jpeg;base64,${this.props.blob}`}
             onClick={this.handleShow}/>
-      
+
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>

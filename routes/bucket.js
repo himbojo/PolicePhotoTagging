@@ -26,13 +26,16 @@ module.exports = app => {
   });
 
   app.post("/bucket/add", (req, res) => {
-    console.log("start");
+    console.log("/bucket/add");
     var files = req.files;
     var name = req.body.name;
     var file = files[name];
-    console.log(file);
-    console.log("done");
-    console.log(file.path);
+
+    name = name.split("$").join(".");
+    file.fieldName = name;
+    file.originalFilename = name;
+    file.name = name;
+    file.headers = "";
     var stream = fs.createReadStream(file.path);
     return s3fsImpl.writeFile(file.originalFilename, stream).then(function() {
       fs.unlink(file.path, function(err) {
