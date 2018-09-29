@@ -1,9 +1,19 @@
 const fs = require("fs");
 const S3FS = require("s3fs");
-const s3fsImpl = new S3FS("policephototaggingstorage/photos", {
+const s3 = require('s3');
+const AWS = require('aws-sdk');
+//configuring the AWS environment
+AWS.config.update({
   accessKeyId: "AKIAIPC5WDUR6SXASWTQ",
   secretAccessKey: "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"
 });
+
+var client = new AWS.S3();
+
+// const s3fsImpl = new S3FS("policephototaggingstorage/photos", {
+//   accessKeyId: "AKIAIPC5WDUR6SXASWTQ",
+//   secretAccessKey: "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"
+// });
 
 module.exports = app => {
   app.post("/bucket/get", async (req, res) => {
@@ -36,13 +46,29 @@ module.exports = app => {
     file.originalFilename = name;
     file.name = name;
     file.headers = "";
-    var stream = fs.createReadStream(file.path);
-    return s3fsImpl.writeFile(file.originalFilename, stream).then(function() {
-      fs.unlink(file.path, function(err) {
-        if (err) {
-          console.error(err);
-        }
-      });
+    //var stream = fs.createReadStream(file.path);
+    var params = {
+      Bucket: 'policephototaggingstorage/photos',
+      Body : fs.createReadStream(file.path),
+      Key : file.name
+    };
+    client.upload(params, function (err, data) {
+      //handle error
+      if (err) {
+        console.log("Error", err);
+      }
+
+      //success
+      if (data) {
+        console.log("Uploaded in:", data.Location);
+      }
     });
+    // return s3fsImpl.writeFile(file.originalFilename, stream).then(function() {
+    //   fs.unlink(file.path, function(err) {
+    //     if (err) {
+    //       console.error(err);
+    //     }
+    //   });
+    // });
   });
 };

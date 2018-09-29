@@ -70,6 +70,7 @@ module.exports = app => {
         var stream = await s3fsImpl.readFile(imageNameArray[k], "binary");
         var base64data = new Buffer(stream.Body, "binary").toString("base64");
         imageInfoArray[k].blob = base64data;
+        //imageInfoArray[k].path = base64data;
       }
     }
 
