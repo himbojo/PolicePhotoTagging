@@ -12,7 +12,8 @@ module.exports = app => {
 			}
 			var point = 'POINT(' + pointD + ')';
 
-			var body = [req.body.qid, req.body.eventNumber, req.body.dateTime, point, req.body.offence, req.body.iu];
+			var iuNew = req.body.iu.split("$").join(".");
+			var body = [req.body.qid, req.body.eventNumber, req.body.dateTime, point, req.body.offence, iuNew];
 			console.log(body);
 			var tags = req.body.tags;
 

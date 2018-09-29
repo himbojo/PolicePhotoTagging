@@ -24,7 +24,7 @@ class Search extends Component {
     this.setState({ ShowMap: 1});
   }
   onDisplayMap(){
-    if(this.state.ShowMap == 1)
+    if(this.state.ShowMap === 1)
     return <SearchMap />;
 
     return null;
