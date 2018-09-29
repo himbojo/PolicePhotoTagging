@@ -4,7 +4,7 @@ class SearchMap extends Component {
 
   render(){
 
-    return(<div>sup bitch</div>);
+    return(<div></div>);
   }
 
 
