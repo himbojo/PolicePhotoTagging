@@ -9,7 +9,6 @@ AWS.config.update({
 });
 
 var client = new AWS.S3();
-
 // const s3fsImpl = new S3FS("policephototaggingstorage/photos", {
 //   accessKeyId: "AKIAIPC5WDUR6SXASWTQ",
 //   secretAccessKey: "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"
@@ -50,25 +49,17 @@ module.exports = app => {
     var params = {
       Bucket: 'policephototaggingstorage/photos',
       Body : fs.createReadStream(file.path),
-      Key : file.name
+      Key : file.name,
+      ACL: 'public-read',
+      ContentType: 'image/jpeg'
     };
     client.upload(params, function (err, data) {
-      //handle error
       if (err) {
         console.log("Error", err);
       }
-
-      //success
       if (data) {
         console.log("Uploaded in:", data.Location);
       }
     });
-    // return s3fsImpl.writeFile(file.originalFilename, stream).then(function() {
-    //   fs.unlink(file.path, function(err) {
-    //     if (err) {
-    //       console.error(err);
-    //     }
-    //   });
-    // });
   });
 };

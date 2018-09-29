@@ -51,7 +51,7 @@ class EachPicture extends Component {
 
 
         <img
-          src={`data:image/jpeg;base64,${this.props.blob}`}
+          src={this.props.path}
             onClick={this.handleShow}/>
 
 
@@ -62,7 +62,7 @@ class EachPicture extends Component {
           <Modal.Body>
 
             <Image
-              src={`data:image/jpeg;base64,${this.props.blob}`}
+              src={this.props.path}
               onClick={this.handleShow}
               thumbnail
             />
@@ -133,7 +133,7 @@ class ResultForm extends Component {
       //  console.log(this.props.search[image].blob);
       return (
         <EachPicture
-          blob={this.props.search[image].blob}
+          path={this.props.search[image].path}
           desciptor={this.props.search[image]}
         />
       );
