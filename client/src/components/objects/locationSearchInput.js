@@ -3,26 +3,6 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import { FormControl, FormGroup, ControlLabel, Button, HelpBlock } from "react-bootstrap";
 
 class LocationSearchInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      address: '',
-      lat_lng: '' };
-  }
-
-  handleChangeLocation = address => {
-    this.setState({ address });
-  };
-
-  handleSelectLocation = address => {
-    this.setState({address: address}, () => console.log(this.state.address + " " + this.state.lat_lng));
-     geocodeByAddress(address)
-       .then(results => getLatLng(results[0]))
-       .then(latLng => this.setState({
-         lat_lng: latLng.lat + " " + latLng.lng}, () => console.log(this.state.lat_lng)))
-       .catch(error => console.error('Error', error));
-
-  };
 
   render() {
     const searchOptions = {
@@ -30,9 +10,9 @@ class LocationSearchInput extends Component {
     }
     return (
       <PlacesAutocomplete
-        value={this.state.address}
-        onChange={this.handleChangeLocation}
-        onSelect={this.handleSelectLocation}
+        value={this.props.address}
+        onChange={this.props.handleChangeLocation}
+        onSelect={this.props.handleSelectLocation}
         searchOptions={searchOptions}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (

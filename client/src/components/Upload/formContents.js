@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import "../css/reactTags.css";
 import thesaurus from "thesaurus";
 import { WithContext as ReactTags } from 'react-tag-input';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import LocationSearchInput from "../objects/locationSearchInput";
 const KeyCodes = {
   comma: 188,
@@ -34,6 +35,8 @@ class FormContents extends Component{
     this.handleAddition = this.handleAddition.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handleTime = this.handleTime.bind(this);
+    this.handleChangeLocation = this.handleChangeLocation.bind(this);
+    this.handleSelectLocation = this.handleSelectLocation.bind(this);
     this.state = {
       qid: '',
       eventNumber: '',
@@ -42,9 +45,23 @@ class FormContents extends Component{
       tags: [],
       offence: '',
       iu: '',
-      file: ''
+      file: '',
+      address: ''
     };
   }
+  handleChangeLocation = address => {
+    this.setState({ address });
+  };
+
+  handleSelectLocation = address => {
+    this.setState({address: address}, () => console.log(this.state.address));
+     geocodeByAddress(address)
+       .then(results => getLatLng(results[0]))
+       .then(latLng => this.setState({
+         location: latLng.lat + " " + latLng.lng}, () => console.log(this.state.location)))
+       .catch(error => console.error('Error', error));
+
+  };
 
   handleTime(e){
     //  var date = new Date(e.value);
@@ -220,17 +237,14 @@ class FormContents extends Component{
                 />
 
             </FormGroup>
-            <FieldGroup
-              id="formControlsLocation"
-              type="text"
-              label="Location"
-              name="location"
-              placeholder="Please enter Location"
-              value={this.state.value}
-              onChange={this.handleChange}
-              vState={this.isNull(this.state.location)}/>
-            <LocationSearchInput />
-
+            <FormGroup>
+            <ControlLabel>Location</ControlLabel>
+            <LocationSearchInput
+              address = {this.state.address}
+              handleChangeLocation={this.handleChangeLocation}
+              handleSelectLocation={this.handleSelectLocation}
+              />
+          </FormGroup>
             <FormGroup>
               <ControlLabel>Tags</ControlLabel>
               <div>
