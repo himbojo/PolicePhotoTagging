@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import "../css/reactTags.css";
 import thesaurus from "thesaurus";
 import { WithContext as ReactTags } from 'react-tag-input';
-
+import LocationSearchInput from "../objects/locationSearchInput";
 const KeyCodes = {
   comma: 188,
   enter: 13,
@@ -229,6 +229,8 @@ class FormContents extends Component{
               value={this.state.value}
               onChange={this.handleChange}
               vState={this.isNull(this.state.location)}/>
+            <LocationSearchInput />
+
             <FormGroup>
               <ControlLabel>Tags</ControlLabel>
               <div>
