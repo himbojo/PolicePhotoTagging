@@ -19,21 +19,45 @@ import GoogleMapReact from "google-map-react";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import "../css/reactTags.css";
+import { WithContext as ReactTags } from 'react-tag-input';
 
 const MAP_COMPONENT = ({ text }) => <div>{text}</div>;
+const KeyCodes = {
+  comma: 188,
+  enter: 13,
+};
 
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 class EachPicture extends Component {
   constructor(props, context) {
     super(props, context);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleAddition = this.handleAddition.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
 
     this.state = {
       show: false,
-      width: -1
+      width: -1,
+      widthW: window.innerWidth,
+      tags: this.props.image_tags
     };
   }
+
+  componentWillMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ widthW: window.innerWidth });
+  };
 
   handleClose() {
     this.setState({ show: false });
@@ -43,38 +67,82 @@ class EachPicture extends Component {
     this.setState({ show: true });
   }
 
-  render() {
+  handleDelete(i) {
+    const { tags } = this.state;
+    this.setState({
+      tags: tags.filter((tag, index) => index !== i),
+    });
+  }
 
-    // console.log(this.props.desciptor);
+  handleAddition(tag) {
+    tag = this.sendTags(tag);
+    this.setState(state => ({ tags: [...state.tags, tag] }));
+    // () => {
+    //   var tags1 = this.sendTags();
+    //   this.setState({tags: tags1});}
+      }
+
+      handleDrag(tag, currPos, newPos) {
+        const tags = [...this.state.tags];
+        const newTags = tags.slice();
+
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+
+        // re-render
+        this.setState({ tags: newTags });
+      }
+
+  render() {
+    const { widthW } = this.state;
+    const isMobile = widthW <= 768;
+    var imgCSS= "";
+    if(isMobile){
+      imgCSS = "imgMobile";
+    }
+    else{
+      imgCSS = "imgDesktop";
+    }
+    console.log(this.props.image_tags);
+    //this.setState(state => ({ tags: this.props.image_tags }));
     return (
       <div>
 
-
         <img
+          className={imgCSS}
           src={this.props.path}
-            onClick={this.handleShow}/>
-
-
+          onClick={this.handleShow}/>
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Picture #1</Modal.Title>
+            <Modal.Title>{this.props.desciptor.image_name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
             <Image
               src={this.props.path}
               onClick={this.handleShow}
               thumbnail
-            />
+              />
             <FormGroup disabled>
-              <ControlLabel>Assocaited Tags</ControlLabel>
-              <Tagging />
+              <FormGroup>
+                <ControlLabel>Tags</ControlLabel>
+                <div>
+                  <ReactTags tags={this.state.tags}
+                    suggestions={this.state.suggestions}
+                    handleDelete={this.handleDelete}
+                    handleAddition={this.handleAddition}
+                    handleDrag={this.handleDrag}
+                    delimiters={delimiters}
+                    readOnly="true"
+                    />
+                </div>
+
+              </FormGroup>
               <ControlLabel>QID</ControlLabel>
               <FormControl
                 type="text"
                 name="qid"
                 value={this.props.desciptor.qid}
-              />
+                />
               <ControlLabel>Date</ControlLabel>
               <DateOnlyPicker value={this.props.desciptor._datetime} />
               <ControlLabel>Time</ControlLabel>
@@ -86,7 +154,7 @@ class EachPicture extends Component {
                 type="text"
                 name="offence"
                 value={this.props.desciptor.offence}
-              />
+                />
             </FormGroup>
           </Modal.Body>
           <Modal.Footer>
@@ -97,21 +165,16 @@ class EachPicture extends Component {
     );
   }
 }
-
 class ResultForm extends Component {
   constructor(props, context) {
     super(props, context);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-
     this.state = {
       show: false,
       width: -1
     };
   }
-
-
-
   static defaultProps = {
     center: {
       lat: 59.95,
@@ -119,27 +182,22 @@ class ResultForm extends Component {
     },
     zoom: 11
   };
-
   handleClose() {
     this.setState({ show: false });
   }
-
   handleShow() {
     this.setState({ show: true });
   }
-
   render() {
     let images = Object.keys(this.props.search).map(image => {
-      //  console.log(this.props.search[image].blob);
       return (
         <EachPicture
           path={this.props.search[image].path}
           desciptor={this.props.search[image]}
-        />
+          image_tags={this.props.search[image].image_tags}
+          />
       );
     });
-
-    //console.log(this.props.search[0].blob);
     const width = this.state.width;
     return (
       <Measure
@@ -147,7 +205,7 @@ class ResultForm extends Component {
         onResize={contentRect =>
           this.setState({ width: contentRect.bounds.width })
         }
-      >
+        >
         {({ measureRef }) => {
           if (width < 1) {
             return <div ref={measureRef} />;
@@ -171,10 +229,7 @@ class ResultForm extends Component {
                   </Button>
                 </Link>
               </div>
-
-
               {images}
-
             </div>
           );
         }}

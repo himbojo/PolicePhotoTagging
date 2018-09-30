@@ -144,6 +144,7 @@ class FormContents extends Component{
     //var imported_thesaurus = thesaurus.load("../assets/th_en_US_new.dat");
     this.props.updateTag(this.state);
     this.props.bucketPhoto(this.state);
+    console.log(this.state.tags);
   }
 
   handleChange(e) {

@@ -80,21 +80,6 @@ class SearchForm extends Component {
     });
   }
 
-  //Upload form HandleSubmit
-
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   var file1 = this.props.iu;
-  //   var date = new Date().toISOString('en-nz').replace(/T/, '_').replace(/\..+/, '');
-  //
-  //   var name = date + '_' + file1.name;
-  //   name = name.split(".").join("$");
-  //   var file2 = new File([file1], name);
-  //   var tags1 = this.sendTags();
-  //   this.setState({iu: file2.name, file: file2, tags: tags1}, () => this.sendData());
-  //   //console.log(this.state.iu);
-  // }
-
   handleDelete(i) {
     const { tags } = this.state;
     this.setState({
@@ -120,7 +105,7 @@ class SearchForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onShowMap(); 
+    this.props.onShowMap();
     console.log("hello");
     this.sendData();
   }
