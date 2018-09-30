@@ -1,29 +1,35 @@
-.loginBody{
+.loginContainer {
+  border-radius: 0.3em;
+  margin: 20%;
+  background-color: rgba(255, 255, 255, 0.75);
+  object-fit: cover;
   padding: 2%;
-  position: absolute;
-  top:0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 40%;
-  height: 65%;
-  background-color:rgba(20, 57, 77, 0.75);
-  border-radius: 0.4em;
-}
-.loginMain{
-  overflow: auto;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  background-position: center;
-  background-image: linear-gradient(rgba(50,125,205,0.5), rgba(50,125,205,0.5)), url("../assets/new-zealand-police-background.jpg");
-  height: 100vh;
 }
 
-.loginFont{
-  color:#FFF;
+.loginFont {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 2em;
 }
-.loginButton, .loginHeader, .loginFont{
-  padding-top: 5vh;
+
+.rowFields {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.rowButton {
+  margin-left: 30%;
+  margin-right: 30%;
+  padding-top: 5%;
+}
+.rowImage {
+  margin: 2%;
+  display: flex;
+}
+
+.imgLogin {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 100% !important;
+  max-height: 100% !important;
 }

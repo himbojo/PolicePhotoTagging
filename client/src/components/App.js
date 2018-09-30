@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
@@ -17,7 +17,7 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div>
-            <Route exact path="/" component={Protected(NavBar)} />
+            <Route exact path="/" render={() => (<Redirect to="/login"/>)}/>
             <Route exact path="/login" component={Protected(Login)} />
             <Route exact path="/upload" component={Protected(Upload)} />
             <Route exact path="/search" component={Protected(Search)} />

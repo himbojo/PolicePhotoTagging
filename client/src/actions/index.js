@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   LOGIN_USER,
   REG_USER,
-  INS_PHOTO,
   BUCKET_PHOTO,
   IMG_SEARCH,
   UPDATE_TAG
@@ -27,13 +26,6 @@ export const regUser = values => async dispatch => {
   const res = await axios.post("/users/reg", values);
 
   dispatch({ type: REG_USER, payload: res.data });
-};
-
-export const insPhoto = values => async dispatch => {
-  console.log(values);
-  const res = await axios.post("/image/add", values);
-  console.log("insPhoto");
-  dispatch({ type: INS_PHOTO, payload: res.data });
 };
 
 export const loginUser = (values, history) => async dispatch => {
