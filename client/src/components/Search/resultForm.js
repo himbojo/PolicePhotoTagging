@@ -17,6 +17,7 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import { DateTimePicker } from 'react-widgets';
 import 'react-widgets/dist/css/react-widgets.css';
 
+
 //const MAP_COMPONENT = ({ text }) => <div>{text}</div>;
 const KeyCodes = {
   comma: 188,
@@ -90,6 +91,7 @@ class EachPicture extends Component {
 
   render() {
     const { widthW } = this.state;
+
     const isMobile = widthW <= 768;
     var imgCSS= "";
     if(isMobile){
@@ -134,9 +136,12 @@ class EachPicture extends Component {
               <ControlLabel>Event Number</ControlLabel>
               <FormControl type="text" name="eventNumber"
                 value={this.props.desciptor.event_number} />
-              <ControlLabel>Location</ControlLabel>
+              <ControlLabel>Lat & Lng</ControlLabel>
               <FormControl type="text" name="Location"
                 value={this.props.desciptor.location.x + " " + this.props.desciptor.location.y} />
+                <ControlLabel>Location</ControlLabel>
+                <FormControl type="text" name="Location"
+                  value={this.props.locationName} />
               <ControlLabel>Date & Time</ControlLabel>
               <DateTimePicker readOnly defaultValue={new Date(this.props.desciptor._datetime)}/>
               <ControlLabel>Offence</ControlLabel>
@@ -180,6 +185,7 @@ class ResultForm extends Component {
       return (
         <EachPicture
           path={this.props.search[image].path}
+          locationName={this.props.search[image].locationName}
           desciptor={this.props.search[image]}
           image_tags={this.props.search[image].image_tags}
           />
