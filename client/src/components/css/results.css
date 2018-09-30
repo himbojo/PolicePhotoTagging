@@ -12,3 +12,7 @@
   border-radius: 8px;
   float: left;
 }
+
+.modalGroup .control-label {
+  padding-top: 2%;
+}

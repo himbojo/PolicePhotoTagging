@@ -17,6 +17,7 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div>
+            <NavBar />
             <Route exact path="/" render={() => (<Redirect to="/login"/>)}/>
             <Route exact path="/login" component={Protected(Login)} />
             <Route exact path="/upload" component={Protected(Upload)} />

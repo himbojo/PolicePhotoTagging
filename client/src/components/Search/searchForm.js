@@ -9,15 +9,12 @@ import {
 } from "react-bootstrap";
 
 import DateOnlyPicker from "../objects/dateOnlyPicker";
-import Tagging from "../objects/tagging";
 import "./inputForm.css";
 import "./search.css";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
-import axios from "axios";
 import thesaurus from "thesaurus";
 import { WithContext as ReactTags } from "react-tag-input";
-import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
 const KeyCodes = {
@@ -68,18 +65,6 @@ class SearchForm extends Component {
     this.context.router.history.push(`/result`);
   };
 
-  handleSubmit(e) {
-    e.preventDefault();
-    //Trying to use axios here to search database
-    //to avoid passing the pages data around
-    //https://stackoverflow.com/questions/50924154/how-to-fetch-data-from-mongodb-in-mern
-    //axios.get("/images/search");
-
-    this.props.searchImage(this.state).then(res => {
-      this.props.history.push("/results");
-    });
-  }
-
   handleDelete(i) {
     const { tags } = this.state;
     this.setState({
@@ -108,6 +93,9 @@ class SearchForm extends Component {
     this.props.onShowMap();
     console.log("hello");
     this.sendData();
+    this.props.searchImage(this.state).then(res => {
+      this.props.history.push("/results");
+    });
   }
 
   compareItems(item, arrayI) {

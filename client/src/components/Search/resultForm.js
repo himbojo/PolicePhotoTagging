@@ -5,24 +5,19 @@ import {
   ControlLabel,
   Button,
   Modal,
-  Well,
   Image
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import DateOnlyPicker from "../objects/dateOnlyPicker";
-import TimeOnlyPicker from "../objects/timeOnlyPicker";
-import Tagging from "../objects/tagging";
-import "../results/results.css"
-import Measure from "react-measure";
-import Gallery from "react-photo-gallery";
-import GoogleMapReact from "google-map-react";
+import "../css/results.css"
+//import GoogleMapReact from "google-map-react";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import "../css/reactTags.css";
 import { WithContext as ReactTags } from 'react-tag-input';
+import { DateTimePicker } from 'react-widgets';
+import 'react-widgets/dist/css/react-widgets.css';
 
-const MAP_COMPONENT = ({ text }) => <div>{text}</div>;
+//const MAP_COMPONENT = ({ text }) => <div>{text}</div>;
 const KeyCodes = {
   comma: 188,
   enter: 13,
@@ -80,18 +75,18 @@ class EachPicture extends Component {
     // () => {
     //   var tags1 = this.sendTags();
     //   this.setState({tags: tags1});}
-      }
+  }
 
-      handleDrag(tag, currPos, newPos) {
-        const tags = [...this.state.tags];
-        const newTags = tags.slice();
+  handleDrag(tag, currPos, newPos) {
+    const tags = [...this.state.tags];
+    const newTags = tags.slice();
 
-        newTags.splice(currPos, 1);
-        newTags.splice(newPos, 0, tag);
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
 
-        // re-render
-        this.setState({ tags: newTags });
-      }
+    // re-render
+    this.setState({ tags: newTags });
+  }
 
   render() {
     const { widthW } = this.state;
@@ -103,15 +98,14 @@ class EachPicture extends Component {
     else{
       imgCSS = "imgDesktop";
     }
-    console.log(this.props.image_tags);
+    console.log(this.props);
     //this.setState(state => ({ tags: this.props.image_tags }));
     return (
       <div>
-
-        <img
-          className={imgCSS}
+        <img className={imgCSS}
           src={this.props.path}
-          onClick={this.handleShow}/>
+          onClick={this.handleShow}
+          alt={this.props.path} />
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>{this.props.desciptor.image_name}</Modal.Title>
@@ -120,12 +114,11 @@ class EachPicture extends Component {
             <Image
               src={this.props.path}
               onClick={this.handleShow}
+              alt={this.props.path}
               thumbnail
               />
-            <FormGroup disabled>
-              <FormGroup>
+            <FormGroup bsClass="modalGroup" disabled>
                 <ControlLabel>Tags</ControlLabel>
-                <div>
                   <ReactTags tags={this.state.tags}
                     suggestions={this.state.suggestions}
                     handleDelete={this.handleDelete}
@@ -134,27 +127,21 @@ class EachPicture extends Component {
                     delimiters={delimiters}
                     readOnly="true"
                     />
-                </div>
-
-              </FormGroup>
-              <ControlLabel>QID</ControlLabel>
-              <FormControl
-                type="text"
-                name="qid"
+              <ControlLabel>Uploader QID</ControlLabel>
+              <FormControl type="text" name="qid"
                 value={this.props.desciptor.qid}
                 />
-              <ControlLabel>Date</ControlLabel>
-              <DateOnlyPicker value={this.props.desciptor._datetime} />
-              <ControlLabel>Time</ControlLabel>
-              <TimeOnlyPicker />
-              <ControlLabel>File Number</ControlLabel>
-              <FormControl type="text" name="filenumber" />
+              <ControlLabel>Event Number</ControlLabel>
+              <FormControl type="text" name="eventNumber"
+                value={this.props.desciptor.event_number} />
+              <ControlLabel>Location</ControlLabel>
+              <FormControl type="text" name="Location"
+                value={this.props.desciptor.location.x + " " + this.props.desciptor.location.y} />
+              <ControlLabel>Date & Time</ControlLabel>
+              <DateTimePicker readOnly defaultValue={new Date(this.props.desciptor._datetime)}/>
               <ControlLabel>Offence</ControlLabel>
-              <FormControl
-                type="text"
-                name="offence"
-                value={this.props.desciptor.offence}
-                />
+              <FormControl type="text" name="offence"
+                value={this.props.desciptor.offence}/>
             </FormGroup>
           </Modal.Body>
           <Modal.Footer>
@@ -198,28 +185,6 @@ class ResultForm extends Component {
           />
       );
     });
-    const width = this.state.width;
-    return (
-      <Measure
-        bounds
-        onResize={contentRect =>
-          this.setState({ width: contentRect.bounds.width })
-        }
-        >
-        {({ measureRef }) => {
-          if (width < 1) {
-            return <div ref={measureRef} />;
-          }
-          let columns = 1;
-          if (width >= 480) {
-            columns = 2;
-          }
-          if (width >= 1024) {
-            columns = 4;
-          }
-          if (width >= 1824) {
-            columns = 4;
-          }
           return (
             <div>
               <div className="buttonGroup">
@@ -232,9 +197,6 @@ class ResultForm extends Component {
               {images}
             </div>
           );
-        }}
-      </Measure>
-    );
   }
 }
 
