@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as actions from "../../actions";
 import { withRouter } from "react-router-dom";
+import { Grid, Col, Row} from "react-bootstrap"
 
 import { connect } from "react-redux";
 import {
@@ -66,33 +67,51 @@ class loginForm extends Component {
     // }
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className="loginBody">
-          <FormGroup controlId="formBasicText" bsSize="large">
-            <FieldGroup
-              id="formControlsUsername"
-              type="text"
-              label="Username"
-              name="email"
-              placeholder="Enter Username"
-              value={this.state.email}
-              onChange={this.change}
-            />
-            <FieldGroup
-              id="formControlsPassword"
-              type="password"
-              label="Password"
-              name="password"
-              placeholder="Enter Password"
-              value={this.state.password}
-              onChange={this.change}
-            />
-            <div className="loginButton">
-              <Button bsSize="large" type="Submit" block bsStyle="primary">
-                Login
-              </Button>
+
+        <FormGroup controlId="formBasicText" bsSize="large">
+          <Grid>
+            <div className="loginContainer">
+              <Row bsClass="rowImage">
+                <Col xs={13} sm={13} md={13} lg={13}>
+                  <img className="imgLogin" src="https://catalogue.data.govt.nz/uploads/group/2017-07-26-040017.749135NZ-Police-Logo-COL-Nov-16-update.png" alt="police-logo"/>
+                </Col>
+              </Row>
+              <Row bsClass="rowFields">
+                <Col xs={13} sm={13} md={13} lg={13}>
+                  <FieldGroup
+                    id="formControlsUsername"
+                    type="text"
+                    label="Username"
+                    name="email"
+                    placeholder="Enter Username"
+                    value={this.state.email}
+                    onChange={this.change}
+                    />
+                  <FieldGroup
+                    id="formControlsPassword"
+                    type="password"
+                    label="Password"
+                    name="password"
+                    placeholder="Enter Password"
+                    value={this.state.password}
+                    onChange={this.change}
+                    />
+                </Col>
+              </Row>
+              <Row bsClass="rowButton">
+                <Col xs={13} sm={13} md={13} lg={13}>
+                  <div className="loginButton">
+                    <Button bsSize="large" type="Submit" block bsStyle="primary">
+                      Login
+                    </Button>
+                  </div>
+                </Col>
+              </Row>
             </div>
-          </FormGroup>
-        </div>
+
+          </Grid>
+        </FormGroup>
+
       </form>
     );
   }

@@ -4,8 +4,6 @@ const bodyParser = require("body-parser");
 const app = express();
 const _ = require("lodash");
 const { User } = require("./routes/models/user");
-const { Image } = require("./routes/models/image");
-const { Tag } = require("./routes/models/tag");
 const keys = require("./keys");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
