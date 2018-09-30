@@ -67,16 +67,26 @@ module.exports = app => {
 
     for (j = 0; j < selectImage.length; j++) {
       imageInfoArray = imageInfoArray.concat(selectImage[j]);
-      imageNameArray = imageNameArray.concat(selectImage[j].image_name);
     }
 
     console.log(imageInfoArray);
-    console.log(imageNameArray);
-    for (var k = 0; k < imageNameArray.length; k++) {
-      var key = imageNameArray[k];
+    for (var k = 0; k < imageInfoArray.length; k++) {
+      var key = imageInfoArray[k].image_name;
       console.log("before getting path");
       //imageInfoArray[k].blob = base64data;
       //ap-southeast-2
+      var image_tags = await pool.query(
+        'SELECT Items.item, Colours.colour FROM ((Link INNER JOIN Items ON Items.ID = Link.itemID) INNER JOIN Colours ON Colours.ID = Link.colourID) WHERE imageID = ?', [imageInfoArray[k].ID]
+      );
+      var tagArray = [];
+      for (var l = 0; l < image_tags.length; l++) {
+        var mergeTag = {
+          id: image_tags[l].item + " " + image_tags[l].colour,
+          text: image_tags[l].item + " " + image_tags[l].colour
+        }
+        tagArray = tagArray.concat(mergeTag);
+      }
+      imageInfoArray[k].image_tags = tagArray;
       imageInfoArray[k].path = await s3.getPublicUrl('policephototaggingstorage/photos', key, ['ap-southeast-2']);
     }
   }

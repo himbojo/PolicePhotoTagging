@@ -48,7 +48,7 @@ class InputForm extends Component {
           <Grid>
             <Row>
               <Row xs={8} className="colStyle2">
-                <ImageUpload file={this.state.file} imagePreviewUrl={this.state.imagePreviewUrl} onChange={this._handleImageChange} />
+                <ImageUpload file={this.state.file} imagePreviewUrl={this.state.imagePreviewUrl} onChangeFile={this._handleImageChange} />
               </Row>
               <Row mOffset={.5} xsOffset={1} xs={3} className="colStyle1">
                 <FormContents iu={this.state.file}/>

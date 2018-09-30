@@ -1,7 +1,14 @@
-img{
+
+.imgDesktop {
   padding: 2px;
   height: 60vh;
+  border-radius: 8px;
+  float: left;
+}
 
+.imgMobile {
+  padding: 2px;
+  width: 95vw;
   border-radius: 8px;
   float: left;
 }
