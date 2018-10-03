@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { FormControl, FormGroup, ControlLabel, Button, HelpBlock } from "react-bootstrap";
 import DateTimePick from "../objects/dateTimePicker";
 import "../css/inputForm.css";
+import "../css/upload.css";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import "../css/reactTags.css";
@@ -37,7 +38,9 @@ class FormContents extends Component{
     this.handleTime = this.handleTime.bind(this);
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
     this.handleSelectLocation = this.handleSelectLocation.bind(this);
+    this.validate = this.validate.bind(this);
     this.state = {
+      errors: [],
       qid: '',
       eventNumber: '',
       dateTime: '',
@@ -69,8 +72,44 @@ class FormContents extends Component{
     console.log(e.value);
     this.setState({ dateTime: e.value});
   }
+
+  // Checks the form items if they are empty and returns an array of errors.
+  // this.state.qid... returns an undefined not sure why.
+  validate(){
+  const errors = [];
+
+
+  if (this.state.qid.length === 0) {
+    errors.push("QID can't be empty");
+  }
+  if (this.state.eventNumber.length === 0) {
+    errors.push("Event Number can't be empty");
+  }
+  if (this.state.location.length === 0) {
+    errors.push("location can't be empty");
+  }
+  if (this.state.tags.length === 0) {
+    errors.push("Tags can't be empty");
+  }
+  if (this.state.offence.length === 0) {
+    errors.push("Offence can't be empty");
+  }
+
+  return errors;
+}
+
   handleSubmit(e) {
     e.preventDefault();
+    console.log(this.state);
+
+    //Checks array of errors, if there is an error setstate && display
+    const errors = this.validate();
+    if(errors.length> 0){
+      this.setState({ errors });
+      console.log(errors);
+      return;
+    }
+
     var file1 = this.props.iu;
     var date = new Date().toISOString('en-nz').replace(/T/, '_').replace(/\..+/, '');
 
@@ -79,7 +118,7 @@ class FormContents extends Component{
     var file2 = new File([file1], name);
     this.setState({iu: file2.name, file: file2}, () => this.sendData());
     //console.log(this.state.iu);
-  }
+}
 
   compareItems(item, arrayI){
     for (var i = 0; i < arrayI.length; i++) {
@@ -209,8 +248,12 @@ class FormContents extends Component{
 
 
       render(){
+        const { errors } = this.state;
         return(
-          <form>
+          <form onSubmit={this.handleSubmit}>
+
+            {errors.map(error => (<p className="errorText"key={error}> Error: {error}</p>))}
+
             <FieldGroup
               id="formControlsQID"
               type="text"
@@ -267,7 +310,7 @@ class FormContents extends Component{
               value={this.state.value}
               onChange={this.handleChange}
               vState={this.isNull(this.state.offence)}/>
-            <Button bsStyle="primary" type="submit" onClick={this.handleSubmit}>Upload Image</Button>
+            <Button bsStyle="primary" type="submit">Upload Image</Button>
           </form>
 
         );
