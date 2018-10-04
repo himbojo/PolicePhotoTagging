@@ -71,11 +71,9 @@ class loginForm extends Component {
         <FormGroup controlId="formBasicText" bsSize="large">
           <Grid>
             <div className="loginContainer">
-              <Row bsClass="rowImage">
                 <Col xs={13} sm={13} md={13} lg={13}>
                   <img className="imgLogin" src="https://catalogue.data.govt.nz/uploads/group/2017-07-26-040017.749135NZ-Police-Logo-COL-Nov-16-update.png" alt="police-logo"/>
                 </Col>
-              </Row>
               <Row bsClass="rowFields">
                 <Col xs={13} sm={13} md={13} lg={13}>
                   <FieldGroup
