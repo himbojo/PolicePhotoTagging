@@ -1,16 +1,16 @@
 .colStyle1{
   border-radius: 0.3em;
-  margin: 2%;
+  margin: 1%;
   background-color: rgba(255, 255, 255, 0.75);
 }
 .colStyle2{
   border-radius: 0.3em;
-  margin: 2%;
+  margin: 1%;
   background-color: rgba(255, 255, 255, 0.75);
   object-fit: cover;
 }
 .image{
-  margin: 2%;
+  margin: 1%;
   max-height: 100% !important;
   max-width: 100% !important;
 }
