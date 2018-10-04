@@ -201,6 +201,11 @@ class ResultForm extends Component {
                     Back
                   </Button>
                 </Link>
+
+                  <Button className="searchButton" bsStyle="primary" onClick={() => this.props.onShowMap(1)}>
+                    Map
+                  </Button>
+
               </div>
               {images}
             </div>

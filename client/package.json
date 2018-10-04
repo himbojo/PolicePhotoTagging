@@ -27,6 +27,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
     "globalize": "^1.4.0",
+    "google-maps-react": "^2.0.2",
     "materialize-css": "^1.0.0-rc.2",
     "popper.js": "^1.14.4",
     "react": "^16.4.1",
