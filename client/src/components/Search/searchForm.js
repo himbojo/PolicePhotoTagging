@@ -5,7 +5,8 @@ import {
   ControlLabel,
   Grid,
   Row,
-  Button
+  Button,
+  Col
 } from "react-bootstrap";
 
 import DateOnlyPicker from "../objects/dateOnlyPicker";
@@ -179,7 +180,8 @@ class SearchForm extends Component {
     return (
       <div>
         <Grid>
-          <Row xsOffset={1} xs={3} className="colStyle1">
+          <Row>
+            <Col xs={13} sm={13} md={8} mdPush={2} lg={8} lgPush={2} className="colStyle1">
             <form>
               <ControlLabel>Tags</ControlLabel>
               <div>
@@ -247,6 +249,7 @@ class SearchForm extends Component {
                 </Button>
               </div>
             </form>
+          </Col>
           </Row>
         </Grid>
       </div>

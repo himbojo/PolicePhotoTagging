@@ -109,6 +109,7 @@ class EachPicture extends Component {
           onClick={this.handleShow}
           alt={this.props.path} />
         <Modal show={this.state.show} onHide={this.handleClose}>
+          <div>
           <Modal.Header closeButton>
             <Modal.Title>{this.props.desciptor.image_name}</Modal.Title>
           </Modal.Header>
@@ -152,6 +153,7 @@ class EachPicture extends Component {
           <Modal.Footer>
             <Button onClick={this.handleClose}>Close</Button>
           </Modal.Footer>
+          </div>
         </Modal>
       </div>
     );
