@@ -154,7 +154,7 @@ class FormContents extends Component{
   }
 
   sendTags(tag){
-      var string = tag.text;
+      var string = tag.text.toLowerCase();
       var strings = string.split(" ");
 
       var ts1 = thesaurus.find(strings[0]);
