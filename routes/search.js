@@ -30,10 +30,29 @@ module.exports = app => {
   app.post("/image/search", async (req, res) => {
     console.log("/image/search");
     var tags = req.body.tags;
+    var qid = req.body.qid;
+    var filenumber = req.body.filenumber;
+    var offence = req.body.offence;
+
+    //Set up for searching with things other than TAGS
+    
+    // var selectQid = await pool.query(
+    //   "SELECT qid FROM images WHERE qid = ?",
+    //   [qid]
+    // );
+    //
+    // var selectFileNumber = await pool.query(
+    //   "SELECT event_number FROM images WHERE event_number = ?",
+    //   [filenumber]
+    // );
+    //
+    // var selectOffence = await pool.query(
+    //   "SELECT offence FROM images WHERE offence = ?",
+    //   [offence]
+    // );
 
     var imageNameArray = [];
     var imageInfoArray = [];
-    //  console.log(tags[0].text + "\n" + tags[1].text + "finish")
     for (var i = 0; i < tags.length; i++) {
       var strings = tags[i].text.split(" ");
       var item = strings[0];
@@ -99,6 +118,7 @@ module.exports = app => {
         imageInfoArray[k].path = await s3.getPublicUrl('policephototaggingstorage/photos', key, ['ap-southeast-2']);
       }
     }
+
 
     res.send(_.uniq(imageInfoArray));
   });
