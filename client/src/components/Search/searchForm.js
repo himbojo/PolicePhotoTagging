@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 import thesaurus from 'thesaurus';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { withRouter } from 'react-router-dom';
+var suggests = require('../assets/suggestions').suggests;
 
 const KeyCodes = {
   comma: 188,
@@ -39,6 +40,7 @@ class SearchForm extends Component {
       filenumber: '',
       location: '',
       tags: [],
+      suggestions: suggests,
       description: '',
       offence: '',
       showing: false

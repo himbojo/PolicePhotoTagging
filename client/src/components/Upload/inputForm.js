@@ -32,49 +32,47 @@ class InputForm extends Component {
     e.preventDefault();
     console.log(e);
     let file = e.target.files[0];
-      this.setState({
-        file: file,
-        imagePreviewUrl: URL.createObjectURL(file)},     console.log(this.state));
-
-
-  }
-
-  render() {
-    const { width } = this.state;
-    const isMobile = width <= 768;
-    if (isMobile) {
-      return (
-        <div>
-          <Grid>
-            <Row>
-              <Row xs={8} className="colStyle2">
-                <ImageUpload file={this.state.file} imagePreviewUrl={this.state.imagePreviewUrl} onChangeFile={this._handleImageChange} />
-              </Row>
-              <Row mOffset={.5} xsOffset={1} xs={3} className="colStyle1">
-                <FormContents iu={this.state.file}/>
-              </Row>
-            </Row>
-          </Grid>
-        </div>
-      );
+    this.setState({
+      file: file,
+      imagePreviewUrl: URL.createObjectURL(file)},     console.log(this.state));
     }
-    else{
-      return (
-        <div>
-          <Grid>
-            <Row>
-              <Col xs={8} className="colStyle2">
-                <ImageUpload file={this.state.file} imagePreviewUrl={this.state.imagePreviewUrl} onChangeFile={this._handleImageChange} />
-              </Col>
-              <Col  xsOffset={1} xs={3} className="colStyle1">
-                <FormContents iu={this.state.file}/>
-              </Col>
-            </Row>
-          </Grid>
-        </div>
-      );
-    }
-  }
-};
 
-export default InputForm;
+    render() {
+      const { width } = this.state;
+      const isMobile = width <= 768;
+      if (isMobile) {
+        return (
+          <div>
+            <Grid>
+              <Row>
+                <Row xs={8} className="colStyle2">
+                  <ImageUpload file={this.state.file} imagePreviewUrl={this.state.imagePreviewUrl} onChangeFile={this._handleImageChange} />
+                </Row>
+                <Row mOffset={.5} xsOffset={1} xs={3} className="colStyle1">
+                  <FormContents iu={this.state.file}/>
+                </Row>
+              </Row>
+            </Grid>
+          </div>
+        );
+      }
+      else{
+        return (
+          <div>
+            <Grid>
+              <Row>
+                <Col xs={8} className="colStyle2">
+                  <ImageUpload file={this.state.file} imagePreviewUrl={this.state.imagePreviewUrl} onChangeFile={this._handleImageChange} />
+                </Col>
+                <Col  xsOffset={1} xs={3} className="colStyle1">
+                  <FormContents iu={this.state.file}/>
+                </Col>
+              </Row>
+            </Grid>
+          </div>
+        );
+      }
+    }
+  };
+
+  export default InputForm;
