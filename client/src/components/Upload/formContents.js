@@ -14,11 +14,9 @@ import { connect } from 'react-redux';
 import '../css/reactTags.css';
 import thesaurus from 'thesaurus';
 import { WithContext as ReactTags } from 'react-tag-input';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
-} from 'react-places-autocomplete';
-import LocationSearchInput from '../objects/locationSearchInput';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import LocationSearchInput from "../objects/locationSearchInput";
+var suggests = require('../assets/suggestions').suggests;
 const KeyCodes = {
   comma: 188,
   enter: 13
@@ -55,6 +53,7 @@ class FormContents extends Component {
       dateTime: '',
       location: '',
       tags: [],
+      suggestions: suggests,
       offence: '',
       iu: '',
       file: '',
@@ -107,7 +106,6 @@ class FormContents extends Component {
     if (this.state.offence.length === 0) {
       errors.push("Offence can't be empty");
     }
-
     return errors;
   }
   //When the upload button is pressed, send the state data to the
@@ -142,9 +140,10 @@ class FormContents extends Component {
       if (arrayI[i].indexOf(item) > -1) {
         return true;
       }
+      }
+      return false;
     }
-    return false;
-  }
+
   //Takes in the thesaurus and a tag and return it's matching type (either headwear, top, bottom, or footwear)
   ///RETURNS: The tags matching 'type' or, if it doesn't match any, the tag
   formatTags(arrayT, string) {
@@ -165,8 +164,9 @@ class FormContents extends Component {
         return 'footwear';
       }
     }
-    return string;
-  }
+      return string;
+    }
+
   //Takes in a tag and searchs the thesaurus for similar words. It then formats the tag and sends the formatted tag back.
   ///RETURNS: A formatted tag, the formt is: WORD then COLOUR.
   sendTags(tag) {
