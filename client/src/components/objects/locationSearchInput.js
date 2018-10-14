@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import { FormControl, FormGroup, ControlLabel, Button, HelpBlock } from "react-bootstrap";
+import PlacesAutocomplete from 'react-places-autocomplete';
+import { FormControl } from "react-bootstrap";
 
 class LocationSearchInput extends Component {
 
