@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import '../css/reactTags.css';
 import thesaurus from 'thesaurus';
 import { WithContext as ReactTags } from 'react-tag-input';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import LocationSearchInput from "../objects/locationSearchInput";
 var suggests = require('../assets/suggestions').suggests;
 const KeyCodes = {

@@ -12,9 +12,6 @@
     "/bucket/*": {
       "target": "http://localhost:5000"
     },
-    "/image/add": {
-      "target": "http://localhost:5000"
-    },
     "/image/search": {
       "target": "http://localhost:5000"
     },

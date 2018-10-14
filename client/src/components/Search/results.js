@@ -25,8 +25,6 @@ class Results extends Component {
     if(this.state.ShowMap === 1)
     return <GMap onShowMap={this.onShowMap}/>;
     return <ResultForm onShowMap={this.onShowMap}/>;
-
-    return null;
   }
   render() {
     return (
