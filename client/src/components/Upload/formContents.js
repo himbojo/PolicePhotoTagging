@@ -33,7 +33,7 @@ function FieldGroup({ id, vState, label, help, ...props }) {
     </FormGroup>
   );
 }
-
+//Form contents for the upload page
 class FormContents extends Component {
   constructor(props) {
     super(props);

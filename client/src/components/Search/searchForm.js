@@ -25,7 +25,7 @@ const KeyCodes = {
 };
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
-
+//The form for the search page
 class SearchForm extends Component {
   constructor(props, context) {
     super(props, context);

@@ -21,7 +21,7 @@ function FieldGroup({ id, label, help, ...props }) {
     </FormGroup>
   );
 }
-
+//The form for the login page
 class loginForm extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +33,7 @@ class loginForm extends Component {
     password: "",
     logged: false
   };
+  //Send the state data to the login action, then redirect to the upload page (if the login was successful)
   handleSubmit(e) {
     e.preventDefault();
     console.log("this.state");
