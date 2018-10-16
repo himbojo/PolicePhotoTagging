@@ -4,7 +4,8 @@ import {
   FormGroup,
   ControlLabel,
   Button,
-  HelpBlock
+  HelpBlock,
+  Modal
 } from 'react-bootstrap';
 import DateTimePick from '../objects/dateTimePicker';
 import '../css/inputForm.css';
@@ -57,7 +58,9 @@ class FormContents extends Component {
       offence: '',
       iu: '',
       file: '',
-      address: ''
+      address: '',
+      show: false,
+      success: false
     };
   }
   //Change the current address in the state
@@ -223,7 +226,10 @@ class FormContents extends Component {
     //var imported_thesaurus = thesaurus.load("../assets/th_en_US_new.dat");
     this.props.updateTag(this.state);
     this.props.bucketPhoto(this.state);
+    window.alert("Image upload successful");
     console.log(this.state.tags);
+
+
   }
 
   handleChange(e) {
@@ -340,6 +346,7 @@ class FormContents extends Component {
         <Button bsStyle="primary" type="submit">
           Upload Image
         </Button>
+
       </form>
     );
   }
