@@ -94,7 +94,54 @@ module.exports = app => {
       var selectImage = await pool.query(
         'SELECT * FROM Images WHERE ID IN (SELECT imageID FROM Link WHERE itemID = ? AND colourID = ?)', [selectItem, selectColour]
       );
+
+      //var idArray= [];
+      //var infromationQuery = 'SELECT * FROM Images WHERE ID IN ?'
+      //if(qid==""){
+      //  infromationQuery.concat(' AND qid = ?');
+      //}
       //concatinate every image that has matched the tag to the info results array
+      //for (j = 0; j < selectImage.length; j++) {
+      //  //imageInfoArray = imageInfoArray.concat(selectImage[j]);
+      //  idArray = idArray.concat(selectImage[j].ID);
+      //}
+      //selectImage = await pool.query(
+      //  infromationQuery, [idArray, qid]
+      //);
+
+      var tempArray = [];
+      //if a qid has been entered, refine the query by it
+      if(qid!=""){
+        var qidNum = parseInt(qid, 10);
+        for (j = 0; j < selectImage.length; j++) {
+          tempArray = tempArray.concat(selectImage[j].ID);
+        }
+        selectImage = await pool.query(
+           "SELECT * FROM Images WHERE ID IN (?) AND qid = ?", [tempArray, qidNum]
+        );
+      }
+      //if a event number has been enter, refine the query by it
+      if(filenumber!=""){
+        tempArray = [];
+        fileNum = parseInt(filenumber, 10);
+        for (j = 0; j < selectImage.length; j++) {
+          tempArray = tempArray.concat(selectImage[j].ID);
+        }
+        selectImage = await pool.query(
+           "SELECT * FROM Images WHERE ID IN (?) AND event_number = ?", [tempArray, fileNum]
+        );
+      }
+      //if a offence has been entered, refine the search by it
+      if(offence!=""){
+        tempArray = [];
+        for (j = 0; j < selectImage.length; j++) {
+          tempArray = tempArray.concat(selectImage[j].ID);
+        }
+        selectImage = await pool.query(
+           "SELECT * FROM Images WHERE ID IN (?) AND offence = ?", [tempArray, offence]
+        );
+      }
+
       for (j = 0; j < selectImage.length; j++) {
         imageInfoArray = imageInfoArray.concat(selectImage[j]);
       }
