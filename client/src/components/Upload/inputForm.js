@@ -15,19 +15,19 @@ class InputForm extends Component {
     };
     this._handleImageChange = this._handleImageChange.bind(this);
   }
-
+  //Add listeners for the window resize
   componentWillMount() {
     window.addEventListener('resize', this.handleWindowSizeChange);
   }
-
+  //Remove listeners for the window rezie
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowSizeChange);
   }
-
+  //Change the window size on change
   handleWindowSizeChange = () => {
     this.setState({ width: window.innerWidth });
   };
-
+  //Set the file and URL objects in the state
   _handleImageChange(e) {
     e.preventDefault();
     console.log(e);

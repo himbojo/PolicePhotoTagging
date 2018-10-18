@@ -1,6 +1,6 @@
 const _ = require("lodash");
 const { User } = require("./models/user");
-
+//Check if the user exists, if they do exist, log them in
 module.exports = app => {
   app.post("/users/login", (req, res) => {
     console.log("HERERERE");

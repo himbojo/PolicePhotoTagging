@@ -4,7 +4,7 @@ import "./upload.css";
 import "../css/main.css";
 import SearchForm from "./searchForm";
 import SearchMap from "./searchMap";
-
+//The main search page
 class Search extends Component {
 
   constructor(props, context) {

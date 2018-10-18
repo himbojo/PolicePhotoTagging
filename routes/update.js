@@ -1,5 +1,5 @@
 var pool = require('./database');
-
+//Upload a image and its information to the database
 module.exports = app => {
 	app.post("/tag/update", async (req, res) => {
 		console.log("/tag/update");
@@ -11,16 +11,17 @@ module.exports = app => {
 				var pointD = "0 0";
 			}
 			var point = 'POINT(' + pointD + ')';
-
+			//changes the JSON format ('$' instead of '.') for the image name back to dots
 			var iuNew = req.body.iu.split("$").join(".");
 			var body = [req.body.qid, req.body.eventNumber, req.body.dateTime, point, req.body.offence, iuNew];
 			console.log(body);
 			var tags = req.body.tags;
-
+			//insert the image and its data into the database
 			var insertImage = await pool.query('INSERT INTO Images (qid, event_number, _datetime, location, offence, image_name) VALUES(?, ?, ?, ST_PointFromText(?), ?, ?)', body);
 			var imageId = insertImage.insertId;
 
 			console.log("Image ID: " + imageId);
+			//upload the tags to the database
 			for (var i = 0; i < tags.length; i++) {
 				var tag1 = tags[i].text.split(" ");
 				var item = tag1[0];

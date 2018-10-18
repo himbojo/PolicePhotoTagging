@@ -25,7 +25,7 @@ const KeyCodes = {
 };
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
-
+//Display when a picture is clicked on
 class EachPicture extends Component {
   constructor(props, context) {
     super(props, context);
@@ -42,34 +42,34 @@ class EachPicture extends Component {
       tags: this.props.image_tags
     };
   }
-
+  //Add listener for the window re-size
   componentWillMount() {
     window.addEventListener('resize', this.handleWindowSizeChange);
   }
-
+  //Remove listner for the window re-size
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowSizeChange);
   }
-
+  //Reset the window size on window size change
   handleWindowSizeChange = () => {
     this.setState({ widthW: window.innerWidth });
   };
-
+  //Set show to flase, closing the information panel
   handleClose() {
     this.setState({ show: false });
   }
-
+  //Set show to true, bringing the information panel for the image up
   handleShow() {
     this.setState({ show: true });
   }
-
+  //Delete a tag from the tag array at index i
   handleDelete(i) {
     const { tags } = this.state;
     this.setState({
       tags: tags.filter((tag, index) => index !== i),
     });
   }
-
+  //Add a tag to the end of the tag array
   handleAddition(tag) {
     tag = this.sendTags(tag);
     this.setState(state => ({ tags: [...state.tags, tag] }));
@@ -77,7 +77,7 @@ class EachPicture extends Component {
     //   var tags1 = this.sendTags();
     //   this.setState({tags: tags1});}
   }
-
+  //Change the position of a tag in the tag array
   handleDrag(tag, currPos, newPos) {
     const tags = [...this.state.tags];
     const newTags = tags.slice();
@@ -159,6 +159,7 @@ class EachPicture extends Component {
     );
   }
 }
+//The main results page
 class ResultForm extends Component {
   constructor(props, context) {
     super(props, context);
@@ -176,6 +177,7 @@ class ResultForm extends Component {
     },
     zoom: 11
   };
+  //Set the closing and opening of the images information panel
   handleClose() {
     this.setState({ show: false });
   }

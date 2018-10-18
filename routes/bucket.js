@@ -8,14 +8,14 @@ AWS.config.update({
 });
 
 var client = new AWS.S3();
-
+//Adds a given photo to the photo bucket
 module.exports = app => {
   app.post("/bucket/add", (req, res) => {
     console.log("/bucket/add");
     var files = req.files;
     var name = req.body.name;
     var file = files[name];
-
+    //changes the '$' from the JSON format to a dot
     name = name.split("$").join(".");
     file.fieldName = name;
     file.originalFilename = name;

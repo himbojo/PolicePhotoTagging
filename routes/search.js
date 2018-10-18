@@ -25,7 +25,8 @@ const options = {
 
 const geocoder = NodeGeocoder(options);
 
-
+//Searchs the database with the given query and then return the results
+//ONLY SEARCHS BY TAGS ATM
 module.exports = app => {
   app.post("/image/search", async (req, res) => {
     console.log("/image/search");
@@ -35,7 +36,7 @@ module.exports = app => {
     var offence = req.body.offence;
 
     //Set up for searching with things other than TAGS
-    
+
     // var selectQid = await pool.query(
     //   "SELECT qid FROM images WHERE qid = ?",
     //   [qid]
@@ -53,6 +54,7 @@ module.exports = app => {
 
     var imageNameArray = [];
     var imageInfoArray = [];
+    //for all of the tags in the searched query
     for (var i = 0; i < tags.length; i++) {
       var strings = tags[i].text.split(" ");
       var item = strings[0];
@@ -85,6 +87,7 @@ module.exports = app => {
         "SELECT imageID FROM Link WHERE itemID = ? AND colourID = ?",
         [selectItem, selectColour]
       );
+      //add all of the found images to the id results
       for (var j = 0; j < selectLink.length; j++) {
         imageIdArray = imageIdArray.concat(selectLink[j].imageID);
       }
@@ -92,11 +95,59 @@ module.exports = app => {
         'SELECT * FROM Images WHERE ID IN (SELECT imageID FROM Link WHERE itemID = ? AND colourID = ?)', [selectItem, selectColour]
       );
 
+      //var idArray= [];
+      //var infromationQuery = 'SELECT * FROM Images WHERE ID IN ?'
+      //if(qid==""){
+      //  infromationQuery.concat(' AND qid = ?');
+      //}
+      //concatinate every image that has matched the tag to the info results array
+      //for (j = 0; j < selectImage.length; j++) {
+      //  //imageInfoArray = imageInfoArray.concat(selectImage[j]);
+      //  idArray = idArray.concat(selectImage[j].ID);
+      //}
+      //selectImage = await pool.query(
+      //  infromationQuery, [idArray, qid]
+      //);
+
+      var tempArray = [];
+      //if a qid has been entered, refine the query by it
+      if(qid!=""){
+        var qidNum = parseInt(qid, 10);
+        for (j = 0; j < selectImage.length; j++) {
+          tempArray = tempArray.concat(selectImage[j].ID);
+        }
+        selectImage = await pool.query(
+           "SELECT * FROM Images WHERE ID IN (?) AND qid = ?", [tempArray, qidNum]
+        );
+      }
+      //if a event number has been enter, refine the query by it
+      if(filenumber!=""){
+        tempArray = [];
+        fileNum = parseInt(filenumber, 10);
+        for (j = 0; j < selectImage.length; j++) {
+          tempArray = tempArray.concat(selectImage[j].ID);
+        }
+        selectImage = await pool.query(
+           "SELECT * FROM Images WHERE ID IN (?) AND event_number = ?", [tempArray, fileNum]
+        );
+      }
+      //if a offence has been entered, refine the search by it
+      if(offence!=""){
+        tempArray = [];
+        for (j = 0; j < selectImage.length; j++) {
+          tempArray = tempArray.concat(selectImage[j].ID);
+        }
+        selectImage = await pool.query(
+           "SELECT * FROM Images WHERE ID IN (?) AND offence = ?", [tempArray, offence]
+        );
+      }
+
       for (j = 0; j < selectImage.length; j++) {
         imageInfoArray = imageInfoArray.concat(selectImage[j]);
       }
-
+      //get all of the tags for the image(s) that have been found
       for (var k = 0; k < imageInfoArray.length; k++) {
+        //name of image
         var key = imageInfoArray[k].image_name;
         //imageInfoArray[k].blob = base64data;
         //ap-southeast-2

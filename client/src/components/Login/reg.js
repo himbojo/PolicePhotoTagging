@@ -2,7 +2,7 @@ import React from "react";
 
 import * as actions from "../../actions";
 import { connect } from "react-redux";
-
+//The Page for registering users
 class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +12,7 @@ class Register extends React.Component {
     email: "",
     password: ""
   };
-
+  //Submit the state data to the regUser action
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
