@@ -32,7 +32,7 @@ export const regUser = values => async dispatch => {
 export const loginUser = (values, history) => async dispatch => {
   console.log("values");
   //post users login details to the back-end
-  const res = await axios.post("/users/login", values).then(res => {
+  await axios.post("/users/login", values).then(res => {
     localStorage.setItem("token", res.headers.xauth);
     dispatch(setUser(res.data));
 
