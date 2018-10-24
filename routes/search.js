@@ -13,6 +13,20 @@ const client = s3.createClient({
     secretAccessKey: "GTkj/LT4nh7+eItXUZbkFrtn1xHCvg0XM0jIfCrO",
   },
 });
+
+// const client = s3.createClient({
+//   maxAsyncS3: 20,     // this is the default
+//   s3RetryCount: 3,    // this is the default
+//   s3RetryDelay: 1000, // this is the default
+//   multipartUploadThreshold: 20971520, // this is the default (20 MB)
+//   multipartUploadSize: 15728640, // this is the default (15 MB)
+//   s3Options: {
+//     accessKeyId: process.env.S3_ACCESS_KEY_ID,
+//     secretAccessKey: process.env.S3_ACCESS_KEY
+//   },
+// });
+
+
 const NodeGeocoder = require('node-geocoder');
 
 const options = {
@@ -29,28 +43,10 @@ const geocoder = NodeGeocoder(options);
 //ONLY SEARCHS BY TAGS ATM
 module.exports = app => {
   app.post("/image/search", async (req, res) => {
-    console.log("/image/search");
     var tags = req.body.tags;
     var qid = req.body.qid;
     var filenumber = req.body.filenumber;
     var offence = req.body.offence;
-
-    //Set up for searching with things other than TAGS
-
-    // var selectQid = await pool.query(
-    //   "SELECT qid FROM images WHERE qid = ?",
-    //   [qid]
-    // );
-    //
-    // var selectFileNumber = await pool.query(
-    //   "SELECT event_number FROM images WHERE event_number = ?",
-    //   [filenumber]
-    // );
-    //
-    // var selectOffence = await pool.query(
-    //   "SELECT offence FROM images WHERE offence = ?",
-    //   [offence]
-    // );
 
     var imageNameArray = [];
     var imageInfoArray = [];
@@ -94,20 +90,6 @@ module.exports = app => {
       var selectImage = await pool.query(
         'SELECT * FROM Images WHERE ID IN (SELECT imageID FROM Link WHERE itemID = ? AND colourID = ?)', [selectItem, selectColour]
       );
-
-      //var idArray= [];
-      //var infromationQuery = 'SELECT * FROM Images WHERE ID IN ?'
-      //if(qid==""){
-      //  infromationQuery.concat(' AND qid = ?');
-      //}
-      //concatinate every image that has matched the tag to the info results array
-      //for (j = 0; j < selectImage.length; j++) {
-      //  //imageInfoArray = imageInfoArray.concat(selectImage[j]);
-      //  idArray = idArray.concat(selectImage[j].ID);
-      //}
-      //selectImage = await pool.query(
-      //  infromationQuery, [idArray, qid]
-      //);
 
       var tempArray = [];
       //if a qid has been entered, refine the query by it

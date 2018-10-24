@@ -2,25 +2,20 @@ var pool = require('./database');
 //Upload a image and its information to the database
 module.exports = app => {
 	app.post("/tag/update", async (req, res) => {
-		console.log("/tag/update");
 		try {
 			var pointD = req.body.location;
-			console.log(pointD);
 			if(!pointD){
-				console.log("Default: 0 0");
 				var pointD = "0 0";
 			}
 			var point = 'POINT(' + pointD + ')';
 			//changes the JSON format ('$' instead of '.') for the image name back to dots
 			var iuNew = req.body.iu.split("$").join(".");
 			var body = [req.body.qid, req.body.eventNumber, req.body.dateTime, point, req.body.offence, iuNew];
-			console.log(body);
 			var tags = req.body.tags;
 			//insert the image and its data into the database
 			var insertImage = await pool.query('INSERT INTO Images (qid, event_number, _datetime, location, offence, image_name) VALUES(?, ?, ?, ST_PointFromText(?), ?, ?)', body);
 			var imageId = insertImage.insertId;
 
-			console.log("Image ID: " + imageId);
 			//upload the tags to the database
 			for (var i = 0; i < tags.length; i++) {
 				var tag1 = tags[i].text.split(" ");
@@ -36,7 +31,6 @@ module.exports = app => {
 				}else{
 					selectColour = selectColour[0].ID;
 				}
-				console.log("Colour ID: " + selectColour);
 
 				//query to select item
 				var selectItem = await pool.query('SELECT ID FROM Items WHERE item = ?', [item]);
@@ -48,7 +42,6 @@ module.exports = app => {
 				}else{
 					selectItem = selectItem[0].ID;
 				}
-				console.log("Item ID: " + selectItem);
 
 				//link id's
 				var insertLink = await pool.query('INSERT INTO Link (imageID, itemID, colourID) VALUES(?, ?, ?)', [imageId, selectItem, selectColour]);
