@@ -10,8 +10,7 @@ import {
 } from 'react-bootstrap';
 
 import DateOnlyPicker from '../objects/dateOnlyPicker';
-import './inputForm.css';
-import './search.css';
+import '../css/searchForm.css';
 import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import thesaurus from 'thesaurus';

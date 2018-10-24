@@ -2,3 +2,8 @@
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   color: red;
 }
+
+.image {
+  max-height: 70vh;
+  max-width: 70vw;
+}

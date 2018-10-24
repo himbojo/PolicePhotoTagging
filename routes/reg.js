@@ -5,11 +5,9 @@ module.exports = app => {
 	app.post("/users/reg", (req, res) => {
 	  var body = _.pick(req.body, ["email", "password"]);
 	  var user = new User(body);
-	  console.log(body);
 	  user
 	    .save()
 	    .then(() => {
-	      console.log("generate");
 	      return user.generateAuthToken();
 	    })
 	    .then(token => {

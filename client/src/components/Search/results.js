@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-import "./upload.css";
+import "../css/upload.css";
 import "../css/main.css";
 
 import ResultForm from "./resultForm";
-import GMap from "./GMap";
+import GMap from "../objects/GMap";
 
 class Results extends Component {
   constructor(props, context) {

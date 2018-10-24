@@ -8,6 +8,14 @@ const pool = mysql.createPool({
     database: 'PolicePhotoTagging'
 })
 
+// const pool = mysql.createPool({
+//     connectionLimit: 10,
+//     host: process.env.DB_HOST_NAME,
+//     user:  process.env.DB_ADMIN_USER,
+//     password:  process.env.DB_ADMIN_PASS,
+//     database: process.env.DB_NAME,
+// })
+
 // Ping database to check for common exception errors.
 pool.getConnection((err, connection) => {
     if (err) {
