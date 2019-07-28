@@ -9,8 +9,8 @@ const client = s3.createClient({
   multipartUploadThreshold: 20971520, // this is the default (20 MB)
   multipartUploadSize: 15728640, // this is the default (15 MB)
   s3Options: {
-    accessKeyId: "AKIAIPC5WDUR6SXASWTQ",
-    secretAccessKey: "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",
+    accessKeyId: "",
+    secretAccessKey: "",
   },
 });
 
@@ -21,8 +21,6 @@ const client = s3.createClient({
 //   multipartUploadThreshold: 20971520, // this is the default (20 MB)
 //   multipartUploadSize: 15728640, // this is the default (15 MB)
 //   s3Options: {
-//     accessKeyId: process.env.S3_ACCESS_KEY_ID,
-//     secretAccessKey: process.env.S3_ACCESS_KEY
 //   },
 // });
 
@@ -33,7 +31,7 @@ const options = {
   provider: 'google',
   // Optional depending on the providers
   httpAdapter: 'https', // Default
-  apiKey: 'AIzaSyBQHmyt52mE15WOMQX9_dLeQ2LGQN1PFNA', // for Mapquest, OpenCage, Google Premier
+  apiKey: '', // for Mapquest, OpenCage, Google Premier
   formatter: null         // 'gpx', 'string', ...
 };
 
@@ -148,7 +146,7 @@ module.exports = app => {
         var locData = await geocoder.reverse({lat:imageInfoArray[k].location.x, lon:imageInfoArray[k].location.y});
         imageInfoArray[k].locationName = locData[0].formattedAddress;
         imageInfoArray[k].image_tags = tagArray;
-        imageInfoArray[k].path = await s3.getPublicUrl('policephototaggingstorage/photos', key, ['ap-southeast-2']);
+        imageInfoArray[k].path = await s3.getPublicUrl('', key, ['ap-southeast-2']);
       }
     }
 
