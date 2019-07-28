@@ -2,10 +2,6 @@ const util = require('util')
 const mysql = require('mysql')
 const pool = mysql.createPool({
     connectionLimit: 10,
-    host: 'policephototagging.cxtufkjuvqzf.ap-southeast-2.rds.amazonaws.com',
-    user: 'admin',
-    password: 'admin123',
-    database: 'PolicePhotoTagging'
 })
 
 // const pool = mysql.createPool({
