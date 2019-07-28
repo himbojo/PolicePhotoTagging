@@ -5,8 +5,6 @@ const keys = require("../keys");
 
 //configuring the AWS environment
 AWS.config.update({
-  accessKeyId: "AKIAIPC5WDUR6SXASWTQ",
-  secretAccessKey: "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"
 });
 
 // AWS.config.update({
