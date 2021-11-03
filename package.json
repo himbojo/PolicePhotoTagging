@@ -27,6 +27,6 @@
     "node-geocoder": "^3.22.0",
     "nodemon": "^1.18.3",
     "s3": "^4.4.0",
-    "validator": "^10.5.0"
+    "validator": "^13.7.0"
   }
 }
